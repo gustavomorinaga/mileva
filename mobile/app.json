@@ -1,0 +1,30 @@
+{
+	"expo": {
+		"name": "mileva-app",
+		"slug": "mileva-app",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./public/assets/icons/icon.png",
+		"splash": {
+			"image": "./public/assets/images/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./public/assets/icons/adaptive-icon.png",
+				"backgroundColor": "#FFFFFF"
+			}
+		},
+		"web": {
+			"favicon": "./public/assets/favicon.png"
+		}
+	}
+}

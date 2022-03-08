@@ -1,0 +1,35 @@
+{
+	"extends": "expo/tsconfig.base",
+	"compilerOptions": {
+		"target": "ES2020",
+		"lib": ["dom", "ES2020"],
+		"types": ["node"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "ES2020",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "react-native",
+		"baseUrl": ".",
+		"paths": {
+			"@docs/*": ["./public/docs/*"],
+			"@icons/*": ["./public/assets/icons/*"],
+			"@images/*": ["./public/assets/images/*"],
+			"@components/*": ["./src/components/*"],
+			"@interfaces/*": ["./src/interfaces/*"],
+			"@screens/*": ["./src/screens/*"],
+			"@scripts/*": ["./src/scripts/*"],
+			"@services/*": ["./src/services/*"],
+			"@stores/*": ["./src/stores/*"],
+			"@styles/*": ["./src/styles/*"],
+			"@utils/*": ["./src/utils/*"]
+		},
+		"incremental": true
+	},
+	"exclude": ["node_modules", "dist"]
+}

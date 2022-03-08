@@ -1,0 +1,92 @@
+{
+	"name": "mileva-app",
+	"version": "1.0.0",
+	"main": "node_modules/expo/AppEntry.js",
+	"homepage": "https://github.com/GeekyAnts/nativebase-templates#readme",
+	"contributors": [
+		{
+			"name": "Bruno Godinho",
+			"url": "https://github.com/gmbrunoo"
+		},
+		{
+			"name": "Gustavo Matheus",
+			"email": "gustavo.morinaga27@gmail.com",
+			"url": "https://github.com/gmatthewsfeuer"
+		},
+		{
+			"name": "Gustavo Souza",
+			"email": "gssouza8@gmail.com",
+			"url": "https://github.com/gssouza10"
+		}
+	],
+	"private": true,
+	"license": "MIT",
+	"keywords": [
+		"react",
+		"expo",
+		"typescript",
+		"nativebase"
+	],
+	"lint-staged": {
+		"src/**/*.+(js|jsx|ts|tsx|json)": [
+			"eslint --fix"
+		],
+		"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+			"prettier --write"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"scripts": {
+		"start": "expo start",
+		"android": "expo start --android",
+		"ios": "expo start --ios",
+		"web": "expo start --web",
+		"eject": "expo eject",
+		"prepare": "husky install",
+		"pre-commit": "yarn lint",
+		"lint": "eslint"
+	},
+	"dependencies": {
+		"@native-base/icons": "^0.0.11",
+		"@react-navigation/native": "^6.0.8",
+		"axios": "^0.26.0",
+		"expo": "~44.0.6",
+		"expo-status-bar": "~1.2.0",
+		"native-base": "3.3.7",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-hook-form": "^7.27.1",
+		"react-native": "https://github.com/expo/react-native/archive/sdk-44.0.0.tar.gz",
+		"react-native-safe-area-context": "3.3.2",
+		"react-native-screens": "~3.10.1",
+		"react-native-svg": "12.1.1",
+		"react-native-web": "~0.17.7",
+		"react-query": "^3.34.16",
+		"yup": "^0.32.11",
+		"zustand": "^3.7.1"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.17.5",
+		"@commitlint/cli": "^16.2.1",
+		"@commitlint/config-conventional": "^16.2.1",
+		"@types/node": "^17.0.21",
+		"@types/react": "~17.0.39",
+		"@types/react-native": "~0.67.1",
+		"@typescript-eslint/eslint-plugin": "^5.13.0",
+		"@typescript-eslint/parser": "^5.13.0",
+		"eslint": "^8.10.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.29.3",
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"husky": "^7.0.4",
+		"lint-staged": "^12.3.4",
+		"metro-react-native-babel-preset": "^0.69.0",
+		"prettier": "^2.5.1",
+		"typescript": "~4.6.2"
+	}
+}
