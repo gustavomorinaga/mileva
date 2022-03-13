@@ -21,6 +21,7 @@ module.exports = {
 	},
 	rules: {
 		'prettier/prettier': 'error',
+		'react/prop-types': 'off',
 		'react/no-children-prop': 'off',
 		'no-mixed-operators': ['error', { allowSamePrecedence: false }],
 	},

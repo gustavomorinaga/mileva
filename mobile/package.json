@@ -51,7 +51,9 @@
 		"lint": "eslint"
 	},
 	"dependencies": {
+		"@expo/vector-icons": "^12.0.5",
 		"@native-base/icons": "^0.0.11",
+		"@react-navigation/bottom-tabs": "^6.2.0",
 		"@react-navigation/native": "^6.0.8",
 		"axios": "^0.26.0",
 		"expo": "~44.0.6",
