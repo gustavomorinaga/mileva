@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { Icon, NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-import { Ionicons } from '@expo/vector-icons';
 
 // import SignInScreen from '@screens/signIn';
 // import SignUpScreen from '@screens/signUp';
@@ -15,6 +13,8 @@ import FavoritesScreen from '@screens/favorites';
 import ScheduleScreen from '@screens/schedule';
 import AccountScreen from '@screens/profile';
 
+import tabNavigatorConfig from '@configs/tabNavigatorConfig';
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -22,42 +22,7 @@ export default function App() {
 		<NativeBaseProvider>
 			<SafeAreaProvider>
 				<NavigationContainer>
-					<Tab.Navigator
-						screenOptions={({ route }) => ({
-							tabBarIcon: ({ focused, size }) => {
-								const iconProps = {
-									name: '',
-									size,
-									color: focused ? 'darkBlue.500' : 'dark.500',
-								};
-
-								switch (route.name) {
-									case 'Login':
-										iconProps.name = 'enter';
-										break;
-									case 'Home':
-										iconProps.name = 'home';
-										break;
-									case 'Favorites':
-										iconProps.name = 'heart';
-										break;
-									case 'Schedule':
-										iconProps.name = 'briefcase';
-										break;
-									case 'Account':
-										iconProps.name = 'person';
-										break;
-									default:
-										iconProps.name = 'alert-circle';
-										break;
-								}
-
-								return <Icon as={Ionicons} {...iconProps} />;
-							},
-							headerShown: false,
-							tabBarShowLabel: false,
-						})}
-					>
+					<Tab.Navigator {...tabNavigatorConfig}>
 						{/* <Tab.Screen name="Login" component={LoginScreen} /> */}
 						<Tab.Screen name="Home" component={HomeScreen} />
 						<Tab.Screen name="Favorites" component={FavoritesScreen} />

@@ -25,6 +25,7 @@ module.exports = function (api) {
 						'@images': './public/assets/images',
 
 						'@components': './src/components',
+						'@configs': './src/configs',
 						'@interfaces': './src/interfaces',
 						'@screens': './src/screens',
 						'@scripts': './src/scripts',
