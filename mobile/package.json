@@ -58,6 +58,7 @@
 		"@react-navigation/native": "^6.0.8",
 		"axios": "^0.26.0",
 		"expo": "~44.0.6",
+		"expo-linear-gradient": "~11.0.3",
 		"expo-status-bar": "~1.2.0",
 		"native-base": "3.3.7",
 		"react": "17.0.2",

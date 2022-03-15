@@ -1,51 +1,105 @@
 import React from 'react';
 
-import { Button, FormControl, HStack, Image, Input, View } from 'native-base';
+// --- Native Base ---
+import { Button, FormControl, VStack, Image, Input, Flex } from 'native-base';
 
 // --- Form and Validations ---
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
+// --- Components ---
+import BaseScreen from '@components/BaseScreen';
+
+// --- Utils ---
+import avoidKeyboardView from '@utils/avoidKeyboardView';
+
+// --- Images ---
 const bgImage = require('@images/00_background.jpg');
 
 const validationSchema = Yup.object().shape({
-	email: Yup.string().required('E-mail is required!'),
-	password: Yup.string().required('Password is required!'),
+	email: Yup.string().email().required('E-mail is required!'),
+	password: Yup.string()
+		.min(8, 'Password is too short - should be 8 chars minimum')
+		.matches(/(?=.*[0-9])/, 'Password should have at least one digit')
+		.matches(/(?=.*[a-z])/, 'Password should have at least one lowercase letter')
+		.matches(/(?=.*[A-Z])/, 'Password should have at least one uppercase letter')
+		.required('Password is required!'),
 });
 
-export default function SignInScreen() {
+export default function SignInScreen({ navigation }) {
 	const {
+		control,
 		handleSubmit,
-		register,
 		formState: { errors, isSubmitting },
 	} = useForm({ resolver: yupResolver(validationSchema), mode: 'onTouched' });
 
 	const onSubmit = ({ email, password }) =>
-		new Promise(() => setTimeout(() => console.log({ email, password }), 500));
+		new Promise(() =>
+			setTimeout(() => navigation.navigate('Home', { email, password }), 500)
+		);
 
 	return (
-		<View w="full" h="full">
-			<Image source={bgImage} size="full" alt="Travel Wallpapers" />
+		<BaseScreen>
+			<Image
+				source={bgImage}
+				size="full"
+				alt="Travel Wallpapers"
+				position="absolute"
+				{...avoidKeyboardView}
+			/>
 
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<HStack w="full" py="2">
+			{/* // TODO - Adicionar Linear Gradient para contrastar o plano de fundo */}
+
+			<Flex w="full" h="full" justify="flex-end">
+				<VStack w="full" space="4">
 					<FormControl isInvalid={errors.email}>
 						<FormControl.Label>E-mail</FormControl.Label>
-						<Input
-							{...register('email')}
-							variant="filled"
-							type="text"
-							placeholder="E-mail"
+						<Controller
+							control={control}
+							name="email"
+							render={({ field: { onChange, onBlur } }) => (
+								<Input
+									variant="filled"
+									type="email"
+									placeholder="E-mail"
+									onBlur={onBlur}
+									onChangeText={value => onChange(value)}
+								/>
+							)}
 						/>
-						<FormControl.ErrorMessage>{errors.email.message}</FormControl.ErrorMessage>
+						<FormControl.ErrorMessage>{errors.email?.message}</FormControl.ErrorMessage>
 					</FormControl>
 
-					<Button isLoading={isSubmitting} isLoadingText="Logging In">
+					<FormControl isInvalid={errors.password}>
+						<FormControl.Label>Password</FormControl.Label>
+						<Controller
+							control={control}
+							name="password"
+							render={({ field: { onChange, onBlur } }) => (
+								<Input
+									variant="filled"
+									type="password"
+									placeholder="Password"
+									onBlur={onBlur}
+									onChangeText={value => onChange(value)}
+								/>
+							)}
+						/>
+						<FormControl.ErrorMessage>
+							{errors.password?.message}
+						</FormControl.ErrorMessage>
+					</FormControl>
+
+					<Button
+						isLoading={isSubmitting}
+						isLoadingText="Logging In"
+						onPress={handleSubmit(onSubmit)}
+					>
 						Login
 					</Button>
-				</HStack>
-			</form>
-		</View>
+				</VStack>
+			</Flex>
+		</BaseScreen>
 	);
 }
