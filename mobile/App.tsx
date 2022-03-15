@@ -2,20 +2,23 @@ import React from 'react';
 
 import { NativeBaseProvider } from 'native-base';
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-// import SignInScreen from '@screens/signIn';
-// import SignUpScreen from '@screens/signUp';
-import HomeScreen from '@screens/home';
-import FavoritesScreen from '@screens/favorites';
-import ScheduleScreen from '@screens/schedule';
-import AccountScreen from '@screens/profile';
+import SignInScreen from '@screens/SignIn';
+import SignUpScreen from '@screens/SignUp';
+import HomeScreen from '@screens/Home';
+import FavoritesScreen from '@screens/Favorites';
+import ScheduleScreen from '@screens/Schedule';
+import AccountScreen from '@screens/Profile';
 
 import tabNavigatorConfig from '@configs/tabNavigatorConfig';
+import signScreensConfig from '@configs/signScreensConfig';
 
 const Tab = createBottomTabNavigator();
+
+const isUserLogged = false;
 
 export default function App() {
 	return (
@@ -23,11 +26,27 @@ export default function App() {
 			<SafeAreaProvider>
 				<NavigationContainer>
 					<Tab.Navigator {...tabNavigatorConfig}>
-						{/* <Tab.Screen name="Login" component={LoginScreen} /> */}
-						<Tab.Screen name="Home" component={HomeScreen} />
-						<Tab.Screen name="Favorites" component={FavoritesScreen} />
-						<Tab.Screen name="Schedule" component={ScheduleScreen} />
-						<Tab.Screen name="Account" component={AccountScreen} />
+						{isUserLogged ? (
+							<>
+								<Tab.Screen name="Home" component={HomeScreen} />
+								<Tab.Screen name="Favorites" component={FavoritesScreen} />
+								<Tab.Screen name="Schedule" component={ScheduleScreen} />
+								<Tab.Screen name="Account" component={AccountScreen} />
+							</>
+						) : (
+							<>
+								<Tab.Screen
+									name="Sign In"
+									component={SignInScreen}
+									options={signScreensConfig}
+								/>
+								<Tab.Screen
+									name="Sign Up"
+									component={SignUpScreen}
+									options={signScreensConfig}
+								/>
+							</>
+						)}
 					</Tab.Navigator>
 				</NavigationContainer>
 			</SafeAreaProvider>

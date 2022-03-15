@@ -39,6 +39,8 @@ const tabNavigatorConfig = {
 		},
 		headerShown: false,
 		tabBarShowLabel: false,
+		unmountOnBlur: true,
+		lazy: true,
 	}),
 };
 
