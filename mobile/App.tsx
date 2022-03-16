@@ -1,7 +1,9 @@
 import React from 'react';
 
+import AppLoading from 'expo-app-loading';
+
 // --- Native Base ---
-import { NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider, StatusBar } from 'native-base';
 
 // --- React Navigation ---
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -21,14 +23,40 @@ import nativeBaseConfig from '@configs/nativeBaseConfig';
 import tabNavigatorConfig from '@configs/tabNavigatorConfig';
 import signScreensConfig from '@configs/signScreensConfig';
 
+// --- Fonts ---
+import {
+	Poppins_100Thin,
+	Poppins_200ExtraLight,
+	Poppins_300Light,
+	Poppins_400Regular,
+	Poppins_600SemiBold,
+	Poppins_700Bold,
+	useFonts,
+} from '@expo-google-fonts/poppins';
+
+// --- Styles ---
+import { theme } from '@styles/theme';
+
 const Tab = createBottomTabNavigator();
 
 const isUserLogged = false;
 
 export default function App() {
+	let [fontsLoaded] = useFonts({
+		Poppins_100Thin,
+		Poppins_200ExtraLight,
+		Poppins_300Light,
+		Poppins_400Regular,
+		Poppins_600SemiBold,
+		Poppins_700Bold,
+	});
+
+	if (!fontsLoaded) return <AppLoading />;
+
 	return (
-		<NativeBaseProvider config={nativeBaseConfig}>
+		<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
 			<SafeAreaProvider>
+				<StatusBar animated={true} />
 				<NavigationContainer>
 					<Tab.Navigator {...tabNavigatorConfig}>
 						{isUserLogged ? (
