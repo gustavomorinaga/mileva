@@ -32,10 +32,10 @@ const bgImage = require('@images/00_background.jpg');
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string()
-		.matches(/^[A-Za-z ]*$/, 'Enter valid name!')
+		.matches(/^[A-Za-z ]*$/, 'Entre com um nome válido!')
 		.max(40)
-		.required(),
-	email: Yup.string().email().required('E-mail é obrigatório!'),
+		.required('Nome é obrigatório!'),
+	email: Yup.string().email('Digite um e-mail válido!').required('E-mail é obrigatório!'),
 	password: Yup.string()
 		.min(8, 'Senha muito curta - deve ter no mínimo 8 caracteres!')
 		.matches(/(?=.*[0-9])/, 'Senha deve conter pelo menos um dígito!')

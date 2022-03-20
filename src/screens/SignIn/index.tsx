@@ -27,12 +27,13 @@ import avoidKeyboardView from '@utils/avoidKeyboardView';
 
 // --- Icons ---
 import { Ionicons } from '@expo/vector-icons';
+import useAuthStore from '@stores/auth';
 
 // --- Images ---
 const bgImage = require('@images/00_background.jpg');
 
 const validationSchema = Yup.object().shape({
-	email: Yup.string().email().required('E-mail é obrigatório!'),
+	email: Yup.string().email('Digite um e-mail válido!').required('E-mail é obrigatório!'),
 	password: Yup.string()
 		.min(8, 'Senha muito curta - deve ter no mínimo 8 caracteres!')
 		.matches(/(?=.*[0-9])/, 'Senha deve conter pelo menos um dígito!')
@@ -42,6 +43,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function SignInScreen({ navigation }) {
+	const setAuthentication = useAuthStore(({ setAuthentication }) => setAuthentication);
+
 	const {
 		control,
 		handleSubmit,
@@ -50,7 +53,10 @@ export default function SignInScreen({ navigation }) {
 
 	const onSubmit = ({ email, password }) =>
 		new Promise(() =>
-			setTimeout(() => navigation.navigate('Home', { email, password }), 500)
+			setTimeout(() => {
+				setAuthentication();
+				return navigation.navigate('Home', { email, password });
+			}, 500)
 		);
 
 	return (

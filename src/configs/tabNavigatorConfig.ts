@@ -1,11 +1,20 @@
-import { createElement } from 'react';
+import { createElement } from 'react-native';
 
+// --- Native-Base ---
 import { Icon } from 'native-base';
 
+// --- Components ---
+import HeaderComponent from '@components/Header';
+
+// --- Icons ---
 import { Ionicons } from '@expo/vector-icons';
 
 const tabNavigatorConfig = {
 	screenOptions: ({ route }) => ({
+		tabBarShowLabel: false,
+		unmountOnBlur: true,
+		lazy: true,
+		header: (props?: any) => createElement(HeaderComponent, props),
 		tabBarIcon: ({ focused, size }) => {
 			const iconProps = {
 				as: Ionicons,
@@ -37,10 +46,6 @@ const tabNavigatorConfig = {
 
 			return createElement(Icon, iconProps);
 		},
-		headerShown: false,
-		tabBarShowLabel: false,
-		unmountOnBlur: true,
-		lazy: true,
 	}),
 };
 

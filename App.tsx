@@ -23,6 +23,9 @@ import nativeBaseConfig from '@configs/nativeBaseConfig';
 import tabNavigatorConfig from '@configs/tabNavigatorConfig';
 import signScreensConfig from '@configs/signScreensConfig';
 
+// --- Stores ---
+import useAuthStore from './src/stores/auth';
+
 // --- Fonts ---
 import {
 	Poppins_100Thin,
@@ -39,9 +42,9 @@ import { theme } from '@styles/theme';
 
 const Tab = createBottomTabNavigator();
 
-const isUserLogged = false;
-
 export default function App() {
+	const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
+
 	let [fontsLoaded] = useFonts({
 		Poppins_100Thin,
 		Poppins_200ExtraLight,
@@ -59,7 +62,7 @@ export default function App() {
 				<StatusBar animated={true} />
 				<NavigationContainer>
 					<Tab.Navigator {...tabNavigatorConfig}>
-						{isUserLogged ? (
+						{isAuthenticated ? (
 							<>
 								<Tab.Screen name="Home" component={HomeScreen} />
 								<Tab.Screen name="Favorites" component={FavoritesScreen} />
