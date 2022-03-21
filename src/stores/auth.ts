@@ -1,6 +1,8 @@
 // ! SERVIÇO DE AUTENTICAÇÃO TEMPORÁRIO!!!
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import create from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface State {
 	isAuthenticated: boolean;
@@ -9,15 +11,22 @@ interface State {
 	setAuthentication: (auth?: boolean) => void;
 }
 
-const useAuthStore = create<State>((set, get) => ({
-	isAuthenticated: JSON.parse(localStorage.getItem('isAuthenticated')),
+const useAuthStore = create<State>(
+	persist(
+		(set, get) => ({
+			isAuthenticated: false,
 
-	setAuthentication: (auth?: boolean) => {
-		const isAuthenticated = auth ?? !get().isAuthenticated;
-		localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+			setAuthentication: async (auth?: boolean) => {
+				const isAuthenticated = auth ?? !get().isAuthenticated;
 
-		set(() => ({ isAuthenticated }));
-	},
-}));
+				set(() => ({ isAuthenticated }));
+			},
+		}),
+		{
+			name: 'auth-storage',
+			getStorage: () => AsyncStorage,
+		}
+	)
+);
 
 export default useAuthStore;

@@ -21,7 +21,8 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./public/assets/icons/adaptive-icon.png",
 				"backgroundColor": "#FFFFFF"
-			}
+			},
+			"softwareKeyboardLayoutMode": "pan"
 		},
 		"web": {
 			"favicon": "./public/assets/favicon.png"

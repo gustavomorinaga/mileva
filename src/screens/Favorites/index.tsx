@@ -9,7 +9,7 @@ import SearchInput from '@components/SearchInput';
 
 export default function FavoritesScreen() {
 	return (
-		<BaseScreen>
+		<BaseScreen isOnAppContent={true}>
 			<SearchInput />
 		</BaseScreen>
 	);
