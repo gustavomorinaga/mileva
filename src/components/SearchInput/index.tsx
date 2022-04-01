@@ -1,18 +1,21 @@
 import React from 'react';
 
 // --- Native-Base ---
-import { Input } from 'native-base';
+import { IInputProps, Input } from 'native-base';
 
 // --- Components ---
 import IconComponent from '@components/Icon';
 
-export default function SearchInput() {
+export default function SearchInput(props: IInputProps) {
 	return (
 		<Input
-			bgColor="white"
+			variant="unstyled"
+			color="darkText"
+			bgColor="muted.100"
 			borderRadius="2xl"
-			shadow="1"
-			InputLeftElement={<IconComponent name="search-outline" size="sm" m="2" />}
+			shadow="3"
+			InputLeftElement={<IconComponent name="search-outline" size="sm" ml="2" />}
+			{...props}
 		/>
 	);
 }

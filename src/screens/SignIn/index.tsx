@@ -11,7 +11,6 @@ import {
 	Box,
 	Text,
 	Link,
-	Icon,
 	View,
 } from 'native-base';
 
@@ -25,13 +24,14 @@ import * as Yup from 'yup';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
+import IconComponent from '@components/Icon';
 import IconButtonComponent from '@components/IconButton';
 
 // --- Utils ---
 import avoidKeyboardView from '@utils/avoidKeyboardView';
 
-// --- Icons ---
-import { Ionicons } from '@expo/vector-icons';
+// --- Types ---
+import { TSignInProps } from '@~types/TSignInProps';
 
 // --- Images ---
 const bgImage = require('@images/00_background.jpg');
@@ -46,7 +46,7 @@ const validationSchema = Yup.object().shape({
 		.required('Senha é obrigatória!'),
 });
 
-export default function SignInScreen({ navigation }) {
+export default function SignInScreen({ navigation }: TSignInProps) {
 	const setAuthentication = useAuthStore(({ setAuthentication }) => setAuthentication);
 
 	const {
@@ -59,11 +59,12 @@ export default function SignInScreen({ navigation }) {
 
 	const handleShowPassword = () => setShowPassword(!showPassword);
 
-	const onSubmit = ({ email, password }) =>
+	const onSubmit = (values: typeof validationSchema.fields) =>
 		new Promise(() =>
 			setTimeout(() => {
 				setAuthentication();
-				return navigation.navigate('Home', { email, password });
+				console.log(values);
+				return navigation.navigate('Home');
 			}, 500)
 		);
 
@@ -176,8 +177,7 @@ export default function SignInScreen({ navigation }) {
 								<Flex direction="row" align="center" py="2" pl="2">
 									<Text color="lightText">Cadastrar-se</Text>
 
-									<Icon
-										as={Ionicons}
+									<IconComponent
 										name="arrow-forward"
 										size="sm"
 										color="lightText"

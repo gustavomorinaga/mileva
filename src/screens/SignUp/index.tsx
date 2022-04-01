@@ -11,9 +11,11 @@ import {
 	Box,
 	Text,
 	Link,
-	Icon,
 	View,
 } from 'native-base';
+
+// --- Stores ---
+import useAuthStore from '@stores/auth';
 
 // --- Form and Validations ---
 import { Controller, useForm } from 'react-hook-form';
@@ -22,13 +24,14 @@ import * as Yup from 'yup';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
+import IconComponent from '@components/Icon';
 import IconButtonComponent from '@components/IconButton';
-
-// --- Icons ---
-import { Ionicons } from '@expo/vector-icons';
 
 // --- Utils ---
 import avoidKeyboardView from '@utils/avoidKeyboardView';
+
+// --- Types ---
+import { TSignUpProps } from '@~types/TSignUpProps';
 
 // --- Images ---
 const bgImage = require('@images/00_background.jpg');
@@ -51,7 +54,9 @@ const validationSchema = Yup.object().shape({
 	),
 });
 
-export default function SignUpScreen({ navigation }) {
+export default function SignUpScreen({ navigation }: TSignUpProps) {
+	const setAuthentication = useAuthStore(({ setAuthentication }) => setAuthentication);
+
 	const {
 		control,
 		handleSubmit,
@@ -65,9 +70,13 @@ export default function SignUpScreen({ navigation }) {
 	const handleShowPasswordConfirmation = () =>
 		setShowPasswordConfirmation(!showPasswordConfirmation);
 
-	const onSubmit = ({ email, password }) =>
+	const onSubmit = (values: typeof validationSchema.fields) =>
 		new Promise(() =>
-			setTimeout(() => navigation.navigate('Home', { email, password }), 500)
+			setTimeout(() => {
+				setAuthentication();
+				console.log(values);
+				return navigation.navigate('Home');
+			}, 500)
 		);
 
 	return (
@@ -227,12 +236,11 @@ export default function SignUpScreen({ navigation }) {
 						<Flex direction="row" justify="space-between">
 							<Link onPress={() => navigation.navigate('Sign In')}>
 								<Flex direction="row" align="center" py="2" pr="2">
-									<Icon
-										as={Ionicons}
-										name="arrow-back"
+									<IconComponent
+										name="arrow-forward"
 										size="sm"
 										color="lightText"
-										mr="2"
+										ml="2"
 									/>
 
 									<Text color="lightText">Entrar na minha conta</Text>

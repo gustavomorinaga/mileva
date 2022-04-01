@@ -1,5 +1,6 @@
 import React from 'react';
 
+// --- Splash Loading ---
 import AppLoading from 'expo-app-loading';
 
 // --- Native Base ---
@@ -39,6 +40,10 @@ import {
 
 // --- Styles ---
 import { theme } from '@styles/theme';
+import { LogBox } from 'react-native';
+
+// --- Disable NativeBase Logs ---
+LogBox.ignoreLogs(['NativeBase:']);
 
 const Tab = createBottomTabNavigator();
 

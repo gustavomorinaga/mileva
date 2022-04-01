@@ -28,11 +28,8 @@
 		"nativebase"
 	],
 	"lint-staged": {
-		"src/**/*.+(js|jsx|ts|tsx|json)": [
-			"eslint --fix"
-		],
-		"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-			"prettier --write"
+		"src/**/*.{js,jsx,ts,tsx,json}": [
+			"yarn lint:fix"
 		]
 	},
 	"husky": {
@@ -46,9 +43,12 @@
 		"ios": "expo start --ios",
 		"web": "expo start --web",
 		"eject": "expo eject",
+		"type-check": "tsc --noEmit",
+		"lint": "eslint",
+		"lint:fix": "eslint --fix && yarn format",
+		"format": "prettier --write",
 		"prepare": "husky install",
-		"pre-commit": "yarn lint",
-		"lint": "eslint"
+		"pre-commit": "yarn lint"
 	},
 	"dependencies": {
 		"@expo-google-fonts/poppins": "^0.2.2",

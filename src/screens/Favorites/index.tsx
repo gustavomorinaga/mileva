@@ -5,12 +5,7 @@ import React from 'react';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
-import SearchInput from '@components/SearchInput';
 
 export default function FavoritesScreen() {
-	return (
-		<BaseScreen isOnAppContent={true}>
-			<SearchInput />
-		</BaseScreen>
-	);
+	return <BaseScreen isOnAppContent={true}></BaseScreen>;
 }

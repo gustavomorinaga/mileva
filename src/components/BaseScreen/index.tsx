@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -11,7 +11,7 @@ export const BaseScreenPrimitive = ({
 	isOnAppContent = false,
 	...props
 }: IViewProps & { isOnAppContent?: boolean }) => (
-	<SafeAreaView style={{ flex: 1, marginTop: isOnAppContent ? 4 : 0 }}>
+	<SafeAreaView style={{ flex: 1, zIndex: 10, marginTop: isOnAppContent ? 4 : 0 }}>
 		<View padding="5" h="full" {...props} mt={isOnAppContent ? -12 : 0}>
 			{children}
 		</View>
@@ -24,28 +24,52 @@ export default function BaseScreen({
 	isOnAppContent = false,
 	...props
 }: IViewProps & { isAnimated?: boolean; isOnAppContent?: boolean }) {
-	const animation = React.useRef(new Animated.Value(0)).current;
+	const fadeAnimation = React.useRef(new Animated.Value(0)).current;
+	const slideTopAnimation = React.useRef(new Animated.Value(50)).current;
 
 	useEffect(() => {
-		Animated.timing(animation, {
+		Animated.timing(fadeAnimation, {
 			toValue: 1,
 			duration: 500,
 			useNativeDriver: true,
+			easing: Easing.in(Easing.ease),
+		}).start();
+
+		Animated.timing(slideTopAnimation, {
+			toValue: 0,
+			duration: 500,
+			useNativeDriver: true,
+			easing: Easing.inOut(Easing.ease),
 		}).start();
 
 		return () => {
-			Animated.timing(animation, {
+			Animated.timing(fadeAnimation, {
 				toValue: 0,
 				duration: 250,
 				useNativeDriver: true,
+				easing: Easing.ease,
+			}).start();
+
+			Animated.timing(slideTopAnimation, {
+				toValue: 50,
+				duration: 250,
+				useNativeDriver: true,
+				easing: Easing.ease,
 			}).start();
 		};
-	}, [animation, isAnimated]);
+	}, [fadeAnimation, slideTopAnimation, isAnimated]);
 
 	return (
 		<>
 			{isAnimated ? (
-				<Animated.View style={{ flex: 1, opacity: animation, zIndex: 10 }}>
+				<Animated.View
+					style={{
+						flex: 1,
+						opacity: fadeAnimation,
+						transform: [{ translateY: slideTopAnimation }],
+						zIndex: 10,
+					}}
+				>
 					<BaseScreenPrimitive {...props} isOnAppContent={isOnAppContent}>
 						{children}
 					</BaseScreenPrimitive>
