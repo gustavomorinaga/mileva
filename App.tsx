@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 // --- Splash Loading ---
 import * as SplashScreen from 'expo-splash-screen';
 
 // --- Native Base ---
-import { NativeBaseProvider, StatusBar, View } from 'native-base';
+import { NativeBaseProvider, StatusBar } from 'native-base';
 
 // --- React Navigation ---
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -61,6 +61,13 @@ export default function App() {
 		Poppins_700Bold,
 	});
 
+	useEffect(() => {
+		async function prepare() {
+			await SplashScreen.preventAutoHideAsync();
+		}
+		prepare();
+	}, []);
+
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) await SplashScreen.hideAsync();
 	}, [fontsLoaded]);
@@ -68,38 +75,36 @@ export default function App() {
 	if (!fontsLoaded) return;
 
 	return (
-		<View onLayout={onLayoutRootView}>
-			<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
-				<SafeAreaProvider>
-					<StatusBar animated={true} />
-					<NavigationContainer>
-						<Tab.Navigator {...tabNavigatorConfig}>
-							{isAuthenticated ? (
-								<>
-									<Tab.Screen name="Home" component={HomeScreen} />
-									<Tab.Screen name="Favorites" component={FavoritesScreen} />
-									<Tab.Screen name="Schedule" component={ScheduleScreen} />
-									<Tab.Screen name="Account" component={AccountScreen} />
-								</>
-							) : (
-								<>
-									<Tab.Screen
-										name="Sign In"
-										component={SignInScreen}
-										options={signScreensConfig}
-									/>
-									<Tab.Screen
-										name="Sign Up"
-										component={SignUpScreen}
-										options={signScreensConfig}
-									/>
-									<Tab.Screen name="Home" component={HomeScreen} />
-								</>
-							)}
-						</Tab.Navigator>
-					</NavigationContainer>
-				</SafeAreaProvider>
-			</NativeBaseProvider>
-		</View>
+		<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
+			<SafeAreaProvider onLayout={onLayoutRootView}>
+				<StatusBar animated={true} />
+				<NavigationContainer>
+					<Tab.Navigator {...tabNavigatorConfig}>
+						{isAuthenticated ? (
+							<>
+								<Tab.Screen name="Home" component={HomeScreen} />
+								<Tab.Screen name="Favorites" component={FavoritesScreen} />
+								<Tab.Screen name="Schedule" component={ScheduleScreen} />
+								<Tab.Screen name="Account" component={AccountScreen} />
+							</>
+						) : (
+							<>
+								<Tab.Screen
+									name="Sign In"
+									component={SignInScreen}
+									options={signScreensConfig}
+								/>
+								<Tab.Screen
+									name="Sign Up"
+									component={SignUpScreen}
+									options={signScreensConfig}
+								/>
+								<Tab.Screen name="Home" component={HomeScreen} />
+							</>
+						)}
+					</Tab.Navigator>
+				</NavigationContainer>
+			</SafeAreaProvider>
+		</NativeBaseProvider>
 	);
 }

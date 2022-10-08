@@ -11,8 +11,8 @@ interface State {
 	setAuthentication: (auth?: boolean) => void;
 }
 
-const useAuthStore = create<State>(
-	persist(
+const useAuthStore = create(
+	persist<State>(
 		(set, get) => ({
 			isAuthenticated: false,
 

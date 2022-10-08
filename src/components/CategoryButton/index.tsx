@@ -48,7 +48,7 @@ export default function CategoryButton({
 			>
 				<IconComponent
 					name={iconProps.name}
-					size="lg"
+					size="3xl"
 					color="muted.500"
 					{...iconProps.styles}
 				/>

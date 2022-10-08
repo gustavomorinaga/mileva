@@ -1,7 +1,7 @@
 import React from 'react';
 
 // --- Native-Base ---
-import { Flex } from 'native-base';
+import { Avatar, Flex, Heading, Stack, Text } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -11,8 +11,17 @@ import CategoryButton from '@components/CategoryButton';
 // { route: { params } }
 export default function HomeScreen() {
 	return (
-		<BaseScreen isOnAppContent={true}>
-			<SearchInput />
+		<BaseScreen mt={-32}>
+			<Flex direction="row" justify="space-between" mb="7">
+				<Stack>
+					<Heading color="white">Olá, Gustavo</Heading>
+					<Text color="white">Qual a próxima parada?</Text>
+				</Stack>
+
+				<Avatar source={{ uri: 'https://github.com/gmatthewsfeuer.png' }} />
+			</Flex>
+
+			<SearchInput placeholder="Pesquisar um destino..." />
 
 			<Flex direction="row" justify="space-between" mt="4">
 				<CategoryButton

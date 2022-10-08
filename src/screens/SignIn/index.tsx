@@ -95,7 +95,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 				<Flex w="full" h="full" justify="flex-end">
 					<VStack w="full" space="16">
 						<VStack w="full" space="4">
-							<FormControl isInvalid={errors.email}>
+							<FormControl isInvalid={!!errors.email}>
 								<FormControl.Label>
 									<Text color="lightText">E-mail</Text>
 								</FormControl.Label>
@@ -105,7 +105,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 									render={({ field: { onChange, onBlur } }) => (
 										<Input
 											variant="outline"
-											type="email"
+											type="text"
 											borderRadius="xl"
 											color="lightText"
 											selectionColor="lightText"
@@ -119,7 +119,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={errors.password}>
+							<FormControl isInvalid={!!errors.password}>
 								<FormControl.Label>
 									<Text color="lightText">Password</Text>
 								</FormControl.Label>

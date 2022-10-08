@@ -1,4 +1,4 @@
-import { createElement } from 'react';
+import { createElement, ReactElement } from 'react';
 
 // --- Components ---
 import HeaderComponent from '@components/Header';
@@ -9,7 +9,7 @@ const tabNavigatorConfig = {
 		tabBarShowLabel: false,
 		unmountOnBlur: true,
 		lazy: true,
-		header: (props?: any) => createElement(HeaderComponent, props),
+		header: (props?: ReactElement['props']) => createElement(HeaderComponent, props),
 		tabBarIcon: ({ focused, size }) => {
 			const iconProps = {
 				name: 'alert-circle',
