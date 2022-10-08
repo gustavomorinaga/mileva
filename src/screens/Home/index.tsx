@@ -7,12 +7,15 @@ import { Flex } from 'native-base';
 import BaseScreen from '@components/BaseScreen';
 import SearchInput from '@components/SearchInput';
 import CategoryButton from '@components/CategoryButton';
+import WelcomeHeaderComponent from '@components/WelcomeHeader';
 
 // { route: { params } }
 export default function HomeScreen() {
 	return (
-		<BaseScreen isOnAppContent={true}>
-			<SearchInput />
+		<BaseScreen mt={-32}>
+			<WelcomeHeaderComponent />
+
+			<SearchInput placeholder="Pesquisar um destino..." />
 
 			<Flex direction="row" justify="space-between" mt="4">
 				<CategoryButton

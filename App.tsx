@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 // --- Splash Loading ---
-import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 
 // --- Native Base ---
 import { NativeBaseProvider, StatusBar } from 'native-base';
@@ -47,10 +47,12 @@ LogBox.ignoreLogs(['NativeBase:']);
 
 const Tab = createBottomTabNavigator();
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
 	const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
 
-	let [fontsLoaded] = useFonts({
+	const [fontsLoaded] = useFonts({
 		Poppins_100Thin,
 		Poppins_200ExtraLight,
 		Poppins_300Light,
@@ -59,11 +61,21 @@ export default function App() {
 		Poppins_700Bold,
 	});
 
-	if (!fontsLoaded) return <AppLoading />;
+	useEffect(() => {
+		(async function prepare() {
+			await SplashScreen.preventAutoHideAsync();
+		})();
+	}, []);
+
+	const onLayoutRootView = useCallback(async () => {
+		if (fontsLoaded) await SplashScreen.hideAsync();
+	}, [fontsLoaded]);
+
+	if (!fontsLoaded) return null;
 
 	return (
 		<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
-			<SafeAreaProvider>
+			<SafeAreaProvider onLayout={onLayoutRootView}>
 				<StatusBar animated={true} />
 				<NavigationContainer>
 					<Tab.Navigator {...tabNavigatorConfig}>

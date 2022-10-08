@@ -6,24 +6,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View } from 'native-base';
 import { IViewProps } from 'native-base/lib/typescript/components/basic/View/types';
 
-export const BaseScreenPrimitive = ({
-	children,
-	isOnAppContent = false,
-	...props
-}: IViewProps & { isOnAppContent?: boolean }) => (
-	<SafeAreaView style={{ flex: 1, zIndex: 10, marginTop: isOnAppContent ? 4 : 0 }}>
-		<View padding="5" h="full" {...props} mt={isOnAppContent ? -12 : 0}>
-			{children}
-		</View>
+export const BaseScreenPrimitive = ({ ...props }: IViewProps) => (
+	<SafeAreaView style={{ flex: 1, zIndex: 10, marginTop: 4 }}>
+		<View padding="5" h="full" {...props}></View>
 	</SafeAreaView>
 );
 
 export default function BaseScreen({
 	children,
 	isAnimated = true,
-	isOnAppContent = false,
 	...props
-}: IViewProps & { isAnimated?: boolean; isOnAppContent?: boolean }) {
+}: IViewProps & { isAnimated?: boolean }) {
 	const fadeAnimation = React.useRef(new Animated.Value(0)).current;
 	const slideTopAnimation = React.useRef(new Animated.Value(50)).current;
 
@@ -70,14 +63,10 @@ export default function BaseScreen({
 						zIndex: 10,
 					}}
 				>
-					<BaseScreenPrimitive {...props} isOnAppContent={isOnAppContent}>
-						{children}
-					</BaseScreenPrimitive>
+					<BaseScreenPrimitive {...props}>{children}</BaseScreenPrimitive>
 				</Animated.View>
 			) : (
-				<BaseScreenPrimitive {...props} isOnAppContent={isOnAppContent}>
-					{children}
-				</BaseScreenPrimitive>
+				<BaseScreenPrimitive {...props}>{children}</BaseScreenPrimitive>
 			)}
 		</>
 	);
