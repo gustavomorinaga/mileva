@@ -46,8 +46,10 @@ const validationSchema = Yup.object().shape({
 		.required('Senha é obrigatória!'),
 });
 
+type FormType = Yup.InferType<typeof validationSchema>;
+
 export default function SignInScreen({ navigation }: TSignInProps) {
-	const setAuthentication = useAuthStore(({ setAuthentication }) => setAuthentication);
+	const login = useAuthStore(state => state.login);
 
 	const {
 		control,
@@ -59,11 +61,10 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 
 	const handleShowPassword = () => setShowPassword(!showPassword);
 
-	const onSubmit = (values: typeof validationSchema.fields) =>
+	const onSubmit = (values: FormType) =>
 		new Promise(() =>
 			setTimeout(() => {
-				setAuthentication();
-				console.log(values);
+				login(values);
 				return navigation.navigate('Home');
 			}, 500)
 		);

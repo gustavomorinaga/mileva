@@ -1,25 +1,40 @@
-// ! SERVIÇO DE AUTENTICAÇÃO TEMPORÁRIO!!!
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface State {
-	isAuthenticated: boolean;
+// --- Interfaces ---
+import { IAuth } from '@interfaces/IAuth';
 
-	// eslint-disable-next-line no-unused-vars
-	setAuthentication: (auth?: boolean) => void;
+interface Login {
+	email: string;
+	password: string;
+}
+
+interface State extends IAuth {
+	login: (data: Login) => void;
 }
 
 const useAuthStore = create(
 	persist<State>(
 		(set, get) => ({
 			isAuthenticated: false,
+			avatarUrl: null,
+			email: null,
+			name: null,
+			firstName: null,
 
-			setAuthentication: async (auth?: boolean) => {
-				const isAuthenticated = auth ?? !get().isAuthenticated;
+			login: async ({ email }) => {
+				const auth: IAuth = {
+					email,
+					avatarUrl: 'https://github.com/gmatthewsfeuer.png',
+					name: 'Gustavo Matheus',
+					firstName: 'Gustavo Matheus'.split(' ')[0],
+					isAuthenticated: true,
+				};
 
-				set(() => ({ isAuthenticated }));
+				console.log(auth);
+
+				set(() => auth);
 			},
 		}),
 		{

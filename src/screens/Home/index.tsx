@@ -1,25 +1,19 @@
 import React from 'react';
 
 // --- Native-Base ---
-import { Avatar, Flex, Heading, Stack, Text } from 'native-base';
+import { Flex } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
 import SearchInput from '@components/SearchInput';
 import CategoryButton from '@components/CategoryButton';
+import WelcomeHeaderComponent from '@components/WelcomeHeader';
 
 // { route: { params } }
 export default function HomeScreen() {
 	return (
 		<BaseScreen mt={-32}>
-			<Flex direction="row" justify="space-between" mb="7">
-				<Stack>
-					<Heading color="white">Olá, Gustavo</Heading>
-					<Text color="white">Qual a próxima parada?</Text>
-				</Stack>
-
-				<Avatar source={{ uri: 'https://github.com/gmatthewsfeuer.png' }} />
-			</Flex>
+			<WelcomeHeaderComponent />
 
 			<SearchInput placeholder="Pesquisar um destino..." />
 

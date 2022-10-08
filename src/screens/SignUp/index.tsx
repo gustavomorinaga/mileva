@@ -54,8 +54,10 @@ const validationSchema = Yup.object().shape({
 	),
 });
 
+type FormType = Yup.InferType<typeof validationSchema>;
+
 export default function SignUpScreen({ navigation }: TSignUpProps) {
-	const setAuthentication = useAuthStore(({ setAuthentication }) => setAuthentication);
+	const register = useAuthStore(state => state.login);
 
 	const {
 		control,
@@ -70,10 +72,10 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 	const handleShowPasswordConfirmation = () =>
 		setShowPasswordConfirmation(!showPasswordConfirmation);
 
-	const onSubmit = (values: typeof validationSchema.fields) =>
+	const onSubmit = (values: FormType) =>
 		new Promise(() =>
 			setTimeout(() => {
-				setAuthentication();
+				register(values);
 				console.log(values);
 				return navigation.navigate('Home');
 			}, 500)
@@ -106,7 +108,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 				<Flex w="full" h="full" justify="flex-end">
 					<VStack w="full" space="16">
 						<VStack w="full" space="4">
-							<FormControl isInvalid={errors.name}>
+							<FormControl isInvalid={!!errors.name}>
 								<FormControl.Label>
 									<Text color="lightText">Nome</Text>
 								</FormControl.Label>
@@ -129,7 +131,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={errors.email}>
+							<FormControl isInvalid={!!errors.email}>
 								<FormControl.Label>
 									<Text color="lightText">E-mail</Text>
 								</FormControl.Label>
@@ -139,7 +141,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 									render={({ field: { onChange, onBlur } }) => (
 										<Input
 											variant="outline"
-											type="email"
+											type="text"
 											borderRadius="xl"
 											color="lightText"
 											onBlur={onBlur}
@@ -152,7 +154,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={errors.password}>
+							<FormControl isInvalid={!!errors.password}>
 								<FormControl.Label>
 									<Text color="lightText">Password</Text>
 								</FormControl.Label>
@@ -185,7 +187,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={errors.password}>
+							<FormControl isInvalid={!!errors.password}>
 								<FormControl.Label>
 									<Text color="lightText">Confirme a senha</Text>
 								</FormControl.Label>

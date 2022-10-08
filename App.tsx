@@ -62,17 +62,16 @@ export default function App() {
 	});
 
 	useEffect(() => {
-		async function prepare() {
+		(async function prepare() {
 			await SplashScreen.preventAutoHideAsync();
-		}
-		prepare();
+		})();
 	}, []);
 
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) await SplashScreen.hideAsync();
 	}, [fontsLoaded]);
 
-	if (!fontsLoaded) return;
+	if (!fontsLoaded) return null;
 
 	return (
 		<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
