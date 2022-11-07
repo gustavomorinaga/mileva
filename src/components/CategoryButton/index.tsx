@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 
 // --- Components ---
-import IconComponent from '@components/Icon';
+import Icon from '@components/Icon';
 
 interface ICategoryButton {
 	iconProps: {
@@ -46,12 +46,7 @@ export default function CategoryButton({
 				bgColor="gray.300"
 				{...boxProps}
 			>
-				<IconComponent
-					name={iconProps.name}
-					size="3xl"
-					color="muted.500"
-					{...iconProps.styles}
-				/>
+				<Icon name={iconProps.name} size="3xl" color="muted.500" {...iconProps.styles} />
 			</Box>
 			<Text textAlign="center" mt="2" {...labelProps.styles}>
 				{labelProps.label}

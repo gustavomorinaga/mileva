@@ -1,9 +1,9 @@
 import { RouteProp } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
-import { TRootStackParamList } from './TRootStackParamList';
+import { TRootTabParamList } from './TRootTabParamList';
 
 export type TSignUpProps = {
-	route: RouteProp<TRootStackParamList, 'Sign Up'>;
-	navigation: BottomTabNavigationProp<TRootStackParamList, 'Sign Up'>;
+	route: RouteProp<TRootTabParamList, 'Sign Up'>;
+	navigation: BottomTabNavigationProp<TRootTabParamList, 'Sign Up'>;
 };

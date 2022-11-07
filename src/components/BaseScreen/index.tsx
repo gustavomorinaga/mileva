@@ -7,8 +7,8 @@ import { View } from 'native-base';
 import { IViewProps } from 'native-base/lib/typescript/components/basic/View/types';
 
 export const BaseScreenPrimitive = ({ ...props }: IViewProps) => (
-	<SafeAreaView style={{ flex: 1, zIndex: 99, marginTop: 4 }}>
-		<View paddingTop="5" paddingX="5" flex={1} {...props}></View>
+	<SafeAreaView style={{ zIndex: 99, flex: 1, marginTop: 4 }}>
+		<View pt="5" px="5" flex={1} {...props}></View>
 	</SafeAreaView>
 );
 
@@ -53,7 +53,7 @@ export default function BaseScreen({
 	}, [fadeAnimation, slideTopAnimation, isAnimated]);
 
 	return (
-		<View flex={1} bgColor="muted.100" zIndex={9}>
+		<View flex={1} zIndex={9} bgColor="muted.100">
 			{isAnimated ? (
 				<Animated.View
 					style={{

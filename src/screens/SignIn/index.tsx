@@ -24,8 +24,8 @@ import * as Yup from 'yup';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
-import IconComponent from '@components/Icon';
-import IconButtonComponent from '@components/IconButton';
+import Icon from '@components/Icon';
+import IconButton from '@components/IconButton';
 
 // --- Utils ---
 import avoidKeyboardView from '@utils/avoidKeyboardView';
@@ -89,7 +89,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 					w="full"
 					h="full"
 					position="absolute"
-				></Box>
+				/>
 			</View>
 
 			<BaseScreen>
@@ -135,7 +135,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 											color="lightText"
 											selectionColor="lightText"
 											InputRightElement={
-												<IconButtonComponent
+												<IconButton
 													variant="unstyled"
 													iconSize="sm"
 													rounded="none"
@@ -162,9 +162,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 							p="3"
 							onPress={handleSubmit(onSubmit)}
 						>
-							<Text color="lightText" fontSize="md" fontWeight="600">
-								{isSubmitting ? 'Entrando...' : 'Entrar'}
-							</Text>
+							{isSubmitting ? 'Entrando...' : 'Entrar'}
 						</Button>
 
 						<Flex direction="row" justify="space-between">
@@ -178,12 +176,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 								<Flex direction="row" align="center" py="2" pl="2">
 									<Text color="lightText">Cadastrar-se</Text>
 
-									<IconComponent
-										name="arrow-forward"
-										size="sm"
-										color="lightText"
-										ml="2"
-									/>
+									<Icon name="arrow-forward" size="sm" color="lightText" ml="2" />
 								</Flex>
 							</Link>
 						</Flex>

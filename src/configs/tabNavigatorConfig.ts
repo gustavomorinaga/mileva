@@ -1,15 +1,24 @@
-import { createElement, ReactElement } from 'react';
+import { createElement } from 'react';
 
-// --- Components ---
-import HeaderComponent from '@components/Header';
-import IconComponent from '@components/Icon';
+// --- React Navigation ---
+import { ParamListBase, RouteProp } from '@react-navigation/native';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
-const tabNavigatorConfig = {
+import Icon from '@components/Icon';
+
+const tabNavigatorConfig: {
+	screenOptions?:
+		| BottomTabNavigationOptions
+		| ((props: {
+				route: RouteProp<ParamListBase, string>;
+				navigation: any;
+		  }) => BottomTabNavigationOptions);
+} = {
 	screenOptions: ({ route }) => ({
 		tabBarShowLabel: false,
 		unmountOnBlur: true,
 		lazy: true,
-		header: (props?: ReactElement['props']) => createElement(HeaderComponent, props),
+		headerShown: false,
 		tabBarIcon: ({ focused, size }) => {
 			const iconProps = {
 				name: 'alert-circle',
@@ -34,7 +43,7 @@ const tabNavigatorConfig = {
 					break;
 			}
 
-			return createElement(IconComponent, iconProps);
+			return createElement(Icon, iconProps);
 		},
 	}),
 };

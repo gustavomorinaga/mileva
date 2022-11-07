@@ -2,7 +2,7 @@
 	"name": "mileva-app",
 	"version": "1.0.0",
 	"main": "node_modules/expo/AppEntry.js",
-	"homepage": "https://github.com/GeekyAnts/nativebase-templates#readme",
+	"homepage": "https://github.com/gmatthewsfeuer/mileva#readme",
 	"contributors": [
 		{
 			"name": "Bruno Godinho",
@@ -59,7 +59,9 @@
 		"@native-base/icons": "0.0.11",
 		"@react-native-async-storage/async-storage": "1.17.10",
 		"@react-navigation/bottom-tabs": "6.4.0",
+		"@react-navigation/drawer": "^6.5.0",
 		"@react-navigation/native": "6.0.13",
+		"@react-navigation/stack": "^6.3.4",
 		"@tanstack/react-query": "^4.13.0",
 		"axios": "1.1.2",
 		"expo": "46.0.15",

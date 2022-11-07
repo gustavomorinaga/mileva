@@ -10,17 +10,20 @@ import { NativeBaseProvider, StatusBar } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 // --- Screens ---
 import SignInScreen from '@screens/SignIn';
 import SignUpScreen from '@screens/SignUp';
 import HomeScreen from '@screens/Home';
+import AccommodationDetailsScreen from '@screens/AccommodationDetails';
 import FavoritesScreen from '@screens/Favorites';
 import ScheduleScreen from '@screens/Schedule';
 import AccountScreen from '@screens/Profile';
 
 // --- Configs ---
 import nativeBaseConfig from '@configs/nativeBaseConfig';
+import stackNavigatorConfig from '@configs/stackNavigatorConfig';
 import tabNavigatorConfig from '@configs/tabNavigatorConfig';
 import signScreensConfig from '@configs/signScreensConfig';
 
@@ -42,12 +45,29 @@ import {
 import { theme } from '@styles/theme';
 import { LogBox } from 'react-native';
 
+// --- Types ---
+import { TRootTabParamList } from '@~types/TRootTabParamList';
+import { THomeStackParamList } from '@~types/THomeStackParamList';
+
 // --- Disable NativeBase Logs ---
 LogBox.ignoreLogs(['NativeBase:']);
 
-const Tab = createBottomTabNavigator();
+const RootTab = createBottomTabNavigator<TRootTabParamList>();
+const HomeStack = createStackNavigator<THomeStackParamList>();
 
 SplashScreen.preventAutoHideAsync();
+
+function HomeTabs() {
+	return (
+		<HomeStack.Navigator initialRouteName="Home Root" {...stackNavigatorConfig}>
+			<HomeStack.Screen name="Home Root" component={HomeScreen} />
+			<HomeStack.Screen
+				name="Accommodation Details"
+				component={AccommodationDetailsScreen}
+			/>
+		</HomeStack.Navigator>
+	);
+}
 
 export default function App() {
 	const isAuthenticated = useAuthStore(({ isAuthenticated }) => isAuthenticated);
@@ -78,30 +98,29 @@ export default function App() {
 			<SafeAreaProvider onLayout={onLayoutRootView}>
 				<StatusBar animated={true} />
 				<NavigationContainer>
-					<Tab.Navigator {...tabNavigatorConfig}>
+					<RootTab.Navigator {...tabNavigatorConfig}>
 						{isAuthenticated ? (
-							<>
-								<Tab.Screen name="Home" component={HomeScreen} />
-								<Tab.Screen name="Favorites" component={FavoritesScreen} />
-								<Tab.Screen name="Schedule" component={ScheduleScreen} />
-								<Tab.Screen name="Account" component={AccountScreen} />
-							</>
+							<RootTab.Group>
+								<RootTab.Screen name="Home" component={HomeTabs} />
+								<RootTab.Screen name="Favorites" component={FavoritesScreen} />
+								<RootTab.Screen name="Schedule" component={ScheduleScreen} />
+								<RootTab.Screen name="Account" component={AccountScreen} />
+							</RootTab.Group>
 						) : (
-							<>
-								<Tab.Screen
+							<RootTab.Group>
+								<RootTab.Screen
 									name="Sign In"
 									component={SignInScreen}
 									options={signScreensConfig}
 								/>
-								<Tab.Screen
+								<RootTab.Screen
 									name="Sign Up"
 									component={SignUpScreen}
 									options={signScreensConfig}
 								/>
-								<Tab.Screen name="Home" component={HomeScreen} />
-							</>
+							</RootTab.Group>
 						)}
-					</Tab.Navigator>
+					</RootTab.Navigator>
 				</NavigationContainer>
 			</SafeAreaProvider>
 		</NativeBaseProvider>

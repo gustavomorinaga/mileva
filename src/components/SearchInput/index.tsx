@@ -4,7 +4,7 @@ import React from 'react';
 import { IInputProps, Input } from 'native-base';
 
 // --- Components ---
-import IconComponent from '@components/Icon';
+import Icon from '@components/Icon';
 
 export default function SearchInput(props: IInputProps) {
 	return (
@@ -14,7 +14,7 @@ export default function SearchInput(props: IInputProps) {
 			bgColor="muted.100"
 			borderRadius="2xl"
 			shadow="3"
-			InputLeftElement={<IconComponent name="search-outline" size="sm" ml="4" />}
+			InputLeftElement={<Icon name="search-outline" size="sm" ml="4" />}
 			{...props}
 		/>
 	);

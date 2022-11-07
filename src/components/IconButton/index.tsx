@@ -9,7 +9,7 @@ import { ISizes } from 'native-base/lib/typescript/theme/base/sizes';
 import { Ionicons } from '@expo/vector-icons';
 
 interface CustomIconButtonProps extends IIconButtonProps {
-	name: typeof Ionicons['name'];
+	name: keyof typeof Ionicons.glyphMap;
 	color?: ColorType;
 	iconSize?: ISizes;
 }

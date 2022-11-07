@@ -29,15 +29,6 @@ export const theme = extendTheme({
 		body: 'Poppins',
 		mono: 'Poppins',
 	},
-
-	components: {
-		Input: {
-			defaultProps: { fontFamily: 'body' },
-		},
-		Button: {
-			defaultProps: { fontFamily: 'body' },
-		},
-	},
 });
 
 type CustomThemeType = typeof theme;

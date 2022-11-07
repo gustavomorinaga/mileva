@@ -24,8 +24,8 @@ import * as Yup from 'yup';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
-import IconComponent from '@components/Icon';
-import IconButtonComponent from '@components/IconButton';
+import Icon from '@components/Icon';
+import IconButton from '@components/IconButton';
 
 // --- Utils ---
 import avoidKeyboardView from '@utils/avoidKeyboardView';
@@ -101,7 +101,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 					w="full"
 					h="full"
 					position="absolute"
-				></Box>
+				/>
 			</View>
 
 			<BaseScreen>
@@ -168,7 +168,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 											borderRadius="xl"
 											color="lightText"
 											InputRightElement={
-												<IconButtonComponent
+												<IconButton
 													variant="unstyled"
 													iconSize="sm"
 													rounded="none"
@@ -201,7 +201,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 											borderRadius="xl"
 											color="lightText"
 											InputRightElement={
-												<IconButtonComponent
+												<IconButton
 													variant="unstyled"
 													iconSize="sm"
 													rounded="none"
@@ -230,20 +230,13 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 							p="3"
 							onPress={handleSubmit(onSubmit)}
 						>
-							<Text color="lightText" fontSize="md" fontWeight="600">
-								{isSubmitting ? 'Cadastrando...' : 'Cadastrar-se'}
-							</Text>
+							{isSubmitting ? 'Cadastrando...' : 'Cadastrar-se'}
 						</Button>
 
 						<Flex direction="row" justify="space-between">
 							<Link onPress={() => navigation.navigate('Sign In')}>
 								<Flex direction="row" align="center" py="2" pr="2">
-									<IconComponent
-										name="arrow-forward"
-										size="sm"
-										color="lightText"
-										ml="2"
-									/>
+									<Icon name="arrow-forward" size="sm" color="lightText" ml="2" />
 
 									<Text color="lightText">Entrar na minha conta</Text>
 								</Flex>
