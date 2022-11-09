@@ -31,6 +31,7 @@ import IconButton from '@components/IconButton';
 import avoidKeyboardView from '@utils/avoidKeyboardView';
 
 // --- Types ---
+import { OmitNever } from '@~types/TOmitNever';
 import { TSignInProps } from '@~types/TSignInProps';
 
 // --- Images ---
@@ -46,7 +47,7 @@ const validationSchema = Yup.object().shape({
 		.required('Senha é obrigatória!'),
 });
 
-type FormType = Yup.InferType<typeof validationSchema>;
+type FormType = OmitNever<Yup.InferType<typeof validationSchema>>;
 
 export default function SignInScreen({ navigation }: TSignInProps) {
 	const login = useAuthStore(state => state.login);
@@ -71,7 +72,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 
 	return (
 		<>
-			<View position="absolute" flex="1">
+			<View position="absolute" zIndex={9} flex={1}>
 				<Image
 					source={bgImage}
 					size="full"
@@ -92,11 +93,11 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 				/>
 			</View>
 
-			<BaseScreen>
-				<Flex w="full" h="full" justify="flex-end">
+			<BaseScreen bgColor="transparent">
+				<Flex w="full" h="full" justify="flex-end" pb="4">
 					<VStack w="full" space="16">
 						<VStack w="full" space="4">
-							<FormControl isInvalid={!!errors.email}>
+							<FormControl isInvalid={Boolean(errors.email)}>
 								<FormControl.Label>
 									<Text color="lightText">E-mail</Text>
 								</FormControl.Label>
@@ -111,7 +112,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 											color="lightText"
 											selectionColor="lightText"
 											onBlur={onBlur}
-											onChangeText={value => onChange(value)}
+											onChangeText={value => onChange(value.trim())}
 										/>
 									)}
 								/>
@@ -120,7 +121,7 @@ export default function SignInScreen({ navigation }: TSignInProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={!!errors.password}>
+							<FormControl isInvalid={Boolean(errors.password)}>
 								<FormControl.Label>
 									<Text color="lightText">Password</Text>
 								</FormControl.Label>

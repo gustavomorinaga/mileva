@@ -22,8 +22,8 @@ const tabNavigatorConfig: {
 		tabBarIcon: ({ focused, size }) => {
 			const iconProps = {
 				name: 'alert-circle',
-				size,
 				color: focused ? 'darkBlue.500' : 'dark.500',
+				size,
 			};
 
 			switch (route.name) {
@@ -43,7 +43,7 @@ const tabNavigatorConfig: {
 					break;
 			}
 
-			return createElement(Icon, iconProps);
+			return createElement(Icon, iconProps as any);
 		},
 	}),
 };

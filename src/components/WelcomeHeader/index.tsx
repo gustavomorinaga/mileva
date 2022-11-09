@@ -1,7 +1,10 @@
 import React from 'react';
 
+// --- React Navigation ---
+import { useNavigation } from '@react-navigation/native';
+
 // --- Native-Base ---
-import { Avatar, Badge, Heading, Stack, Text, ZStack } from 'native-base';
+import { Avatar, Heading, Pressable, Stack, Text } from 'native-base';
 
 // --- Components ---
 import IconButton from '@components/IconButton';
@@ -12,8 +15,10 @@ import useAuthStore from '@stores/auth';
 export default function WelcomeHeaderComponent() {
 	const auth = useAuthStore(state => state);
 
+	const navigation = useNavigation<any>();
+
 	return (
-		<Stack direction="row" alignItems="center" justifyContent="space-between" m="1">
+		<Stack direction="row" alignItems="center" justifyContent="space-between">
 			<Stack>
 				<Heading color="lightText">{`Olá, ${auth.firstName}`}</Heading>
 				<Text color="lightText">Qual a próxima parada?</Text>
@@ -21,20 +26,12 @@ export default function WelcomeHeaderComponent() {
 
 			<Stack direction="row" space="2">
 				<Stack direction="row">
-					<IconButton name="notifications" color="lightText" />
-					<ZStack>
-						<Badge
-							colorScheme="danger"
-							variant="solid"
-							rounded="full"
-							alignSelf="flex-end"
-						>
-							2
-						</Badge>
-					</ZStack>
+					<IconButton name="notifications" color="lightText" badge={2} />
 				</Stack>
 
-				<Avatar source={{ uri: auth.avatarUrl }} borderColor="white" borderWidth="2" />
+				<Pressable onPress={() => navigation.navigate('Account')}>
+					<Avatar source={{ uri: auth.avatar }} borderColor="white" borderWidth="2" />
+				</Pressable>
 			</Stack>
 		</Stack>
 	);

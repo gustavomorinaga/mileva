@@ -4,6 +4,9 @@ import { Icon, IIconProps } from 'native-base';
 
 import { Ionicons } from '@expo/vector-icons';
 
-export default function IconComponent(props: IIconProps) {
-	return <Icon as={Ionicons} {...props} />;
+export default function IconComponent({
+	name,
+	...props
+}: IIconProps & { name: keyof typeof Ionicons.glyphMap }) {
+	return <Icon as={Ionicons} name={name} {...props} />;
 }

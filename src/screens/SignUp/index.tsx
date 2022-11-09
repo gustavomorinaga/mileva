@@ -31,6 +31,7 @@ import IconButton from '@components/IconButton';
 import avoidKeyboardView from '@utils/avoidKeyboardView';
 
 // --- Types ---
+import { OmitNever } from '@~types/TOmitNever';
 import { TSignUpProps } from '@~types/TSignUpProps';
 
 // --- Images ---
@@ -54,7 +55,7 @@ const validationSchema = Yup.object().shape({
 	),
 });
 
-type FormType = Yup.InferType<typeof validationSchema>;
+type FormType = OmitNever<Yup.InferType<typeof validationSchema>>;
 
 export default function SignUpScreen({ navigation }: TSignUpProps) {
 	const register = useAuthStore(state => state.login);
@@ -104,11 +105,11 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 				/>
 			</View>
 
-			<BaseScreen>
-				<Flex w="full" h="full" justify="flex-end">
+			<BaseScreen bgColor="transparent">
+				<Flex w="full" h="full" justify="flex-end" pb="4">
 					<VStack w="full" space="16">
 						<VStack w="full" space="4">
-							<FormControl isInvalid={!!errors.name}>
+							<FormControl isInvalid={Boolean(errors.name)}>
 								<FormControl.Label>
 									<Text color="lightText">Nome</Text>
 								</FormControl.Label>
@@ -122,7 +123,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 											borderRadius="xl"
 											color="lightText"
 											onBlur={onBlur}
-											onChangeText={value => onChange(value)}
+											onChangeText={value => onChange(value.trim())}
 										/>
 									)}
 								/>
@@ -131,7 +132,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={!!errors.email}>
+							<FormControl isInvalid={Boolean(errors.email)}>
 								<FormControl.Label>
 									<Text color="lightText">E-mail</Text>
 								</FormControl.Label>
@@ -145,7 +146,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 											borderRadius="xl"
 											color="lightText"
 											onBlur={onBlur}
-											onChangeText={value => onChange(value)}
+											onChangeText={value => onChange(value.trim())}
 										/>
 									)}
 								/>
@@ -154,7 +155,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={!!errors.password}>
+							<FormControl isInvalid={Boolean(errors.password)}>
 								<FormControl.Label>
 									<Text color="lightText">Password</Text>
 								</FormControl.Label>
@@ -187,7 +188,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 								</FormControl.ErrorMessage>
 							</FormControl>
 
-							<FormControl isInvalid={!!errors.password}>
+							<FormControl isInvalid={Boolean(errors.password)}>
 								<FormControl.Label>
 									<Text color="lightText">Confirme a senha</Text>
 								</FormControl.Label>
@@ -236,7 +237,7 @@ export default function SignUpScreen({ navigation }: TSignUpProps) {
 						<Flex direction="row" justify="space-between">
 							<Link onPress={() => navigation.navigate('Sign In')}>
 								<Flex direction="row" align="center" py="2" pr="2">
-									<Icon name="arrow-forward" size="sm" color="lightText" ml="2" />
+									<Icon name="arrow-back" size="sm" color="lightText" mr="2" />
 
 									<Text color="lightText">Entrar na minha conta</Text>
 								</Flex>

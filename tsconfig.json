@@ -23,6 +23,7 @@
 			"@components/*": ["./src/components/*"],
 			"@configs/*": ["./src/configs/*"],
 			"@interfaces/*": ["./src/interfaces/*"],
+			"@navigation/*": ["./src/navigation/*"],
 			"@screens/*": ["./src/screens/*"],
 			"@scripts/*": ["./src/scripts/*"],
 			"@services/*": ["./src/services/*"],
@@ -33,5 +34,6 @@
 		},
 		"incremental": true
 	},
+	"include": ["public", "src"],
 	"exclude": ["node_modules", "dist"]
 }

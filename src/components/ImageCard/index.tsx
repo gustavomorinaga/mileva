@@ -35,6 +35,9 @@ export default function ImageCard({
 
 			{title && (
 				<Box
+					position="absolute"
+					w="full"
+					h="full"
 					bg={{
 						linearGradient: {
 							colors: ['transparent', 'black:alpha.70'],
@@ -42,9 +45,6 @@ export default function ImageCard({
 							end: [0, 0],
 						},
 					}}
-					w="full"
-					h="full"
-					position="absolute"
 				/>
 			)}
 

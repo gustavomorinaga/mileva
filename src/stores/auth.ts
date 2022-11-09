@@ -18,21 +18,26 @@ const useAuthStore = create(
 	persist<State>(
 		(set, get) => ({
 			isAuthenticated: false,
-			avatarUrl: null,
+
+			avatar: null,
 			email: null,
 			name: null,
 			firstName: null,
+			birthday: null,
+			gender: null,
+			phone: null,
 
 			login: async ({ email }) => {
 				const auth: IAuth = {
-					email,
-					avatarUrl: 'https://github.com/gmatthewsfeuer.png',
+					isAuthenticated: true,
+					avatar: 'https://github.com/gmatthewsfeuer.png',
 					name: 'Gustavo Matheus',
 					firstName: 'Gustavo Matheus'.split(' ')[0],
-					isAuthenticated: true,
+					email,
+					birthday: new Date('2000-10-27').toISOString(),
+					gender: 'male',
+					phone: '(11) 99769-2927',
 				};
-
-				console.log(auth);
 
 				set(() => auth);
 			},

@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Native-Base ---
-import { Pressable } from 'native-base';
+import { Box, Pressable, ZStack } from 'native-base';
 
 // --- React Navigation ---
 import { useNavigation } from '@react-navigation/native';
@@ -38,7 +38,20 @@ export default function Masonry({ data, numColumns, renderChild, screen }: Mason
 	};
 
 	return (
-		<SafeAreaView style={{ flex: 1, marginTop: 20, marginHorizontal: -20 }}>
+		<SafeAreaView style={{ flex: 1, marginTop: 10, marginHorizontal: -20 }}>
+			<ZStack zIndex={99}>
+				<Box
+					bg={{
+						linearGradient: {
+							colors: ['transparent', 'muted.100'],
+							start: [0, 0.75],
+							end: [0, 0],
+						},
+					}}
+					w="full"
+					h="8"
+				/>
+			</ZStack>
 			<MasonryList
 				data={data}
 				keyExtractor={item => item._id}
@@ -48,7 +61,9 @@ export default function Masonry({ data, numColumns, renderChild, screen }: Mason
 				contentContainerStyle={{
 					marginTop: -16,
 					marginLeft: -16,
+					paddingTop: 20,
 					paddingHorizontal: 20,
+					paddingBottom: 8,
 					alignSelf: 'stretch',
 				}}
 			/>

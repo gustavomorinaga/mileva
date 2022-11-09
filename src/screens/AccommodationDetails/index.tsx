@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // --- React Navigation ---
 import { useNavigation } from '@react-navigation/native';
 
 // --- Native-Base ---
-import { Button, Heading, ScrollView, Stack, Text } from 'native-base';
+import { Box, Button, Heading, ScrollView, Stack, Text, View } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -36,11 +36,42 @@ const data = {
 			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
 			alt: 'Grécia',
 		},
+		{
+			_id: '3',
+			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
+			alt: 'Grécia',
+		},
+		{
+			_id: '4',
+			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
+			alt: 'Grécia',
+		},
+		{
+			_id: '5',
+			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
+			alt: 'Grécia',
+		},
+		{
+			_id: '6',
+			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
+			alt: 'Grécia',
+		},
+		{
+			_id: '7',
+			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
+			alt: 'Grécia',
+		},
 	],
 };
 
 export default function AccommodationDetailsScreen() {
 	const navigation = useNavigation<any>();
+
+	const [favorited, setFavorited] = useState(false);
+
+	const handleFavoritePress = () => {
+		setFavorited(!favorited);
+	};
 
 	return (
 		<>
@@ -52,15 +83,29 @@ export default function AccommodationDetailsScreen() {
 						onPress={() => navigation.goBack()}
 					/>
 
-					<Heading color="white">Detalhes</Heading>
+					<Heading textAlign="center" color="white">
+						Detalhes
+					</Heading>
 
-					<IconButton name="menu" bgColor="white" />
+					<View w="8" />
 				</Stack>
 			</Header>
 
-			<BaseScreen mt={-16}>
-				<ScrollView mx={-6} px="6">
-					<Stack space="6">
+			<BaseScreen mt={-20}>
+				<Box
+					zIndex={99}
+					bg={{
+						linearGradient: {
+							colors: ['transparent', 'darkBlue.500'],
+							start: [0, 0.75],
+							end: [0, 0],
+						},
+					}}
+					w="full"
+					h="8"
+				/>
+				<ScrollView showsVerticalScrollIndicator={false} mt={-8} mx={-6} pt="6">
+					<Stack space="6" px="6" pb="8">
 						<ImageCard
 							image={{ uri: data.image.uri, alt: data.image.alt }}
 							title={data.name}
@@ -74,7 +119,13 @@ export default function AccommodationDetailsScreen() {
 							}
 							sideContent={
 								<>
-									<IconButton name="heart-outline" bgColor="white" shadow="3" />
+									<IconButton
+										name={favorited ? 'heart' : 'heart-outline'}
+										color={favorited ? 'rose.500' : 'black'}
+										bgColor="white"
+										shadow="3"
+										onPress={handleFavoritePress}
+									/>
 									<IconButton name="share-social" bgColor="white" shadow="3" />
 								</>
 							}
