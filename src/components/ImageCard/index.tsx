@@ -1,16 +1,17 @@
 import React from 'react';
 
 // --- Native-Base ---
-import { AspectRatio, Box, Heading, Image, Stack, Text } from 'native-base';
+import { AspectRatio, Box, Heading, IBoxProps, Image, Stack, Text } from 'native-base';
 
-interface IImageProps {
+interface IImageCardProps {
 	image: {
 		uri: string;
 		alt: string;
 	};
 	title?: string;
 	subtitle?: string;
-	content?: React.ReactElement;
+	containerProps?: IBoxProps;
+	children?: React.ReactElement;
 	sideContent?: React.ReactElement;
 }
 
@@ -18,11 +19,18 @@ export default function ImageCard({
 	image,
 	title,
 	subtitle,
-	content,
+	containerProps,
+	children,
 	sideContent,
-}: IImageProps) {
+}: IImageCardProps) {
 	return (
-		<Box position="relative" overflow="hidden" borderRadius="2xl" shadow="5">
+		<Box
+			position="relative"
+			overflow="hidden"
+			borderRadius="2xl"
+			shadow="5"
+			{...containerProps}
+		>
 			<AspectRatio ratio={{ base: 1 / 1 }}>
 				<Image
 					source={{ uri: image.uri }}
@@ -62,18 +70,16 @@ export default function ImageCard({
 					<Stack space="2">{sideContent}</Stack>
 				</Stack>
 
-				{content && (
-					<Box
-						m="4"
-						p="2"
-						alignSelf="flex-start"
-						borderRadius="lg"
-						bgColor="black:alpha.80"
-					>
-						{content}
-					</Box>
-				)}
+				{children}
 			</Stack>
 		</Box>
 	);
 }
+
+ImageCard.Content = function ImageCardContent({ children }) {
+	return (
+		<Box m="4" p="2" alignSelf="flex-start" borderRadius="lg" bgColor="black:alpha.80">
+			{children}
+		</Box>
+	);
+};

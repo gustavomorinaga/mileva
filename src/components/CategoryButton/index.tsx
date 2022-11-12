@@ -14,9 +14,12 @@ import {
 // --- Components ---
 import Icon from '@components/Icon';
 
+// --- Icons ---
+import { Ionicons } from '@expo/vector-icons';
+
 interface ICategoryButton {
 	iconProps: {
-		name: string;
+		name: keyof typeof Ionicons.glyphMap;
 		styles?: IIconProps;
 	};
 	pressableProps?: IPressableProps;
@@ -25,7 +28,7 @@ interface ICategoryButton {
 		label: string;
 		styles?: ITextProps;
 	};
-	handleOnPress?: () => void;
+	onPress?: () => void;
 }
 
 export default function CategoryButton({
@@ -33,20 +36,25 @@ export default function CategoryButton({
 	pressableProps,
 	boxProps,
 	labelProps,
-	handleOnPress,
+	onPress,
 }: ICategoryButton) {
 	return (
-		<Pressable {...pressableProps} onPress={handleOnPress}>
+		<Pressable {...pressableProps} onPress={onPress}>
 			<Box
 				display="flex"
 				alignItems="center"
 				justifyContent="center"
 				borderRadius="2xl"
-				p="10"
+				p="8"
 				bgColor="gray.300"
 				{...boxProps}
 			>
-				<Icon name={iconProps.name} size="3xl" color="muted.500" {...iconProps.styles} />
+				<Icon
+					name={iconProps.name as any}
+					size="3xl"
+					color="muted.500"
+					{...iconProps.styles}
+				/>
 			</Box>
 			<Text textAlign="center" mt="2" {...labelProps.styles}>
 				{labelProps.label}

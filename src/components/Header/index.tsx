@@ -12,9 +12,11 @@ export default function HeaderComponent({ containerStyle, children }: HeaderProp
 	return (
 		<Box
 			zIndex={-9}
-			p="5"
+			w="full"
+			pt="10"
+			px="5"
+			pb="16"
 			bgColor="darkBlue.500"
-			h="32"
 			roundedBottomLeft="3xl"
 			{...containerStyle}
 		>

@@ -1,7 +1,10 @@
 import React from 'react';
 
+// --- Navigation ---
+import { THomeParamProps } from '@navigation/HomeStack';
+
 // --- Native-Base ---
-import { Box, Flex, Stack, Text } from 'native-base';
+import { Box, Stack, Text } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -12,181 +15,73 @@ import CategoryButton from '@components/CategoryButton';
 import Masonry from '@components/MasonryList';
 import Icon from '@components/Icon';
 
-// --- Types ---
-import { THomeRootProps } from '@~types/THomeRootProps';
-
 const data = [
 	{
 		_id: 'id123',
-		uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-		alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://expedicaooriente.com.br/wp-content/uploads/2019/11/nova-iorque-new-york-nova-york.jpg',
+		alt: 'Nova Iorque',
+		title: 'Nova Iorque',
 		rate: 4.5,
 	},
 	{
 		_id: 'id124',
-		uri: 'https://www.precedent-furniture.com/sites/precedent-furniture.com/files/styles/header_slideshow/public/3360_SL%20CR.jpg?itok=3Ltk6red',
-		alt: 'Precedant Furniture',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id125',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/leverette-fabric-queen-upholstered-platform-bed-1594829293.jpg',
-		alt: 'Leverette Upholstered Platform Bed',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80',
+		alt: 'Grécia',
+		title: 'Grécia',
 		rate: 4.5,
 	},
 	{
 		_id: 'id126',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/briget-side-table-1582143245.jpg?crop=1.00xw:0.770xh;0,0.129xh&resize=768:*',
-		alt: 'Briget Accent Table',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://www.gov.br/mre/pt-br/assuntos/portal-consular/arquivos/imagens/espanha1.jpg',
+		alt: 'Espanha',
+		title: 'Espanha',
 		rate: 4.5,
 	},
 	{
 		_id: 'id127',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rivet-emerly-media-console-1610578756.jpg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Rivet Emerly Media Console',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://viagemclub.com.br/wp-content/uploads/2020/06/buenos-aires-noite.jpeg',
+		alt: 'Argentina',
+		title: 'Argentina',
 		rate: 4.5,
 	},
 	{
 		_id: 'id128',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/drew-barrymore-flower-home-petal-chair-1594829759.jpeg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Drew Barrymore Flower Home Accent Chair',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://a.cdn-hotels.com/gdcs/production48/d1338/3cb6a4d4-c771-483c-b66b-3557af9f5e19.jpg',
+		alt: 'Chile',
+		title: 'Chile',
 		rate: 4.5,
 	},
 	{
 		_id: 'id129',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/goodee-ecobirdy-charlie-chairs-1594834221.jpg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Ecobirdy Charlie Chair',
-		title: 'Lorem, ipsum dolor',
+		uri: 'http://pm1.narvii.com/6905/601b6d1bdc01a03d24b25f9a13b72f4ad25a2b5fr1-1280-850v2_uhq.jpg',
+		alt: 'Japão',
+		title: 'Japão',
 		rate: 4.5,
 	},
 	{
 		_id: 'id130',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/hailey-sofa-1571430947.jpg?crop=0.481xw:0.722xh;0.252xw,0.173xh&resize=768:*',
-		alt: 'Hailey Sofa',
-		title: 'Lorem, ipsum dolor',
+		uri: 'http://www.yazigi.com.br/galeria/repositorio/images/noticias/pontos-turisticos-canada/banff-national-park.jpg',
+		alt: 'Canadá',
+		title: 'Canadá',
 		rate: 4.5,
 	},
 	{
 		_id: 'id131',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/archer-home-designs-dining-table-1594830125.jpg?crop=0.657xw:1.00xh;0.0986xw,0&resize=768:*',
-		alt: 'Farmhouse Dining Table',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://magazine.zarpo.com.br/wp-content/uploads/2019/02/descubra-13-imperd%C3%ADveis-pontos-tur%C3%ADsticos-de-londres.jpg',
+		alt: 'Inglaterra',
+		title: 'Inglaterra',
 		rate: 4.5,
 	},
 	{
 		_id: 'id132',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/evelyn-coffee-table-1610578857.jpeg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Evelyn Coffee Table',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id133',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burrow-nomad-sofa-1594837995.jpg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Slope Nomad Leather Sofa',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id134',
-		uri: 'https://apicms.thestar.com.my/uploads/images/2020/02/21/570850.jpg',
-		alt: 'Chair and Table',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id223',
-		uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-		alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id224',
-		uri: 'https://www.precedent-furniture.com/sites/precedent-furniture.com/files/styles/header_slideshow/public/3360_SL%20CR.jpg?itok=3Ltk6red',
-		alt: 'Precedant Furniture',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id225',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/leverette-fabric-queen-upholstered-platform-bed-1594829293.jpg',
-		alt: 'Leverette Upholstered Platform Bed',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id226',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/briget-side-table-1582143245.jpg?crop=1.00xw:0.770xh;0,0.129xh&resize=768:*',
-		alt: 'Briget Accent Table',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id227',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rivet-emerly-media-console-1610578756.jpg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Rivet Emerly Media Console',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id228',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/drew-barrymore-flower-home-petal-chair-1594829759.jpeg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Drew Barrymore Flower Home Accent Chair',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id229',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/goodee-ecobirdy-charlie-chairs-1594834221.jpg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Ecobirdy Charlie Chair',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id230',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/hailey-sofa-1571430947.jpg?crop=0.481xw:0.722xh;0.252xw,0.173xh&resize=768:*',
-		alt: 'Hailey Sofa',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id231',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/archer-home-designs-dining-table-1594830125.jpg?crop=0.657xw:1.00xh;0.0986xw,0&resize=768:*',
-		alt: 'Farmhouse Dining Table',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id232',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/evelyn-coffee-table-1610578857.jpeg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Evelyn Coffee Table',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id233',
-		uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/burrow-nomad-sofa-1594837995.jpg?crop=1xw:1xh;center,top&resize=768:*',
-		alt: 'Slope Nomad Leather Sofa',
-		title: 'Lorem, ipsum dolor',
-		rate: 4.5,
-	},
-	{
-		_id: 'id234',
-		uri: 'https://apicms.thestar.com.my/uploads/images/2020/02/21/570850.jpg',
-		alt: 'Chair and Table',
-		title: 'Lorem, ipsum dolor',
+		uri: 'https://s204818.gridserver.com/wp-content/uploads/2018/06/Africa-do-sul-viaj-1.jpg',
+		alt: 'África do Sul',
+		title: 'África do Sul',
 		rate: 4.5,
 	},
 ];
 
-export default function HomeScreen(props: THomeRootProps) {
+export default function HomeScreen({ navigation }: THomeParamProps) {
 	const locationItem = ({ item }) => {
 		return (
 			<Box
@@ -213,32 +108,38 @@ export default function HomeScreen(props: THomeRootProps) {
 				<WelcomeHeader />
 			</Header>
 
-			<BaseScreen mt={-12}>
-				<SearchInput placeholder="Pesquisar um destino..." />
+			<BaseScreen mt={-12} scrollEnabled={false}>
+				<SearchInput placeholder="Pesquisar um destino..." mb="4" />
 
-				<Flex direction="row" justify="space-between" mt="4">
+				<Stack direction="row" space="2" justifyContent="space-between">
 					<CategoryButton
 						boxProps={{ bgColor: 'red.200' }}
 						iconProps={{ name: 'business', styles: { color: 'red.500' } }}
 						labelProps={{ label: 'Hotéis' }}
+						onPress={() => navigation.navigate('Hotels')}
 					/>
 					<CategoryButton
 						boxProps={{ bgColor: 'darkBlue.200' }}
 						iconProps={{ name: 'airplane', styles: { color: 'darkBlue.500' } }}
 						labelProps={{ label: 'Passagens' }}
+						onPress={() => navigation.navigate('Passages')}
 					/>
 					<CategoryButton
 						boxProps={{ bgColor: 'amber.200' }}
 						iconProps={{ name: 'cube', styles: { color: 'amber.500' } }}
 						labelProps={{ label: 'Pacotes' }}
+						onPress={() => navigation.navigate('Packages')}
 					/>
-				</Flex>
+				</Stack>
 
 				<Masonry
 					numColumns={2}
 					data={data}
-					screen={{ name: 'Accommodation Details' }}
 					renderChild={locationItem}
+					containerProps={{
+						shadow: '1',
+					}}
+					onPress={() => navigation.navigate('Accommodation')}
 				/>
 			</BaseScreen>
 		</>

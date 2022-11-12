@@ -11,8 +11,8 @@ interface IGalleryProps {
 }
 
 export default function Gallery({ data }: IGalleryProps) {
-	const [images] = useState<IGalleryProps['data']>(data.slice(0, 3));
-	const [moreImages] = useState<IGalleryProps['data']>(data.slice(3));
+	const [images] = useState<IGalleryProps['data']>(data.slice(0, 3) || []);
+	const [moreImages] = useState<IGalleryProps['data']>(data.slice(3) || []);
 
 	if (!images.length) return null;
 
@@ -35,8 +35,8 @@ export default function Gallery({ data }: IGalleryProps) {
 				<Box position="relative" overflow="hidden" w="20" h="20" rounded="xl">
 					<AspectRatio ratio={{ base: 1 / 1 }}>
 						<Image
-							source={{ uri: moreImages.at(0).uri }}
-							alt={moreImages.at(0).alt}
+							source={{ uri: moreImages[0].uri }}
+							alt={moreImages[0].alt}
 							resizeMode="cover"
 						/>
 					</AspectRatio>

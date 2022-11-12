@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// --- Navigation ---
+import { TSignUpParamProps } from '@navigation/AuthStack';
+
 // --- Native Base ---
 import {
 	Button,
@@ -32,7 +35,6 @@ import avoidKeyboardView from '@utils/avoidKeyboardView';
 
 // --- Types ---
 import { OmitNever } from '@~types/TOmitNever';
-import { TSignUpProps } from '@~types/TSignUpProps';
 
 // --- Images ---
 const bgImage = require('@images/00_background.jpg');
@@ -57,7 +59,7 @@ const validationSchema = Yup.object().shape({
 
 type FormType = OmitNever<Yup.InferType<typeof validationSchema>>;
 
-export default function SignUpScreen({ navigation }: TSignUpProps) {
+export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 	const register = useAuthStore(state => state.login);
 
 	const {

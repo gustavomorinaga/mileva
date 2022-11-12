@@ -2,10 +2,14 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Native-Base ---
-import { Box, Pressable, ZStack } from 'native-base';
-
-// --- React Navigation ---
-import { useNavigation } from '@react-navigation/native';
+import {
+	Box,
+	IBoxProps,
+	IImageProps,
+	IPressableProps,
+	Pressable,
+	ZStack,
+} from 'native-base';
 
 // --- Reanimated ---
 import MasonryList from 'reanimated-masonry-list';
@@ -20,19 +24,28 @@ interface MasonryProps {
 	data: object & IImage[];
 	numColumns: number;
 	renderChild?: ({ item, i }: { item: object; i?: number }) => React.ReactElement;
-	screen?: {
-		name: string;
-		queryParams?: any[];
-	};
+	containerProps?: IBoxProps;
+	imageProps?: IImageProps;
+	onPress?: IPressableProps['onPress'];
 }
 
-export default function Masonry({ data, numColumns, renderChild, screen }: MasonryProps) {
-	const navigation = useNavigation<any>();
-
+export default function Masonry({
+	data,
+	numColumns,
+	renderChild,
+	containerProps,
+	imageProps,
+	onPress,
+}: MasonryProps) {
 	const renderItem = ({ item }): React.ReactElement => {
 		return (
-			<Pressable onPress={() => navigation.navigate(screen.name)}>
-				<MasonryItem image={item} children={renderChild({ item })} />
+			<Pressable onPress={onPress}>
+				<MasonryItem
+					image={item}
+					children={renderChild({ item })}
+					containerProps={containerProps}
+					imageProps={imageProps}
+				/>
 			</Pressable>
 		);
 	};

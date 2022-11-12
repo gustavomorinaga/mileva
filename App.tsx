@@ -59,7 +59,7 @@ export default function App() {
 
 	return (
 		<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
-			<StatusBar animated={true} />
+			<StatusBar barStyle="default" backgroundColor="transparent" translucent animated />
 			<SafeAreaProvider onLayout={onLayoutRootView}>
 				<NavigationContainer>
 					<TabNavigator />

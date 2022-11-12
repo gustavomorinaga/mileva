@@ -12,7 +12,10 @@ const stackNavigatorConfig: {
 } = {
 	screenOptions: ({ route }) => ({
 		headerShown: false,
-		gestureEnabled: true,
+		gestureEnabled: false,
+		tabBarStyle: {
+			display: 'none',
+		},
 		...TransitionPresets.DefaultTransition,
 	}),
 };
