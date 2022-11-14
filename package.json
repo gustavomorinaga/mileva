@@ -1,6 +1,6 @@
 {
 	"name": "mileva-app",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"main": "node_modules/expo/AppEntry.js",
 	"homepage": "https://github.com/gmatthewsfeuer/mileva#readme",
 	"private": true,
