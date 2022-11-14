@@ -53,7 +53,7 @@
 		"release-as-major": "yarn release --release-as major",
 		"release-as-minor": "yarn release --release-as minor",
 		"release-as-patch": "yarn release --release-as patch",
-		"push-release": "git push --follow-tags origin master",
+		"push-release": "git push --follow-tags origin main",
 		"prepare": "husky install",
 		"pre-commit": "yarn lint"
 	},
