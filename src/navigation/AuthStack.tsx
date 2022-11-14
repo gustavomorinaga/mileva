@@ -6,7 +6,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 
 // --- Navigation ---
-import { TRootTabParamList } from '@navigation/TabNavigator';
+import { TRootTabParamList, TRootTabScreenProps } from '@navigation/TabNavigator';
 
 // --- Screens ---
 import SignInScreen from '@screens/SignIn';
@@ -16,6 +16,11 @@ import ForgotPasswordScreen from '@screens/ForgotPassword';
 // --- Configs ---
 import stackNavigatorConfig from '@configs/stackNavigatorConfig';
 
+type TAuthBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
+	BottomTabScreenProps<TRootTabParamList, T>,
+	TRootTabScreenProps<keyof TRootTabParamList>
+>;
+
 export type TAuthStackParamList = {
 	'Sign In': undefined;
 	'Sign Up': undefined;
@@ -23,16 +28,16 @@ export type TAuthStackParamList = {
 };
 
 export type TSignInParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<TAuthStackParamList, 'Sign In'>
+	StackScreenProps<TAuthStackParamList, 'Sign In'>,
+	TAuthBottomTab<keyof TRootTabParamList>
 >;
 export type TSignUpParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<TAuthStackParamList, 'Sign Up'>
+	StackScreenProps<TAuthStackParamList, 'Sign Up'>,
+	TAuthBottomTab<keyof TRootTabParamList>
 >;
 export type TForgotPasswordParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<TAuthStackParamList, 'Forgot Password'>
+	StackScreenProps<TAuthStackParamList, 'Forgot Password'>,
+	TAuthBottomTab<keyof TRootTabParamList>
 >;
 
 const Stack = createStackNavigator<TAuthStackParamList>();

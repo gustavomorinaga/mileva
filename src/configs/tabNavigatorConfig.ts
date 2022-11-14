@@ -1,10 +1,6 @@
 import { createElement } from 'react';
 import { TouchableOpacity } from 'react-native';
 
-// --- React Navigation ---
-import { ParamListBase, RouteProp } from '@react-navigation/native';
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
-
 // --- Components ---
 import Icon from '@components/Icon';
 
@@ -20,14 +16,7 @@ const TABS_ICONS: {
 	Account: 'person',
 };
 
-const tabNavigatorConfig: {
-	screenOptions?:
-		| BottomTabNavigationOptions
-		| ((props: {
-				route: RouteProp<ParamListBase, string>;
-				navigation: any;
-		  }) => BottomTabNavigationOptions);
-} = {
+const tabNavigatorConfig = {
 	screenOptions: ({ route }) => ({
 		tabBarShowLabel: false,
 		unmountOnBlur: true,
@@ -42,6 +31,13 @@ const tabNavigatorConfig: {
 			}),
 		tabBarButton: props =>
 			createElement(TouchableOpacity, { activeOpacity: 0.6, ...props }),
+	}),
+	screenListeners: ({ navigation, route }) => ({
+		tabPress: e => {
+			e.preventDefault();
+
+			navigation.navigate(route.name);
+		},
 	}),
 };
 

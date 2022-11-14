@@ -6,7 +6,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 
 // --- Navigation ---
-import { TRootTabParamList } from '@navigation/TabNavigator';
+import { TRootTabParamList, TRootTabScreenProps } from '@navigation/TabNavigator';
 
 // --- Screens ---
 import AccountScreen from '@screens/Account';
@@ -14,13 +14,18 @@ import AccountScreen from '@screens/Account';
 // --- Configs ---
 import stackNavigatorConfig from '@configs/stackNavigatorConfig';
 
+type TAccountBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
+	BottomTabScreenProps<TRootTabParamList, T>,
+	TRootTabScreenProps<keyof TRootTabParamList>
+>;
+
 export type TAccountStackParamList = {
 	'Account Root': undefined;
 };
 
 export type TAccountParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<TAccountStackParamList, 'Account Root'>
+	StackScreenProps<TAccountStackParamList, 'Account Root'>,
+	TAccountBottomTab<keyof TRootTabParamList>
 >;
 
 const Stack = createStackNavigator<TAccountStackParamList>();

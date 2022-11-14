@@ -6,7 +6,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 
 // --- Navigation ---
-import { TRootTabParamList } from '@navigation/TabNavigator';
+import { TRootTabParamList, TRootTabScreenProps } from '@navigation/TabNavigator';
 
 // --- Screens ---
 import HomeScreen from '@screens/Home';
@@ -19,9 +19,17 @@ import PackagesScreen from '@screens/Packages';
 // --- Configs ---
 import stackNavigatorConfig from '@configs/stackNavigatorConfig';
 
+type THomeBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
+	BottomTabScreenProps<TRootTabParamList, T>,
+	TRootTabScreenProps<keyof TRootTabParamList>
+>;
+
 export type THomeStackParamList = {
 	'Home Root': undefined;
-	Accommodation: undefined;
+	Accommodation: {
+		returnScreen?: keyof TRootTabParamList;
+		returnScreenKey?: string;
+	};
 	Hotels: undefined;
 	Hotel: undefined;
 	Passages: undefined;
@@ -29,28 +37,28 @@ export type THomeStackParamList = {
 };
 
 export type THomeParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<THomeStackParamList, 'Home Root'>
+	StackScreenProps<THomeStackParamList, 'Home Root'>,
+	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type TAccommodationParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<THomeStackParamList, 'Accommodation'>
+	StackScreenProps<THomeStackParamList, 'Accommodation'>,
+	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type THotelsParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<THomeStackParamList, 'Hotels'>
+	StackScreenProps<THomeStackParamList, 'Hotels'>,
+	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type THotelParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<THomeStackParamList, 'Hotel'>
+	StackScreenProps<THomeStackParamList, 'Hotel'>,
+	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type TPassagesParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<THomeStackParamList, 'Passages'>
+	StackScreenProps<THomeStackParamList, 'Passages'>,
+	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type TPackagesParamProps = CompositeScreenProps<
-	BottomTabScreenProps<TRootTabParamList>,
-	StackScreenProps<THomeStackParamList, 'Passages'>
+	StackScreenProps<THomeStackParamList, 'Packages'>,
+	THomeBottomTab<keyof TRootTabParamList>
 >;
 
 const Stack = createStackNavigator<THomeStackParamList>();

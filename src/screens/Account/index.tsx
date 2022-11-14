@@ -19,7 +19,6 @@ import {
 	Select,
 	Stack,
 	Text,
-	View,
 	ZStack,
 } from 'native-base';
 
@@ -27,7 +26,6 @@ import {
 import BaseScreen from '@components/BaseScreen';
 import Header from '@components/Header';
 import Icon from '@components/Icon';
-import IconButton from '@components/IconButton';
 
 // --- Form and Validations ---
 import { Controller, useForm } from 'react-hook-form';
@@ -110,17 +108,8 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 	return (
 		<>
 			<Header containerStyle={{ bgColor: 'muted.100' }}>
-				<Stack direction="row" alignItems="center" justifyContent="space-between">
-					<IconButton
-						name="arrow-back"
-						color="lightText"
-						bgColor="darkBlue.500"
-						onPress={() => navigation.goBack()}
-					/>
-
+				<Stack direction="row" alignItems="center" justifyContent="center">
 					<Heading color="darkText">Meu perfil</Heading>
-
-					<View w="8" />
 				</Stack>
 			</Header>
 

@@ -13,7 +13,6 @@ import {
 	Image,
 	Stack,
 	Text,
-	View,
 	ZStack,
 } from 'native-base';
 
@@ -21,7 +20,6 @@ import {
 import BaseScreen from '@components/BaseScreen';
 import Header from '@components/Header';
 import Icon from '@components/Icon';
-import IconButton from '@components/IconButton';
 import Card from '@components/Card';
 import FactoryCalendar from '@components/Factory/Calendar';
 
@@ -66,18 +64,10 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 	return (
 		<>
 			<Header>
-				<Stack direction="row" alignItems="center" justifyContent="space-between">
-					<IconButton
-						name="arrow-back"
-						bgColor="white"
-						onPress={() => navigation.goBack()}
-					/>
-
+				<Stack direction="row" alignItems="center" justifyContent="center">
 					<Heading textAlign="center" color="white">
 						Agenda
 					</Heading>
-
-					<View w="8" />
 				</Stack>
 			</Header>
 

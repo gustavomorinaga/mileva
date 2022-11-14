@@ -118,12 +118,14 @@ export default function HomeScreen({ navigation }: THomeParamProps) {
 						labelProps={{ label: 'Hotéis' }}
 						onPress={() => navigation.navigate('Hotels')}
 					/>
+
 					<CategoryButton
 						boxProps={{ bgColor: 'darkBlue.200' }}
 						iconProps={{ name: 'airplane', styles: { color: 'darkBlue.500' } }}
 						labelProps={{ label: 'Passagens' }}
 						onPress={() => navigation.navigate('Passages')}
 					/>
+
 					<CategoryButton
 						boxProps={{ bgColor: 'amber.200' }}
 						iconProps={{ name: 'cube', styles: { color: 'amber.500' } }}

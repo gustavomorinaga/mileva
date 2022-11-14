@@ -66,8 +66,17 @@ const data = {
 	],
 };
 
-export default function AccommodationScreen({ navigation }: TAccommodationParamProps) {
+export default function AccommodationScreen({
+	navigation,
+	route,
+}: TAccommodationParamProps) {
 	const [favorited, setFavorited] = useState(data.favorited);
+
+	const handleGoBack = () => {
+		const returnScreen = route.params?.returnScreen;
+
+		return returnScreen ? navigation.navigate(returnScreen) : navigation.goBack();
+	};
 
 	const handleFavoritePress = () => {
 		setFavorited(!favorited);
@@ -77,11 +86,7 @@ export default function AccommodationScreen({ navigation }: TAccommodationParamP
 		<>
 			<Header>
 				<Stack direction="row" alignItems="center" justifyContent="space-between">
-					<IconButton
-						name="arrow-back"
-						bgColor="white"
-						onPress={() => navigation.goBack()}
-					/>
+					<IconButton name="arrow-back" bgColor="white" onPress={handleGoBack} />
 
 					<Heading textAlign="center" color="white">
 						Detalhes

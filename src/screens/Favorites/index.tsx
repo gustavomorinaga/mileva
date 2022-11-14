@@ -2,10 +2,10 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
-import { TFavoriteParamProps } from '@navigation/FavoriteStack';
+import { TFavoritesParamProps } from '@navigation/FavoritesStack';
 
 // --- Native-Base ---
-import { Box, FlatList, Heading, Stack, View, ZStack } from 'native-base';
+import { Box, FlatList, Heading, Stack, ZStack } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -40,22 +40,14 @@ const data = [
 	},
 ];
 
-export default function FavoritesScreen({ navigation }: TFavoriteParamProps) {
+export default function FavoritesScreen({ navigation, route }: TFavoritesParamProps) {
 	return (
 		<>
 			<Header>
-				<Stack direction="row" alignItems="center" justifyContent="space-between">
-					<IconButton
-						name="arrow-back"
-						bgColor="white"
-						onPress={() => navigation.goBack()}
-					/>
-
+				<Stack direction="row" alignItems="center" justifyContent="center">
 					<Heading textAlign="center" color="white">
 						Favoritos
 					</Heading>
-
-					<View w="8" />
 				</Stack>
 			</Header>
 
@@ -86,6 +78,15 @@ export default function FavoritesScreen({ navigation }: TFavoriteParamProps) {
 									<IconButton name="heart" color="rose.500" bgColor="white" shadow="3" />
 								}
 								containerProps={{ mb: 4, h: 40 }}
+								onPress={() =>
+									navigation.navigate('Home', {
+										screen: 'Accommodation',
+										params: {
+											returnScreen: 'Favorites',
+										},
+										initial: false,
+									})
+								}
 							/>
 						)}
 						contentContainerStyle={{

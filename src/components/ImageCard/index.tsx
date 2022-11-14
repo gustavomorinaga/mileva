@@ -1,7 +1,17 @@
 import React from 'react';
+import { GestureResponderEvent } from 'react-native';
 
 // --- Native-Base ---
-import { AspectRatio, Box, Heading, IBoxProps, Image, Stack, Text } from 'native-base';
+import {
+	AspectRatio,
+	Box,
+	Heading,
+	IBoxProps,
+	Image,
+	Pressable,
+	Stack,
+	Text,
+} from 'native-base';
 
 interface IImageCardProps {
 	image: {
@@ -13,6 +23,7 @@ interface IImageCardProps {
 	containerProps?: IBoxProps;
 	children?: React.ReactElement;
 	sideContent?: React.ReactElement;
+	onPress?: (event: GestureResponderEvent) => void;
 }
 
 export default function ImageCard({
@@ -22,57 +33,60 @@ export default function ImageCard({
 	containerProps,
 	children,
 	sideContent,
+	onPress,
 }: IImageCardProps) {
 	return (
-		<Box
-			position="relative"
-			overflow="hidden"
-			borderRadius="2xl"
-			shadow="5"
-			{...containerProps}
-		>
-			<AspectRatio ratio={{ base: 1 / 1 }}>
-				<Image
-					source={{ uri: image.uri }}
-					alt={image.alt}
-					height="full"
-					alignSelf="stretch"
-					resizeMode="cover"
-				/>
-			</AspectRatio>
+		<Pressable onPress={onPress}>
+			<Box
+				position="relative"
+				overflow="hidden"
+				borderRadius="2xl"
+				shadow="5"
+				{...containerProps}
+			>
+				<AspectRatio ratio={{ base: 1 / 1 }}>
+					<Image
+						source={{ uri: image.uri }}
+						alt={image.alt}
+						height="full"
+						alignSelf="stretch"
+						resizeMode="cover"
+					/>
+				</AspectRatio>
 
-			{title && (
-				<Box
-					position="absolute"
-					w="full"
-					h="full"
-					bg={{
-						linearGradient: {
-							colors: ['transparent', 'black:alpha.70'],
-							start: [0, 0.5],
-							end: [0, 0],
-						},
-					}}
-				/>
-			)}
+				{title && (
+					<Box
+						position="absolute"
+						w="full"
+						h="full"
+						bg={{
+							linearGradient: {
+								colors: ['transparent', 'black:alpha.70'],
+								start: [0, 0.5],
+								end: [0, 0],
+							},
+						}}
+					/>
+				)}
 
-			<Stack position="absolute" top="0" left="0" right="0" bottom="0">
-				<Stack flex={1} direction="row" space="2" justifyContent="space-between" m="4">
-					<Stack>
-						<Heading color="lightText" shadow="3">
-							{title}
-						</Heading>
-						<Text color="lightText" shadow="3">
-							{subtitle}
-						</Text>
+				<Stack position="absolute" top="0" left="0" right="0" bottom="0">
+					<Stack flex={1} direction="row" space="2" justifyContent="space-between" m="4">
+						<Stack>
+							<Heading color="lightText" shadow="3">
+								{title}
+							</Heading>
+							<Text color="lightText" shadow="3">
+								{subtitle}
+							</Text>
+						</Stack>
+
+						<Stack space="2">{sideContent}</Stack>
 					</Stack>
 
-					<Stack space="2">{sideContent}</Stack>
+					{children}
 				</Stack>
-
-				{children}
-			</Stack>
-		</Box>
+			</Box>
+		</Pressable>
 	);
 }
 
