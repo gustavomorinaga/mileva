@@ -13,6 +13,7 @@ import HomeStack, { THomeStackParamList } from '@navigation/HomeStack';
 import FavoritesStack, { TFavoritesStackParamList } from '@navigation/FavoritesStack';
 import ScheduleStack, { TScheduleStackParamList } from '@navigation/ScheduleStack';
 import AccountStack, { TAccountStackParamList } from '@navigation/AccountStack';
+import NotificationsStack, { TNotificationsStackParamList } from './NotificationsStack';
 import AuthStack, { TAuthStackParamList } from '@navigation/AuthStack';
 
 // --- Stores ---
@@ -22,6 +23,7 @@ export type TRootTabParamList = {
 	Home: NavigatorScreenParams<THomeStackParamList>;
 	Favorites: NavigatorScreenParams<TFavoritesStackParamList>;
 	Schedule: NavigatorScreenParams<TScheduleStackParamList>;
+	Notifications: NavigatorScreenParams<TNotificationsStackParamList>;
 	Account: NavigatorScreenParams<TAccountStackParamList>;
 	Auth: NavigatorScreenParams<TAuthStackParamList>;
 };
@@ -43,6 +45,7 @@ export default function TabNavigator() {
 					<Tab.Screen name="Home" component={HomeStack} />
 					<Tab.Screen name="Favorites" component={FavoritesStack} />
 					<Tab.Screen name="Schedule" component={ScheduleStack} />
+					<Tab.Screen name="Notifications" component={NotificationsStack} />
 					<Tab.Screen name="Account" component={AccountStack} />
 				</Tab.Group>
 			) : (

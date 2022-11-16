@@ -13,6 +13,7 @@ const TABS_ICONS: {
 	Home: 'home',
 	Favorites: 'heart',
 	Schedule: 'briefcase',
+	Notifications: 'notifications',
 	Account: 'person',
 };
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 // --- Native-Base ---
 import { Box, IBoxProps, IImageProps, Image } from 'native-base';
@@ -13,12 +13,7 @@ interface IMasonryItem {
 	imageProps?: IImageProps;
 }
 
-export default function MasonryItem({
-	image,
-	children,
-	containerProps,
-	imageProps,
-}: IMasonryItem) {
+function MasonryItem({ image, children, containerProps, imageProps }: IMasonryItem) {
 	const randomBool = useMemo(() => Math.random() < 0.5, []);
 
 	return (
@@ -44,3 +39,5 @@ export default function MasonryItem({
 		</Box>
 	);
 }
+
+export default memo(MasonryItem);

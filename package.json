@@ -45,6 +45,9 @@
 		"web": "expo start --web",
 		"eject": "expo eject",
 		"expo:upgrade": "expo-cli upgrade",
+		"expo:build-android": "eas build -p android",
+		"expo:build-android-preview": "eas build -p android --profile preview",
+		"expo:build-ios": "eas build -p ios",
 		"type-check": "tsc --noEmit",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix && yarn format",
@@ -65,6 +68,7 @@
 		"@native-base/icons": "0.0.11",
 		"@react-native-async-storage/async-storage": "~1.17.3",
 		"@react-native-community/datetimepicker": "6.5.2",
+		"@react-native-community/geolocation": "^3.0.3",
 		"@react-navigation/bottom-tabs": "6.4.0",
 		"@react-navigation/native": "6.0.13",
 		"@react-navigation/stack": "6.3.4",
@@ -74,7 +78,7 @@
 		"expo": "47.0.0",
 		"expo-font": "~11.0.1",
 		"expo-linear-gradient": "~12.0.1",
-		"expo-splash-screen": "~0.17.4",
+		"expo-splash-screen": "~0.17.5",
 		"expo-status-bar": "~1.4.2",
 		"moti": "^0.20.0",
 		"native-base": "3.4.21",
@@ -85,6 +89,7 @@
 		"react-native-calendars": "^1.1291.1",
 		"react-native-gesture-handler": "~2.8.0",
 		"react-native-keyboard-aware-scroll-view": "0.9.5",
+		"react-native-maps": "^1.3.2",
 		"react-native-reanimated": "~2.12.0",
 		"react-native-safe-area-context": "4.4.1",
 		"react-native-screens": "~3.18.0",
@@ -115,5 +120,8 @@
 		"prettier": "2.7.1",
 		"standard-version": "9.5.0",
 		"typescript": "^4.6.3"
+	},
+	"resolutions": {
+		"expo-modules-autolinking": "1.0.0"
 	}
 }

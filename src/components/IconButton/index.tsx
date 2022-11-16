@@ -25,7 +25,12 @@ interface CustomIconButtonProps extends IIconButtonProps {
 	badgeProps?: IBadgeProps & {
 		position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 	};
-	triggerProps?: any;
+	triggerProps?: (
+		_props: any,
+		state: {
+			open: boolean;
+		}
+	) => React.ReactElement;
 }
 
 export default function IconButtonComponent(props: CustomIconButtonProps) {
