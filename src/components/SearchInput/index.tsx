@@ -11,7 +11,7 @@ export default function SearchInput(props: IInputProps) {
 		<Input
 			variant="unstyled"
 			color="darkText"
-			bgColor="muted.100"
+			bgColor="warmGray.100"
 			borderRadius="2xl"
 			shadow="3"
 			InputLeftElement={<Icon name="search-outline" size="sm" ml="4" />}

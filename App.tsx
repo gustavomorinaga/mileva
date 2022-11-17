@@ -4,11 +4,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // --- Splash Loading ---
 import * as SplashScreen from 'expo-splash-screen';
 
-// --- Native Base ---
-import { NativeBaseProvider, StatusBar } from 'native-base';
-
 // --- React Navigation ---
 import { NavigationContainer } from '@react-navigation/native';
+
+// --- Navigation ---
+import TabNavigator from '@navigation/TabNavigator';
+
+// --- Native Base ---
+import { NativeBaseProvider, StatusBar } from 'native-base';
 
 // --- Configs ---
 import nativeBaseConfig from '@configs/nativeBaseConfig';
@@ -27,8 +30,6 @@ import {
 // --- Styles ---
 import { theme } from '@styles/theme';
 import { LogBox } from 'react-native';
-
-import TabNavigator from '@navigation/TabNavigator';
 
 // --- Disable NativeBase Logs ---
 LogBox.ignoreLogs(['NativeBase:']);

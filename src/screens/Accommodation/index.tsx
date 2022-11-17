@@ -129,7 +129,7 @@ export default function AccommodationScreen({
 								}
 							>
 								<ImageCard.Content>
-									<Stack direction="row" space="1">
+									<Stack direction="row" space="1" alignItems="baseline">
 										<Icon name="star" color="amber.400" />
 										<Text color="lightText">
 											{data.rate} ({data.reviews} reviews)

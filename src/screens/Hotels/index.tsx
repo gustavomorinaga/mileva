@@ -120,7 +120,7 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 						<Box
 							bg={{
 								linearGradient: {
-									colors: ['transparent', 'muted.100'],
+									colors: ['transparent', 'warmGray.100'],
 									start: [0, 0.75],
 									end: [0, 0],
 								},
@@ -143,19 +143,19 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 									<Card.Header title={item.title} />
 									<Card.Body>
 										<Stack space="2">
-											<Stack direction="row" space="2">
+											<Stack direction="row" space="2" alignItems="baseline">
 												<Icon name="location" color="red.500" />
 
-												<Stack direction="row" space="1" alignItems="center">
+												<Stack direction="row" space="1">
 													<Text>{item.location}</Text>
 													<Text color="gray.400">({item.proximity}Km do destino)</Text>
 												</Stack>
 											</Stack>
 
-											<Stack direction="row" space="2">
+											<Stack direction="row" space="2" alignItems="baseline">
 												<Icon name="star" color="amber.400" />
 
-												<Stack direction="row" space="1" alignItems="center">
+												<Stack direction="row" space="1">
 													<Text>{item.rate}</Text>
 													<Text color="gray.400">({item.reviews} reviews)</Text>
 												</Stack>

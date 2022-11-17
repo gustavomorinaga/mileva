@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
@@ -41,6 +41,16 @@ const data = [
 ];
 
 export default function FavoritesScreen({ navigation, route }: TFavoritesParamProps) {
+	const handleFavoritePress = useCallback(() => {
+		navigation.navigate('Home', {
+			screen: 'Accommodation',
+			params: {
+				returnScreen: 'Favorites',
+			},
+			initial: false,
+		});
+	}, [navigation]);
+
 	return (
 		<>
 			<Header>
@@ -67,6 +77,13 @@ export default function FavoritesScreen({ navigation, route }: TFavoritesParamPr
 						/>
 					</ZStack>
 					<FlatList
+						pt="4"
+						contentContainerStyle={{
+							marginTop: -4,
+							paddingTop: 4,
+							paddingBottom: 10,
+							paddingHorizontal: 20,
+						}}
 						data={data}
 						keyExtractor={item => item._id}
 						showsVerticalScrollIndicator={false}
@@ -78,24 +95,9 @@ export default function FavoritesScreen({ navigation, route }: TFavoritesParamPr
 									<IconButton name="heart" color="rose.500" bgColor="white" shadow="3" />
 								}
 								containerProps={{ mb: 4, h: 40 }}
-								onPress={() =>
-									navigation.navigate('Home', {
-										screen: 'Accommodation',
-										params: {
-											returnScreen: 'Favorites',
-										},
-										initial: false,
-									})
-								}
+								onPress={handleFavoritePress}
 							/>
 						)}
-						contentContainerStyle={{
-							marginTop: -4,
-							paddingTop: 4,
-							paddingBottom: 10,
-							paddingHorizontal: 20,
-						}}
-						pt="4"
 					/>
 				</SafeAreaView>
 			</BaseScreen>

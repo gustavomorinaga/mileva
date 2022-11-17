@@ -62,7 +62,7 @@ export default function BaseScreen({
 	}, [fadeAnimation, slideTopAnimation, isAnimated]);
 
 	return (
-		<View flex={1} zIndex={9} bgColor={props.bgColor ?? 'muted.100'}>
+		<View flex={1} zIndex={9} bgColor={props.bgColor ?? 'warmGray.100'}>
 			<Animated.View
 				style={{
 					flex: 1,

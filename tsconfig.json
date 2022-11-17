@@ -18,6 +18,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@docs/*": ["./public/docs/*"],
+			"@assets/*": ["./public/assets/*"],
 			"@icons/*": ["./public/assets/icons/*"],
 			"@images/*": ["./public/assets/images/*"],
 			"@components/*": ["./src/components/*"],

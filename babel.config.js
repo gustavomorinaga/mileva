@@ -21,6 +21,7 @@ module.exports = function (api) {
 						'@native-base/icons': '@native-base/icons/lib',
 
 						'@docs': './public/docs',
+						'@assets': './public/assets',
 						'@icons': './public/assets/icons',
 						'@images': './public/assets/images',
 

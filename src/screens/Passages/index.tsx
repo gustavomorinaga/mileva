@@ -136,7 +136,7 @@ export default function PassagesScreen({ navigation }: TPassagesParamProps) {
 						<Box
 							bg={{
 								linearGradient: {
-									colors: ['transparent', 'muted.100'],
+									colors: ['transparent', 'warmGray.100'],
 									start: [0, 0.75],
 									end: [0, 0],
 								},

@@ -18,6 +18,7 @@ import {
 	ScrollView,
 	Select,
 	Stack,
+	StatusBar,
 	Text,
 	ZStack,
 } from 'native-base';
@@ -107,7 +108,14 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 
 	return (
 		<>
-			<Header containerStyle={{ bgColor: 'muted.100' }}>
+			<StatusBar
+				barStyle="dark-content"
+				backgroundColor="transparent"
+				translucent
+				animated
+			/>
+
+			<Header containerStyle={{ bgColor: 'warmGray.100' }}>
 				<Stack direction="row" alignItems="center" justifyContent="center">
 					<Heading color="darkText">Meu perfil</Heading>
 				</Stack>
@@ -119,7 +127,7 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 						<Box
 							bg={{
 								linearGradient: {
-									colors: ['transparent', 'muted.100'],
+									colors: ['transparent', 'warmGray.100'],
 									start: [0, 0.75],
 									end: [0, 0],
 								},
@@ -143,7 +151,7 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 											}}
 											size="2xl"
 											borderWidth="2"
-											borderColor="muted.100"
+											borderColor="warmGray.100"
 										>
 											<Icon name="person" size="2xl" />
 										</Avatar>
@@ -266,7 +274,11 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 															mode="date"
 															value={value ? new Date(value) : new Date()}
 															onChange={(event, selectedDate) => {
-																event.type === 'set' && onChange(formatISO(selectedDate));
+																if (
+																	event.type === 'set' &&
+																	selectedDate !== new Date(value)
+																)
+																	onChange(formatISO(selectedDate));
 																handleShowDatePicker(false);
 															}}
 														/>

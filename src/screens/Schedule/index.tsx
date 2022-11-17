@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
@@ -61,6 +61,16 @@ const data = [
 ];
 
 export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
+	const handleTravelPress = useCallback(() => {
+		navigation.navigate('Home', {
+			screen: 'Accommodation',
+			params: {
+				returnScreen: 'Schedule',
+			},
+			initial: false,
+		});
+	}, [navigation]);
+
 	return (
 		<>
 			<Header>
@@ -72,69 +82,74 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 			</Header>
 
 			<BaseScreen mt={-12}>
-				<Stack flex={1} space="6">
+				<Stack mt={-2} flex={1} space="6">
 					<FactoryCalendar />
 
-					<Heading fontSize="xl">Minhas viagens</Heading>
+					<Stack flex={1} space="4">
+						<Heading fontSize="xl">Minhas viagens</Heading>
 
-					<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
-						<ZStack zIndex={99}>
-							<Box
-								bg={{
-									linearGradient: {
-										colors: ['transparent', 'muted.100'],
-										start: [0, 0.75],
-										end: [0, 0],
-									},
-								}}
-								w="full"
-								h="8"
-							/>
-						</ZStack>
-						<FlatList
-							data={data}
-							keyExtractor={item => item._id}
-							showsVerticalScrollIndicator={false}
-							renderItem={({ item }) => (
-								<Card containerProps={{ mx: 5, mb: 5 }}>
-									<Card.Content>
-										<Card.Body>
-											<Stack direction="row" space="4">
-												<AspectRatio
-													ratio={{ base: 1 / 1 }}
-													overflow="hidden"
-													rounded="xl"
-													w="16"
-													h="16"
-												>
-													<Image source={{ uri: item.image.uri }} alt={item.image.alt} />
-												</AspectRatio>
+						<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
+							<ZStack zIndex={99}>
+								<Box
+									bg={{
+										linearGradient: {
+											colors: ['transparent', 'warmGray.100'],
+											start: [0, 0.75],
+											end: [0, 0],
+										},
+									}}
+									w="full"
+									h="8"
+								/>
+							</ZStack>
+							<FlatList
+								data={data}
+								keyExtractor={item => item._id}
+								showsVerticalScrollIndicator={false}
+								renderItem={({ item }) => (
+									<Card containerProps={{ mx: 5, mb: 5 }} onPress={handleTravelPress}>
+										<Card.Content>
+											<Card.Body>
+												<Stack direction="row" space="4">
+													<AspectRatio
+														ratio={{ base: 1 / 1 }}
+														overflow="hidden"
+														rounded="xl"
+														w="16"
+														h="16"
+													>
+														<Image
+															source={{ uri: item.image.uri }}
+															alt={item.image.alt}
+														/>
+													</AspectRatio>
 
-												<Stack>
-													<Heading fontSize="lg">{item.accommodation}</Heading>
+													<Stack>
+														<Heading fontSize="lg">{item.accommodation}</Heading>
 
-													<Stack direction="row" space="1" alignItems="baseline">
-														<Icon name="calendar" />
-														<Text>
-															{format(new Date(item.startDate), 'PP', { locale: ptBR })}
-															{' - '}
-															{format(new Date(item.endDate), 'PP', { locale: ptBR })}
-														</Text>
+														<Stack direction="row" space="1" alignItems="baseline">
+															<Icon name="calendar" />
+															<Text>
+																{format(new Date(item.startDate), 'PP', { locale: ptBR })}
+																{' - '}
+																{format(new Date(item.endDate), 'PP', { locale: ptBR })}
+															</Text>
+														</Stack>
 													</Stack>
 												</Stack>
-											</Stack>
-										</Card.Body>
-									</Card.Content>
-								</Card>
-							)}
-							contentContainerStyle={{
-								marginTop: -4,
-								paddingTop: 4,
-								paddingBottom: 10,
-							}}
-							pt="4"
-						/>
-					</SafeAreaView>
+											</Card.Body>
+										</Card.Content>
+									</Card>
+								)}
+								contentContainerStyle={{
+									marginTop: -4,
+									paddingTop: 4,
+									paddingBottom: 10,
+								}}
+								pt="4"
+							/>
+						</SafeAreaView>
+					</Stack>
 				</Stack>
 			</BaseScreen>
 		</>

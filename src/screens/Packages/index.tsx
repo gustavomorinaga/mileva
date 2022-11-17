@@ -224,7 +224,7 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 						<Box
 							bg={{
 								linearGradient: {
-									colors: ['transparent', 'muted.100'],
+									colors: ['transparent', 'warmGray.100'],
 									start: [0, 0.75],
 									end: [0, 0],
 								},
@@ -234,6 +234,12 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 						/>
 					</ZStack>
 					<FlatList
+						pt="4"
+						contentContainerStyle={{
+							marginTop: -4,
+							paddingTop: 4,
+							paddingBottom: 10,
+						}}
 						data={data}
 						keyExtractor={item => item._id}
 						showsVerticalScrollIndicator={false}
@@ -460,12 +466,6 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 								</Card.Content>
 							</Card>
 						)}
-						contentContainerStyle={{
-							marginTop: -4,
-							paddingTop: 4,
-							paddingBottom: 10,
-						}}
-						pt="4"
 					/>
 				</SafeAreaView>
 			</BaseScreen>

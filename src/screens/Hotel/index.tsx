@@ -98,13 +98,13 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 							<IconButton
 								name="arrow-back"
 								bgColor="white"
-								shadow="2"
+								shadow="5"
 								onPress={() => navigation.goBack()}
 							/>
 
 							<View w="8" />
 
-							<IconButton name="share-social" bgColor="white" shadow="2" />
+							<IconButton name="share-social" bgColor="white" shadow="5" />
 						</Stack>
 					</Header>
 				</ZStack>
@@ -125,15 +125,16 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 					<Box
 						overflow="hidden"
 						p="5"
-						bgColor="muted.100"
+						bgColor="warmGray.100"
 						borderTopLeftRadius="2xl"
 						borderTopRightRadius="2xl"
+						shadow="5"
 					>
 						<Box
 							zIndex={99}
 							bg={{
 								linearGradient: {
-									colors: ['transparent', 'muted.100'],
+									colors: ['transparent', 'warmGray.100'],
 									start: [0, 0.75],
 									end: [0, 0],
 								},
@@ -147,19 +148,19 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 								<Heading>{data.title}</Heading>
 
 								<Stack space="2">
-									<Stack direction="row" space="2">
+									<Stack direction="row" space="2" alignItems="baseline">
 										<Icon name="location" color="red.500" />
 
-										<Stack direction="row" space="1" alignItems="center">
+										<Stack direction="row" space="1">
 											<Text>{data.location}</Text>
 											<Text color="gray.400">({data.proximity}Km do destino)</Text>
 										</Stack>
 									</Stack>
 
-									<Stack direction="row" space="2">
+									<Stack direction="row" space="2" alignItems="baseline">
 										<Icon name="star" color="amber.400" />
 
-										<Stack direction="row" space="1" alignItems="center">
+										<Stack direction="row" space="1">
 											<Text>{data.rate}</Text>
 											<Text color="gray.400">({data.reviews} reviews)</Text>
 										</Stack>

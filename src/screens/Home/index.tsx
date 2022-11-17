@@ -94,7 +94,7 @@ export default function HomeScreen({ navigation }: THomeParamProps) {
 				bgColor="black:alpha.80"
 			>
 				<Text color="lightText">{item.title}</Text>
-				<Stack direction="row" space="1">
+				<Stack direction="row" space="1" alignItems="baseline">
 					<Icon name="star" color="amber.400" />
 					<Text color="lightText">{item.rate}</Text>
 				</Stack>
@@ -139,7 +139,7 @@ export default function HomeScreen({ navigation }: THomeParamProps) {
 					data={data}
 					renderChild={locationItem}
 					containerProps={{
-						shadow: '1',
+						shadow: '2',
 					}}
 					onPress={() => navigation.navigate('Accommodation')}
 				/>

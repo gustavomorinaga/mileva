@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BlurView } from 'expo-blur';
 
 // --- Navigation ---
 import { TSignInParamProps } from '@navigation/AuthStack';
@@ -15,6 +16,7 @@ import {
 	Text,
 	Link,
 	View,
+	AspectRatio,
 } from 'native-base';
 
 // --- Stores ---
@@ -37,6 +39,7 @@ import avoidKeyboardView from '@utils/avoidKeyboardView';
 import { OmitNever } from '@~types/TOmitNever';
 
 // --- Images ---
+import Logo from '@assets/mileva-logo.svg';
 const bgImage = require('@images/00_background.jpg');
 
 const validationSchema = Yup.object().shape({
@@ -69,15 +72,22 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 		);
 
 	return (
-		<>
+		<View flex={1} bgColor="black">
 			<View position="absolute" zIndex={9} flex={1}>
-				<Image
-					source={bgImage}
-					size="full"
-					alt="Travel Wallpapers"
-					{...avoidKeyboardView}
-				/>
+				<BlurView intensity={5} style={{ flex: 1 }}>
+					<Image
+						source={bgImage}
+						size="full"
+						alt="Photo by Sacha Verheij on Unsplash"
+						opacity={0.3}
+						{...avoidKeyboardView}
+					/>
+				</BlurView>
+
 				<Box
+					position="absolute"
+					w="full"
+					h="full"
 					bg={{
 						linearGradient: {
 							colors: ['transparent', 'black'],
@@ -85,15 +95,16 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 							end: [2, 1],
 						},
 					}}
-					w="full"
-					h="full"
-					position="absolute"
 				/>
 			</View>
 
 			<BaseScreen bgColor="transparent">
 				<Flex w="full" h="full" justify="flex-end" pb="4">
 					<VStack w="full" space="16">
+						<AspectRatio ratio={{ base: 16 / 9 }}>
+							<Logo width="100%" height={250} />
+						</AspectRatio>
+
 						<VStack w="full" space="4">
 							<FormControl isInvalid={Boolean(errors.email)}>
 								<FormControl.Label>
@@ -183,6 +194,6 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 					</VStack>
 				</Flex>
 			</BaseScreen>
-		</>
+		</View>
 	);
 }

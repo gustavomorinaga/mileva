@@ -65,7 +65,13 @@ export default function FactoryCalendar({ containerProps }: IFactoryCalendarProp
 			{...containerProps}
 		>
 			<FCalendar
-				theme={{ arrowColor: '#0077e6', selectedDayBackgroundColor: '#0077e6' }}
+				theme={{
+					arrowColor: '#0077e6',
+					selectedDayBackgroundColor: '#0077e6',
+					textMonthFontFamily: 'Poppins_600SemiBold',
+					textDayHeaderFontFamily: 'Poppins_300Light',
+					textDayFontFamily: 'Poppins_400Regular',
+				}}
 				enableSwipeMonths
 			/>
 		</Box>

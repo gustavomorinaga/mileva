@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Animated, Easing } from 'react-native';
 
 // --- Native-Base ---
 import { Box, IBoxProps } from 'native-base';
@@ -6,9 +7,34 @@ import { Box, IBoxProps } from 'native-base';
 interface HeaderProps {
 	containerStyle?: IBoxProps;
 	children?: React.ReactElement;
+	isAnimated?: boolean;
 }
 
-export default function HeaderComponent({ containerStyle, children }: HeaderProps) {
+export default function HeaderComponent({
+	containerStyle,
+	children,
+	isAnimated = true,
+}: HeaderProps) {
+	const fadeAnimation = React.useRef(new Animated.Value(0)).current;
+
+	useEffect(() => {
+		Animated.timing(fadeAnimation, {
+			toValue: 1,
+			duration: 500,
+			useNativeDriver: true,
+			easing: Easing.in(Easing.ease),
+		}).start();
+
+		return () => {
+			Animated.timing(fadeAnimation, {
+				toValue: 0,
+				duration: 250,
+				useNativeDriver: true,
+				easing: Easing.ease,
+			}).start();
+		};
+	}, [fadeAnimation]);
+
 	return (
 		<Box
 			zIndex={-9}
@@ -20,7 +46,15 @@ export default function HeaderComponent({ containerStyle, children }: HeaderProp
 			roundedBottomLeft="3xl"
 			{...containerStyle}
 		>
-			{children}
+			<Animated.View
+				style={{
+					...(isAnimated && {
+						opacity: fadeAnimation,
+					}),
+				}}
+			>
+				{children}
+			</Animated.View>
 		</Box>
 	);
 }
