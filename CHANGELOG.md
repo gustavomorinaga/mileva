@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/gmatthewsfeuer/mileva/compare/v0.1.1...v0.1.2) (2022-11-17)
+
+
+### Features
+
+* license project ([699963e](https://github.com/gmatthewsfeuer/mileva/commit/699963e8deee7db771e5e197898f7d50c6c1d119))
+* mileva logo ([a9dfc7c](https://github.com/gmatthewsfeuer/mileva/commit/a9dfc7c4db02109588dc56c260580678705c8c7c))
+
+
+### Improvements
+
+* transfer notifications into a dedicated screen ([5ddaf2e](https://github.com/gmatthewsfeuer/mileva/commit/5ddaf2e62517206671d4ebe74a7bc8a74ed6ebf9))
+
 ### 0.1.1 (2022-11-14)
 
 
