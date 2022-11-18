@@ -1,39 +1,38 @@
 {
-  "expo": {
-    "name": "mileva-app",
-    "slug": "mileva-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./public/assets/icons/icon.png",
-    "splash": {
-      "image": "./public/assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./public/assets/icons/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "softwareKeyboardLayoutMode": "pan",
-      "package": "com.gmatthewsfeuer.milevaapp"
-    },
-    "web": {
-      "favicon": "./public/assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "570e6623-596a-4f1b-a07c-131154e3f38e"
-      }
-    }
-  }
+	"expo": {
+		"name": "mileva-app",
+		"slug": "mileva-app",
+		"version": "0.1.2",
+		"orientation": "portrait",
+		"userInterfaceStyle": "automatic",
+		"icon": "./public/assets/icons/icon.png",
+		"splash": {
+			"image": "./public/assets/images/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#0077e6"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./public/assets/icons/adaptive-icon.png",
+				"backgroundColor": "#0077e6"
+			},
+			"softwareKeyboardLayoutMode": "pan",
+			"package": "com.gmatthewsfeuer.milevaapp"
+		},
+		"web": {
+			"favicon": "./public/assets/favicon.png"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "570e6623-596a-4f1b-a07c-131154e3f38e"
+			}
+		}
+	}
 }

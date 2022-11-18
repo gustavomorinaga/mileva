@@ -30,17 +30,17 @@ import { Ionicons } from '@expo/vector-icons';
 const data = {
 	_id: 'id123',
 	image: {
-		uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-		alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
+		uri: 'https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/30/97/309756028.jpeg',
+		alt: 'Sofitel Athens Airport Hotel',
 	},
-	title: 'Mirante da Colyna',
+	title: 'Sofitel Athens Airport Hotel',
 	description:
 		'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti vero dignissimos sunt quas voluptatibus voluptatum? Sequi earum quae voluptates nihil distinctio magni soluta laudantium doloremque tenetur, aspernatur quibusdam at architecto.',
-	location: 'Monte Verde - MG',
-	proximity: 713,
+	location: 'Spata',
+	proximity: null,
 	rate: 4.8,
 	reviews: 3241,
-	price: 300,
+	price: 843,
 	services: ['wifi', 'transport', 'coffee', 'spa'],
 	gallery: [
 		{
@@ -109,7 +109,7 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 					</Header>
 				</ZStack>
 
-				<AspectRatio zIndex={10} ratio={{ base: 1 / 1 }} w="full">
+				<AspectRatio zIndex={10} ratio={{ base: 1 }} w="full">
 					<Image
 						source={{ uri: data.image.uri }}
 						alt={data.image.alt}
@@ -153,7 +153,9 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 
 										<Stack direction="row" space="1">
 											<Text>{data.location}</Text>
-											<Text color="gray.400">({data.proximity}Km do destino)</Text>
+											{data.proximity && (
+												<Text color="gray.400">({data.proximity}Km do destino)</Text>
+											)}
 										</Stack>
 									</Stack>
 

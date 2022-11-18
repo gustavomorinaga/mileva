@@ -314,7 +314,7 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 
 											<Stack direction="row" justifyContent="space-between">
 												<Stack direction="row" space="1" alignItems="center">
-													<AspectRatio ratio={{ base: 1 / 1 }} w="8" h="8">
+													<AspectRatio ratio={{ base: 1 }} w="8" h="8">
 														<Image
 															source={{ uri: item.startPath.company.logo.uri }}
 															alt={item.startPath.company.logo.alt}
@@ -424,7 +424,7 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 
 											<Stack direction="row" justifyContent="space-between">
 												<Stack direction="row" space="1" alignItems="center">
-													<AspectRatio ratio={{ base: 1 / 1 }} w="8" h="8">
+													<AspectRatio ratio={{ base: 1 }} w="8" h="8">
 														<Image
 															source={{ uri: item.endPath.company.logo.uri }}
 															alt={item.endPath.company.logo.alt}

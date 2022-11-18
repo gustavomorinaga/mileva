@@ -5,9 +5,6 @@ import { persist } from 'zustand/middleware';
 // --- Interfaces ---
 import { IAuth } from '@interfaces/IAuth';
 
-// --- Date-FNS ---
-import { formatISO } from 'date-fns';
-
 interface Login {
 	email: string;
 	password: string;
@@ -42,7 +39,7 @@ const useAuthStore = create(
 					name: 'Gustavo Matheus',
 					firstName: 'Gustavo Matheus'.split(' ')[0],
 					email,
-					birthday: formatISO(new Date('2000-10-27')),
+					birthday: '2000-10-28',
 					gender: 'male',
 					phone: '(11) 99769-2927',
 				};

@@ -59,13 +59,18 @@ export default function App() {
 	if (!fontsLoaded) return null;
 
 	return (
-		<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
-			<StatusBar barStyle="default" backgroundColor="transparent" translucent animated />
-			<SafeAreaProvider onLayout={onLayoutRootView}>
+		<SafeAreaProvider onLayout={onLayoutRootView}>
+			<NativeBaseProvider theme={theme} config={nativeBaseConfig}>
+				<StatusBar
+					barStyle="default"
+					backgroundColor="transparent"
+					translucent
+					animated
+				/>
 				<NavigationContainer>
 					<TabNavigator />
 				</NavigationContainer>
-			</SafeAreaProvider>
-		</NativeBaseProvider>
+			</NativeBaseProvider>
+		</SafeAreaProvider>
 	);
 }

@@ -21,7 +21,7 @@ export default function Gallery({ data }: IGalleryProps) {
 			{images.map(item => (
 				<AspectRatio
 					key={item._id}
-					ratio={{ base: 1 / 1 }}
+					ratio={{ base: 1 }}
 					w="20"
 					h="20"
 					rounded="xl"
@@ -33,7 +33,7 @@ export default function Gallery({ data }: IGalleryProps) {
 
 			{Boolean(moreImages.length) && (
 				<Box position="relative" overflow="hidden" w="20" h="20" rounded="xl">
-					<AspectRatio ratio={{ base: 1 / 1 }}>
+					<AspectRatio ratio={{ base: 1 }}>
 						<Image
 							source={{ uri: moreImages[0].uri }}
 							alt={moreImages[0].alt}

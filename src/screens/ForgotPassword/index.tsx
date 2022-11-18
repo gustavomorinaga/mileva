@@ -35,7 +35,7 @@ import avoidKeyboardView from '@utils/avoidKeyboardView';
 import { OmitNever } from '@~types/TOmitNever';
 
 // --- Images ---
-import Logo from '@assets/mileva-logo.svg';
+import Logo from '@assets/logo.svg';
 const bgImage = require('@images/02_background.jpg');
 
 const validationSchema = Yup.object().shape({
@@ -85,7 +85,7 @@ export default function ForgotPasswordScreen({ navigation }: TForgotPasswordPara
 				<Flex w="full" h="full" justify="flex-end" pb="4">
 					<VStack w="full" space="16">
 						<AspectRatio ratio={{ base: 16 / 9 }}>
-							<Logo width="100%" height={350} />
+							<Logo width="100%" height={400} />
 						</AspectRatio>
 
 						<VStack w="full" space="4">

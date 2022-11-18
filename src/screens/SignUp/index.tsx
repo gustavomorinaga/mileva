@@ -39,7 +39,7 @@ import avoidKeyboardView from '@utils/avoidKeyboardView';
 import { OmitNever } from '@~types/TOmitNever';
 
 // --- Images ---
-import Logo from '@assets/mileva-logo.svg';
+import Logo from '@assets/logo.svg';
 const bgImage = require('@images/01_background.jpg');
 
 const validationSchema = Yup.object().shape({

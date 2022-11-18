@@ -40,6 +40,22 @@ module.exports = function (api) {
 				},
 			],
 			'react-native-reanimated/plugin',
+			[
+				'import',
+				{
+					libraryName: 'react-use',
+					camel2DashComponentName: false,
+					customName(/** @type {string} */ name) {
+						const libraryDirectory = name.startsWith('Use')
+							? 'lib/component'
+							: name.startsWith('create')
+							? 'lib/factory'
+							: 'lib';
+						return `react-use/${libraryDirectory}/${name}`;
+					},
+				},
+				'import-react-use',
+			],
 		],
 	};
 };

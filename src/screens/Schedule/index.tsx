@@ -112,7 +112,7 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 											<Card.Body>
 												<Stack direction="row" space="4">
 													<AspectRatio
-														ratio={{ base: 1 / 1 }}
+														ratio={{ base: 1 }}
 														overflow="hidden"
 														rounded="xl"
 														w="16"
@@ -121,6 +121,7 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 														<Image
 															source={{ uri: item.image.uri }}
 															alt={item.image.alt}
+															resizeMode="cover"
 														/>
 													</AspectRatio>
 

@@ -19,15 +19,15 @@ const data = [
 	{
 		_id: 'id123',
 		image: {
-			uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-			alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
+			uri: 'https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/30/97/309756028.jpeg',
+			alt: 'Sofitel Athens Airport Hotel',
 		},
-		title: 'Mirante da Colyna',
-		location: 'Monte Verde - MG',
-		proximity: 713,
+		title: 'Sofitel Athens Airport Hotel',
+		location: 'Spata',
+		proximity: null,
 		rate: 4.8,
 		reviews: 3241,
-		price: 300,
+		price: 843,
 	},
 	{
 		_id: 'id124',
@@ -148,7 +148,9 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 
 												<Stack direction="row" space="1">
 													<Text>{item.location}</Text>
-													<Text color="gray.400">({item.proximity}Km do destino)</Text>
+													{item.proximity && (
+														<Text color="gray.400">({item.proximity}Km do destino)</Text>
+													)}
 												</Stack>
 											</Stack>
 

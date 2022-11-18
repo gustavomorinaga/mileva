@@ -218,7 +218,7 @@ export default function PassagesScreen({ navigation }: TPassagesParamProps) {
 									<Card.Footer>
 										<Stack direction="row" space="1" justifyContent="space-between">
 											<Stack direction="row" space="1" alignItems="center">
-												<AspectRatio ratio={{ base: 1 / 1 }} w="8" h="8">
+												<AspectRatio ratio={{ base: 1 }} w="8" h="8">
 													<Image
 														source={{ uri: item.company.logo.uri }}
 														alt={item.company.logo.alt}

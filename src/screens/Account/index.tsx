@@ -43,7 +43,7 @@ import useAuthStore from '@stores/auth';
 import { maskPhone } from '@utils/masks';
 
 // --- Date-FNS ---
-import { format, formatISO } from 'date-fns';
+import { format } from 'date-fns';
 
 // --- Types ---
 import { OmitNever } from '@~types/TOmitNever';
@@ -89,7 +89,9 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 		} as FormType,
 	});
 
-	const handleShowDatePicker = (value: boolean) => setShowDatePicker(value);
+	const handleShowDatePicker = (value: boolean) => {
+		setShowDatePicker(value);
+	};
 
 	const handleLogout = () => {
 		setIsLoggingOut(true);
@@ -271,14 +273,24 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 
 													{showDatePicker && (
 														<DateTimePicker
+															testID="birthday-picker"
 															mode="date"
+															negativeButtonLabel="Cancelar"
+															positiveButtonLabel="OK"
 															value={value ? new Date(value) : new Date()}
 															onChange={(event, selectedDate) => {
-																if (
-																	event.type === 'set' &&
-																	selectedDate !== new Date(value)
-																)
-																	onChange(formatISO(selectedDate));
+																if (event.type === 'dismissed') {
+																	handleShowDatePicker(false);
+																	return onChange(value);
+																}
+
+																const [date, selectedDateFormatted] = [
+																	format(new Date(value), 'yyyy-MM-dd'),
+																	format(new Date(selectedDate), 'yyyy-MM-dd'),
+																];
+
+																if (selectedDateFormatted !== date) onChange(date);
+
 																handleShowDatePicker(false);
 															}}
 														/>

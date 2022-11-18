@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDebounce } from 'react-use';
 
 // --- Navigation ---
 import { THomeParamProps } from '@navigation/HomeStack';
 
 // --- Native-Base ---
-import { Box, Stack, Text } from 'native-base';
+import { AspectRatio, Box, FlatList, Image, Stack, Text } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -82,6 +83,21 @@ const data = [
 ];
 
 export default function HomeScreen({ navigation }: THomeParamProps) {
+	const [searchTerm, setSearchTerm] = useState('');
+	const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+
+	const [isReady] = useDebounce(
+		() => {
+			setDebouncedSearchTerm(searchTerm);
+		},
+		100,
+		[searchTerm]
+	);
+
+	const handleSearchAccommodation = (value: string) => {
+		setSearchTerm(value);
+	};
+
 	const locationItem = ({ item }) => {
 		return (
 			<Box
@@ -109,7 +125,44 @@ export default function HomeScreen({ navigation }: THomeParamProps) {
 			</Header>
 
 			<BaseScreen mt={-12} scrollEnabled={false}>
-				<SearchInput placeholder="Pesquisar um destino..." mb="4" />
+				<SearchInput
+					placeholder="Pesquisar um destino..."
+					mb="4"
+					value={searchTerm}
+					onChangeText={handleSearchAccommodation}
+				>
+					{isReady && debouncedSearchTerm && (
+						<SearchInput.Autocomplete>
+							<FlatList
+								data={data.filter(({ title }) =>
+									title.includes(debouncedSearchTerm.toLowerCase())
+								)}
+								keyExtractor={item => item._id}
+								renderItem={({ item }) => (
+									<Stack flex={1} direction="row" space="2">
+										<AspectRatio
+											ratio={{ base: 1 }}
+											overflow="hidden"
+											rounded="xl"
+											w="16"
+											h="16"
+										>
+											<Image
+												source={{ uri: item.uri }}
+												alt={item.alt}
+												h="full"
+												alignSelf="strech"
+												resizeMode="cover"
+											/>
+										</AspectRatio>
+
+										<Text>{item.title}</Text>
+									</Stack>
+								)}
+							/>
+						</SearchInput.Autocomplete>
+					)}
+				</SearchInput>
 
 				<Stack direction="row" space="2" justifyContent="space-between">
 					<CategoryButton

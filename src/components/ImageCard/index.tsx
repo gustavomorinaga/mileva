@@ -44,7 +44,7 @@ export default function ImageCard({
 				shadow="5"
 				{...containerProps}
 			>
-				<AspectRatio ratio={{ base: 1 / 1 }}>
+				<AspectRatio ratio={{ base: 1 }}>
 					<Image
 						source={{ uri: image.uri }}
 						alt={image.alt}
