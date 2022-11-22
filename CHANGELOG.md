@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/gmatthewsfeuer/mileva/compare/v0.1.2...v0.1.3) (2022-11-22)
+
+
+### Features
+
+* search input autocomplete ([b2f3fa1](https://github.com/gmatthewsfeuer/mileva/commit/b2f3fa140756ae0ae2af56abe164ec76b78dfece))
+
+
+### Improvements
+
+* autocomplete and category button ([b3f8f7a](https://github.com/gmatthewsfeuer/mileva/commit/b3f8f7a506cc960b5d8667989358819c96ff91a8))
+
 ### [0.1.2](https://github.com/gmatthewsfeuer/mileva/compare/v0.1.1...v0.1.2) (2022-11-17)
 
 
