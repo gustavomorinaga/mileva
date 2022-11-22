@@ -51,7 +51,7 @@ export default function Masonry({
 	};
 
 	return (
-		<SafeAreaView style={{ flex: 1, marginTop: 10, marginHorizontal: -20 }}>
+		<SafeAreaView style={{ flex: 1, marginHorizontal: -20 }}>
 			<ZStack zIndex={99}>
 				<Box
 					bg={{

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
-import { TAccommodationParamProps } from '@navigation/HomeStack';
+import { TDestinationParamProps } from '@navigation/HomeStack';
 
 // --- Native-Base ---
 import { Box, Button, Heading, ScrollView, Stack, Text, View } from 'native-base';
@@ -66,10 +66,7 @@ const data = {
 	],
 };
 
-export default function AccommodationScreen({
-	navigation,
-	route,
-}: TAccommodationParamProps) {
+export default function DestinationScreen({ navigation, route }: TDestinationParamProps) {
 	const [favorited, setFavorited] = useState(data.favorited);
 
 	const handleGoBack = () => {

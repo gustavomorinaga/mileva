@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { THotelsParamProps } from '@navigation/HomeStack';
 
 // --- Native-Base ---
-import { Box, FlatList, Heading, Stack, Text, View, ZStack } from 'native-base';
+import {
+	AspectRatio,
+	Box,
+	Divider,
+	FlatList,
+	Heading,
+	Image,
+	Pressable,
+	Stack,
+	Text,
+	View,
+	ZStack,
+} from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -84,6 +96,10 @@ const data = [
 ];
 
 export default function HotelsScreen({ navigation }: THotelsParamProps) {
+	const [searchTerm, setSearchTerm] = useState('');
+
+	const handleSearchHotels = (value: string) => setSearchTerm(value);
+
 	return (
 		<>
 			<Header>
@@ -104,7 +120,50 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 
 			<BaseScreen mt={-12}>
 				<Stack direction="row" space="2" mb="4">
-					<SearchInput placeholder="Pesquisar um hotel..." flex={1} />
+					<SearchInput
+						placeholder="Pesquisar um hotel..."
+						value={searchTerm}
+						onChangeText={handleSearchHotels}
+					>
+						<SearchInput.Autocomplete
+							searchTerm={searchTerm}
+							searchBy="title"
+							data={data}
+							keyExtractor={item => item._id}
+							renderItem={({ item }) => (
+								<Pressable flex={1} onPress={() => navigation.navigate('Hotel')}>
+									<Box flex={1} mb="2">
+										<Stack space="2">
+											<Stack flex={1} direction="row" space="2" alignItems="center">
+												<AspectRatio
+													ratio={{ base: 1 }}
+													overflow="hidden"
+													rounded="xl"
+													w="10"
+													h="10"
+												>
+													<Image
+														source={{ uri: item.uri }}
+														alt={item.alt}
+														resizeMode="cover"
+													/>
+												</AspectRatio>
+
+												<Text>{item.title}</Text>
+											</Stack>
+
+											<Divider />
+										</Stack>
+									</Box>
+								</Pressable>
+							)}
+							fallback={
+								<Text color="gray.400" fontSize="xs">
+									Não há resultados com esse termo
+								</Text>
+							}
+						/>
+					</SearchInput>
 
 					<IconButton
 						name="options"

@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
-import { TPassagesParamProps } from '@navigation/HomeStack';
+import { TTicketsParamProps } from '@navigation/HomeStack';
 
 // --- Native-Base ---
 import {
@@ -99,7 +99,7 @@ const data = [
 	},
 ];
 
-export default function PassagesScreen({ navigation }: TPassagesParamProps) {
+export default function TicketsScreen({ navigation }: TTicketsParamProps) {
 	return (
 		<>
 			<Header>
@@ -120,7 +120,7 @@ export default function PassagesScreen({ navigation }: TPassagesParamProps) {
 
 			<BaseScreen mt={-12}>
 				<Stack direction="row" space="2" mb="4">
-					<SearchInput placeholder="Pesquisar um destino..." flex={1} />
+					<SearchInput placeholder="Pesquisar um destino..." />
 
 					<IconButton
 						name="options"

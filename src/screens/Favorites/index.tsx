@@ -43,7 +43,7 @@ const data = [
 export default function FavoritesScreen({ navigation, route }: TFavoritesParamProps) {
 	const handleFavoritePress = useCallback(() => {
 		navigation.navigate('Home', {
-			screen: 'Accommodation',
+			screen: 'Destination',
 			params: {
 				returnScreen: 'Favorites',
 			},

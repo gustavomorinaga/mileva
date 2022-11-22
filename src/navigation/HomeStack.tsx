@@ -10,10 +10,10 @@ import { TRootTabParamList, TRootTabScreenProps } from '@navigation/TabNavigator
 
 // --- Screens ---
 import HomeScreen from '@screens/Home';
-import AccommodationScreen from '@screens/Accommodation';
+import DestinationScreen from '@screens/Destination';
 import HotelsScreen from '@screens/Hotels';
 import HotelScreen from '@screens/Hotel';
-import PassagesScreen from '@screens/Passages';
+import TicketsScreen from '@screens/Tickets';
 import PackagesScreen from '@screens/Packages';
 
 // --- Configs ---
@@ -26,13 +26,13 @@ type THomeBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
 
 export type THomeStackParamList = {
 	'Home Root': undefined;
-	Accommodation: {
+	Destination: {
 		returnScreen?: keyof TRootTabParamList;
 		returnScreenKey?: string;
 	};
 	Hotels: undefined;
 	Hotel: undefined;
-	Passages: undefined;
+	Tickets: undefined;
 	Packages: undefined;
 };
 
@@ -40,8 +40,8 @@ export type THomeParamProps = CompositeScreenProps<
 	StackScreenProps<THomeStackParamList, 'Home Root'>,
 	THomeBottomTab<keyof TRootTabParamList>
 >;
-export type TAccommodationParamProps = CompositeScreenProps<
-	StackScreenProps<THomeStackParamList, 'Accommodation'>,
+export type TDestinationParamProps = CompositeScreenProps<
+	StackScreenProps<THomeStackParamList, 'Destination'>,
 	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type THotelsParamProps = CompositeScreenProps<
@@ -52,8 +52,8 @@ export type THotelParamProps = CompositeScreenProps<
 	StackScreenProps<THomeStackParamList, 'Hotel'>,
 	THomeBottomTab<keyof TRootTabParamList>
 >;
-export type TPassagesParamProps = CompositeScreenProps<
-	StackScreenProps<THomeStackParamList, 'Passages'>,
+export type TTicketsParamProps = CompositeScreenProps<
+	StackScreenProps<THomeStackParamList, 'Tickets'>,
 	THomeBottomTab<keyof TRootTabParamList>
 >;
 export type TPackagesParamProps = CompositeScreenProps<
@@ -67,10 +67,10 @@ export default function HomeStack() {
 	return (
 		<Stack.Navigator initialRouteName="Home Root" {...stackNavigatorConfig}>
 			<Stack.Screen name="Home Root" component={HomeScreen} />
-			<Stack.Screen name="Accommodation" component={AccommodationScreen} />
+			<Stack.Screen name="Destination" component={DestinationScreen} />
 			<Stack.Screen name="Hotels" component={HotelsScreen} />
 			<Stack.Screen name="Hotel" component={HotelScreen} />
-			<Stack.Screen name="Passages" component={PassagesScreen} />
+			<Stack.Screen name="Tickets" component={TicketsScreen} />
 			<Stack.Screen name="Packages" component={PackagesScreen} />
 		</Stack.Navigator>
 	);

@@ -63,7 +63,7 @@ const data = [
 export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 	const handleTravelPress = useCallback(() => {
 		navigation.navigate('Home', {
-			screen: 'Accommodation',
+			screen: 'Destination',
 			params: {
 				returnScreen: 'Schedule',
 			},

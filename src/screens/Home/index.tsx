@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useDebounce } from 'react-use';
 
 // --- Navigation ---
 import { THomeParamProps } from '@navigation/HomeStack';
 
 // --- Native-Base ---
-import { AspectRatio, Box, FlatList, Image, Stack, Text } from 'native-base';
+import { AspectRatio, Box, Divider, Image, Pressable, Stack, Text } from 'native-base';
 
 // --- Components ---
 import BaseScreen from '@components/BaseScreen';
@@ -15,6 +14,11 @@ import SearchInput from '@components/SearchInput';
 import CategoryButton from '@components/CategoryButton';
 import Masonry from '@components/MasonryList';
 import Icon from '@components/Icon';
+
+// --- Images ---
+const hotelImage = require('@images/03_background.jpg');
+const ticketImage = require('@images/04_background.jpg');
+const vacationImage = require('@images/05_background.jpg');
 
 const data = [
 	{
@@ -84,19 +88,8 @@ const data = [
 
 export default function HomeScreen({ navigation }: THomeParamProps) {
 	const [searchTerm, setSearchTerm] = useState('');
-	const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
-	const [isReady] = useDebounce(
-		() => {
-			setDebouncedSearchTerm(searchTerm);
-		},
-		100,
-		[searchTerm]
-	);
-
-	const handleSearchAccommodation = (value: string) => {
-		setSearchTerm(value);
-	};
+	const handleSearchDestination = (value: string) => setSearchTerm(value);
 
 	const locationItem = ({ item }) => {
 		return (
@@ -125,77 +118,95 @@ export default function HomeScreen({ navigation }: THomeParamProps) {
 			</Header>
 
 			<BaseScreen mt={-12} scrollEnabled={false}>
-				<SearchInput
-					placeholder="Pesquisar um destino..."
-					mb="4"
-					value={searchTerm}
-					onChangeText={handleSearchAccommodation}
-				>
-					{isReady && debouncedSearchTerm && (
-						<SearchInput.Autocomplete>
-							<FlatList
-								data={data.filter(({ title }) =>
-									title.includes(debouncedSearchTerm.toLowerCase())
-								)}
-								keyExtractor={item => item._id}
-								renderItem={({ item }) => (
-									<Stack flex={1} direction="row" space="2">
-										<AspectRatio
-											ratio={{ base: 1 }}
-											overflow="hidden"
-											rounded="xl"
-											w="16"
-											h="16"
-										>
-											<Image
-												source={{ uri: item.uri }}
-												alt={item.alt}
-												h="full"
-												alignSelf="strech"
-												resizeMode="cover"
-											/>
-										</AspectRatio>
+				<Stack flex={1} space="4">
+					<SearchInput
+						placeholder="Pesquisar um destino..."
+						value={searchTerm}
+						onChangeText={handleSearchDestination}
+						clearButton
+					>
+						<SearchInput.Autocomplete
+							searchTerm={searchTerm}
+							searchBy="title"
+							data={data}
+							keyExtractor={item => item._id}
+							renderItem={({ item }) => (
+								<Pressable flex={1} onPress={() => navigation.navigate('Destination')}>
+									<Box flex={1} mb="2">
+										<Stack space="2">
+											<Stack flex={1} direction="row" space="2" alignItems="center">
+												<AspectRatio
+													ratio={{ base: 1 }}
+													overflow="hidden"
+													rounded="xl"
+													w="10"
+													h="10"
+												>
+													<Image
+														source={{ uri: item.uri }}
+														alt={item.alt}
+														resizeMode="cover"
+													/>
+												</AspectRatio>
 
-										<Text>{item.title}</Text>
-									</Stack>
-								)}
-							/>
-						</SearchInput.Autocomplete>
-					)}
-				</SearchInput>
+												<Text>{item.title}</Text>
+											</Stack>
 
-				<Stack direction="row" space="2" justifyContent="space-between">
-					<CategoryButton
-						boxProps={{ bgColor: 'red.200' }}
-						iconProps={{ name: 'business', styles: { color: 'red.500' } }}
-						labelProps={{ label: 'Hotéis' }}
-						onPress={() => navigation.navigate('Hotels')}
-					/>
+											<Divider />
+										</Stack>
+									</Box>
+								</Pressable>
+							)}
+							fallback={
+								<Text color="gray.400" fontSize="xs">
+									Não há resultados com esse termo
+								</Text>
+							}
+						/>
+					</SearchInput>
 
-					<CategoryButton
-						boxProps={{ bgColor: 'darkBlue.200' }}
-						iconProps={{ name: 'airplane', styles: { color: 'darkBlue.500' } }}
-						labelProps={{ label: 'Passagens' }}
-						onPress={() => navigation.navigate('Passages')}
-					/>
+					<Stack direction="row" space="4" justifyContent="space-between">
+						<CategoryButton
+							image={{
+								uri: hotelImage,
+								alt: 'Photo by Vadim Babenko on Unsplash',
+							}}
+							iconProps={{ name: 'business', styles: { color: 'red.500' } }}
+							labelProps={{ label: 'Hotéis' }}
+							onPress={() => navigation.navigate('Hotels')}
+						/>
 
-					<CategoryButton
-						boxProps={{ bgColor: 'amber.200' }}
-						iconProps={{ name: 'cube', styles: { color: 'amber.500' } }}
-						labelProps={{ label: 'Pacotes' }}
-						onPress={() => navigation.navigate('Packages')}
+						<CategoryButton
+							image={{
+								uri: ticketImage,
+								alt: 'Photo by Christian Wiediger on Unsplash',
+							}}
+							iconProps={{ name: 'airplane', styles: { color: 'darkBlue.500' } }}
+							labelProps={{ label: 'Passagens' }}
+							onPress={() => navigation.navigate('Tickets')}
+						/>
+
+						<CategoryButton
+							image={{
+								uri: vacationImage,
+								alt: 'Photo by Hannah Busing on Unsplash',
+							}}
+							iconProps={{ name: 'cube', styles: { color: 'amber.500' } }}
+							labelProps={{ label: 'Pacotes' }}
+							onPress={() => navigation.navigate('Packages')}
+						/>
+					</Stack>
+
+					<Masonry
+						numColumns={2}
+						data={data}
+						renderChild={locationItem}
+						containerProps={{
+							shadow: '2',
+						}}
+						onPress={() => navigation.navigate('Destination')}
 					/>
 				</Stack>
-
-				<Masonry
-					numColumns={2}
-					data={data}
-					renderChild={locationItem}
-					containerProps={{
-						shadow: '2',
-					}}
-					onPress={() => navigation.navigate('Accommodation')}
-				/>
 			</BaseScreen>
 		</>
 	);

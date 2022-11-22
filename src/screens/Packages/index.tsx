@@ -208,7 +208,7 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 
 			<BaseScreen mt={-12}>
 				<Stack direction="row" space="2" mb="4">
-					<SearchInput placeholder="Pesquisar um destino..." flex={1} />
+					<SearchInput placeholder="Pesquisar um destino..." />
 
 					<IconButton
 						name="options"
