@@ -28,6 +28,7 @@ function SearchInput({ children, clearButton = false, ...props }: ISearchInputPr
 				shadow="4"
 				zIndex={9999}
 				InputLeftElement={<Icon name="search-outline" size="sm" ml="4" />}
+				returnKeyType="search"
 				onFocus={() => setShowAutocomplete(true)}
 				{...(clearButton && {
 					InputRightElement: (

@@ -18,6 +18,7 @@ import PackagesScreen from '@screens/Packages';
 
 // --- Configs ---
 import stackNavigatorConfig from '@configs/stackNavigatorConfig';
+import MapScreen from '@screens/Map';
 
 type THomeBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
 	BottomTabScreenProps<TRootTabParamList, T>,
@@ -34,6 +35,7 @@ export type THomeStackParamList = {
 	Hotel: undefined;
 	Tickets: undefined;
 	Packages: undefined;
+	Map: undefined;
 };
 
 export type THomeParamProps = CompositeScreenProps<
@@ -60,6 +62,10 @@ export type TPackagesParamProps = CompositeScreenProps<
 	StackScreenProps<THomeStackParamList, 'Packages'>,
 	THomeBottomTab<keyof TRootTabParamList>
 >;
+export type TMapParamProps = CompositeScreenProps<
+	StackScreenProps<THomeStackParamList, 'Map'>,
+	THomeBottomTab<keyof TRootTabParamList>
+>;
 
 const Stack = createStackNavigator<THomeStackParamList>();
 
@@ -72,6 +78,7 @@ export default function HomeStack() {
 			<Stack.Screen name="Hotel" component={HotelScreen} />
 			<Stack.Screen name="Tickets" component={TicketsScreen} />
 			<Stack.Screen name="Packages" component={PackagesScreen} />
+			<Stack.Screen name="Map" component={MapScreen} />
 		</Stack.Navigator>
 	);
 }

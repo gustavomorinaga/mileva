@@ -1,5 +1,4 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { TPackagesParamProps } from '@navigation/HomeStack';
@@ -219,7 +218,7 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 					/>
 				</Stack>
 
-				<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
+				<Box flex={1} mx={-5}>
 					<ZStack zIndex={99}>
 						<Box
 							bg={{
@@ -467,7 +466,7 @@ export default function PackagesScreen({ navigation }: TPackagesParamProps) {
 							</Card>
 						)}
 					/>
-				</SafeAreaView>
+				</Box>
 			</BaseScreen>
 		</>
 	);

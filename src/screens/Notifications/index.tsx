@@ -1,11 +1,19 @@
 import React, { useCallback } from 'react';
-import { Pressable, SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { TNotificationsParamProps } from '@navigation/NotificationsStack';
 
 // --- Native-Base ---
-import { Box, Divider, FlatList, Heading, Stack, Text, ZStack } from 'native-base';
+import {
+	Box,
+	Divider,
+	FlatList,
+	Heading,
+	Pressable,
+	Stack,
+	Text,
+	ZStack,
+} from 'native-base';
 import { ColorType } from 'native-base/lib/typescript/components/types';
 
 // --- Components ---
@@ -110,7 +118,7 @@ export default function NotificationsScreen({ navigation }: TNotificationsParamP
 			</Header>
 
 			<BaseScreen mt={-16}>
-				<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
+				<Box flex={1} mt={-5} mx={-5}>
 					<ZStack zIndex={99}>
 						<Box
 							bg={{
@@ -191,7 +199,7 @@ export default function NotificationsScreen({ navigation }: TNotificationsParamP
 							</Stack>
 						)}
 					/>
-				</SafeAreaView>
+				</Box>
 			</BaseScreen>
 		</>
 	);

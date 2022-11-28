@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { TFavoritesParamProps } from '@navigation/FavoritesStack';
@@ -38,6 +37,30 @@ const data = [
 			alt: 'Chile',
 		},
 	},
+	{
+		_id: '4',
+		name: 'Grécia',
+		image: {
+			uri: 'https://cdn.kimkim.com/files/a/content_articles/featured_photos/0e3794a0b646d638627afb626bf9ee46f472feb1/big-0bb2a2bea537c680f141d40cb484d888.jpg',
+			alt: 'Grécia',
+		},
+	},
+	{
+		_id: '5',
+		name: 'Canadá',
+		image: {
+			uri: 'http://www.yazigi.com.br/galeria/repositorio/images/noticias/pontos-turisticos-canada/banff-national-park.jpg',
+			alt: 'Canadá',
+		},
+	},
+	{
+		_id: '6',
+		name: 'Chile',
+		image: {
+			uri: 'https://a.cdn-hotels.com/gdcs/production48/d1338/3cb6a4d4-c771-483c-b66b-3557af9f5e19.jpg',
+			alt: 'Chile',
+		},
+	},
 ];
 
 export default function FavoritesScreen({ navigation, route }: TFavoritesParamProps) {
@@ -61,8 +84,8 @@ export default function FavoritesScreen({ navigation, route }: TFavoritesParamPr
 				</Stack>
 			</Header>
 
-			<BaseScreen mt={-16}>
-				<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
+			<BaseScreen mt={-12}>
+				<Box flex={1} mt={-8} mx={-5}>
 					<ZStack zIndex={99}>
 						<Box
 							bg={{
@@ -99,7 +122,7 @@ export default function FavoritesScreen({ navigation, route }: TFavoritesParamPr
 							/>
 						)}
 					/>
-				</SafeAreaView>
+				</Box>
 			</BaseScreen>
 		</>
 	);

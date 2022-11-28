@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react';
 import { Animated, Easing } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
-
 // --- Native-Base ---
-import { View } from 'native-base';
+import { Box, View } from 'native-base';
 import { IViewProps } from 'native-base/lib/typescript/components/basic/View/types';
+
+export const BaseScreenPrimitive = ({ children, ...props }: IViewProps) => (
+	<Box px="5" flex={1} safeArea {...props}>
+		{children}
+	</Box>
+);
 
 interface IBaseScreenProps extends IViewProps {
 	isAnimated?: boolean;
 	scrollEnabled?: boolean;
 }
-
-export const BaseScreenPrimitive = ({ children, ...props }: IViewProps) => (
-	<SafeAreaView style={{ zIndex: 99, flex: 1 }}>
-		<View px="5" flex={1} {...props}>
-			{children}
-		</View>
-	</SafeAreaView>
-);
 
 export default function BaseScreen({
 	children,

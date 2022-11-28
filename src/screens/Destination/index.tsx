@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { TDestinationParamProps } from '@navigation/HomeStack';
@@ -48,21 +47,6 @@ const data = {
 			uri: 'https://www.fuiserviajante.com/wp-content/uploads/2017/11/lugares-para-visitar-na-grecia-navagio-zakynthos1.jpg',
 			alt: 'Grécia',
 		},
-		{
-			_id: '5',
-			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
-			alt: 'Grécia',
-		},
-		{
-			_id: '6',
-			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
-			alt: 'Grécia',
-		},
-		{
-			_id: '7',
-			uri: 'https://cdn.cnn.com/cnnnext/dam/assets/170606121035-greece---travel-destination---shutterstock-560829934.jpg',
-			alt: 'Grécia',
-		},
 	],
 };
 
@@ -94,7 +78,7 @@ export default function DestinationScreen({ navigation, route }: TDestinationPar
 			</Header>
 
 			<BaseScreen mt={-20}>
-				<SafeAreaView style={{ flex: 1, marginHorizontal: -20 }}>
+				<Box flex={1} mx={-5}>
 					<Box
 						zIndex={99}
 						bg={{
@@ -153,11 +137,11 @@ export default function DestinationScreen({ navigation, route }: TDestinationPar
 							<Stack space="2">
 								<Heading fontSize="xl">Galeria</Heading>
 
-								<Gallery data={data.gallery} />
+								<Gallery data={data.gallery} limit={3} />
 							</Stack>
 						</Stack>
 					</ScrollView>
-				</SafeAreaView>
+				</Box>
 			</BaseScreen>
 		</>
 	);

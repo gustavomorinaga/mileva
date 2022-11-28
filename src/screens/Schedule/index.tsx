@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { TScheduleParamProps } from '@navigation/ScheduleStack';
@@ -82,13 +81,13 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 			</Header>
 
 			<BaseScreen mt={-12}>
-				<Stack mt={-2} flex={1} space="6">
+				<Stack mt={-3} flex={1} space="6">
 					<FactoryCalendar />
 
 					<Stack flex={1} space="4">
 						<Heading fontSize="xl">Minhas viagens</Heading>
 
-						<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
+						<Box flex={1} mt={-3} mx={-5}>
 							<ZStack zIndex={99}>
 								<Box
 									bg={{
@@ -149,7 +148,7 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 								}}
 								pt="4"
 							/>
-						</SafeAreaView>
+						</Box>
 					</Stack>
 				</Stack>
 			</BaseScreen>

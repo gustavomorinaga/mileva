@@ -1,5 +1,4 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 
 // --- Navigation ---
 import { TTicketsParamProps } from '@navigation/HomeStack';
@@ -131,7 +130,7 @@ export default function TicketsScreen({ navigation }: TTicketsParamProps) {
 					/>
 				</Stack>
 
-				<SafeAreaView style={{ flex: 1, marginTop: -8, marginHorizontal: -20 }}>
+				<Box flex={1} mx={-5}>
 					<ZStack zIndex={99}>
 						<Box
 							bg={{
@@ -247,7 +246,7 @@ export default function TicketsScreen({ navigation }: TTicketsParamProps) {
 						}}
 						pt="4"
 					/>
-				</SafeAreaView>
+				</Box>
 			</BaseScreen>
 		</>
 	);

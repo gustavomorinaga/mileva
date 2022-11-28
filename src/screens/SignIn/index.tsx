@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BlurView } from 'expo-blur';
 
 // --- Navigation ---
@@ -60,6 +60,8 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 
 	const [showPassword, setShowPassword] = useState(false);
 
+	const passwordRef = useRef(null);
+
 	const handleShowPassword = () => setShowPassword(!showPassword);
 
 	const onSubmit = (values: FormType) =>
@@ -120,6 +122,10 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 											borderRadius="xl"
 											color="lightText"
 											selectionColor="lightText"
+											autoCapitalize="none"
+											returnKeyType="next"
+											blurOnSubmit={false}
+											onSubmitEditing={() => passwordRef.current.focus()}
 											onBlur={onBlur}
 											onChangeText={value => onChange(value.trim())}
 										/>
@@ -139,11 +145,14 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 									name="password"
 									render={({ field: { onChange, onBlur } }) => (
 										<Input
+											ref={passwordRef}
 											variant="outline"
 											type={showPassword ? 'text' : 'password'}
 											borderRadius="xl"
 											color="lightText"
 											selectionColor="lightText"
+											autoCapitalize="none"
+											returnKeyType="join"
 											InputRightElement={
 												<IconButton
 													variant="unstyled"
@@ -156,6 +165,7 @@ export default function SignInScreen({ navigation }: TSignInParamProps) {
 											}
 											onBlur={onBlur}
 											onChangeText={value => onChange(value)}
+											onSubmitEditing={handleSubmit(onSubmit)}
 										/>
 									)}
 								/>

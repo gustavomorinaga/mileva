@@ -91,7 +91,10 @@ export default function TabNavigator() {
 				tabPress: e => {
 					e.preventDefault();
 
-					navigation.navigate(route.name);
+					navigation.navigate(route.name, {
+						initial: true,
+						screen: `${route.name} Root`,
+					});
 				},
 			})}
 		>

@@ -39,7 +39,7 @@ const useAuthStore = create(
 					name: 'Gustavo Matheus',
 					firstName: 'Gustavo Matheus'.split(' ')[0],
 					email,
-					birthday: '2000-10-28',
+					birthday: '2000-10-27',
 					gender: 'male',
 					phone: '(11) 99769-2927',
 				};

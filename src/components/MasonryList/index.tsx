@@ -1,5 +1,4 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 
 // --- Native-Base ---
 import {
@@ -51,7 +50,7 @@ export default function Masonry({
 	};
 
 	return (
-		<SafeAreaView style={{ flex: 1, marginHorizontal: -20 }}>
+		<Box flex={1} mx={-5}>
 			<ZStack zIndex={99}>
 				<Box
 					bg={{
@@ -80,6 +79,6 @@ export default function Masonry({
 					alignSelf: 'stretch',
 				}}
 			/>
-		</SafeAreaView>
+		</Box>
 	);
 }

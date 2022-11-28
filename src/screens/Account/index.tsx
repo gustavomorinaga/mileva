@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
+import React, { useRef, useState } from 'react';
 
 // --- Navigation ---
 import { TAccountParamProps } from '@navigation/AccountStack';
@@ -72,6 +71,8 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const [isLoggingOut, setIsLoggingOut] = useState(false);
 
+	const [emailRef, phoneRef] = [useRef(null), useRef(null)];
+
 	const {
 		control,
 		handleSubmit,
@@ -124,7 +125,7 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 			</Header>
 
 			<BaseScreen mt={-12}>
-				<SafeAreaView style={{ flex: 1, marginTop: -20, marginHorizontal: -20 }}>
+				<Box flex={1} mt={-5} mx={-5}>
 					<ZStack zIndex={99}>
 						<Box
 							bg={{
@@ -181,6 +182,9 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 												borderRadius="xl"
 												color="darkText"
 												selectionColor="darkText"
+												returnKeyType="next"
+												blurOnSubmit={false}
+												onSubmitEditing={() => emailRef.current.focus()}
 												value={value}
 												onBlur={onBlur}
 												onChangeText={value => onChange(value.trim())}
@@ -201,12 +205,17 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 										name="email"
 										render={({ field: { onChange, onBlur, value } }) => (
 											<Input
+												ref={emailRef}
 												placeholder="Digite o seu e-mail"
 												variant="outline"
 												type="text"
 												borderRadius="xl"
 												color="darkText"
 												selectionColor="darkText"
+												autoCapitalize="none"
+												returnKeyType="next"
+												blurOnSubmit={false}
+												onSubmitEditing={() => phoneRef.current.focus()}
 												value={value}
 												onBlur={onBlur}
 												onChangeText={value => onChange(value.trim())}
@@ -227,15 +236,23 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 										name="phone"
 										render={({ field: { onChange, onBlur, value } }) => (
 											<Input
+												ref={phoneRef}
 												placeholder="Digite o seu telefone"
 												variant="outline"
 												type="text"
 												borderRadius="xl"
 												color="darkText"
 												selectionColor="darkText"
+												keyboardType="number-pad"
+												returnKeyType="next"
+												blurOnSubmit={false}
+												onSubmitEditing={() => {
+													phoneRef.current.blur();
+													handleShowDatePicker(true);
+												}}
 												value={value}
 												onBlur={onBlur}
-												onChangeText={value => onChange(maskPhone(value.trim()))}
+												onChangeText={value => onChange(maskPhone(value))}
 											/>
 										)}
 									/>
@@ -384,7 +401,7 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 							</Button>
 						</Stack>
 					</ScrollView>
-				</SafeAreaView>
+				</Box>
 			</BaseScreen>
 		</>
 	);

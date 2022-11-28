@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BlurView } from 'expo-blur';
 
 // --- Navigation ---
@@ -74,6 +74,12 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
+	const [emailRef, passwordRef, confirmPasswordRef] = [
+		useRef(null),
+		useRef(null),
+		useRef(null),
+	];
+
 	const handleShowPassword = () => setShowPassword(!showPassword);
 	const handleShowPasswordConfirmation = () =>
 		setShowPasswordConfirmation(!showPasswordConfirmation);
@@ -135,6 +141,9 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 											type="text"
 											borderRadius="xl"
 											color="lightText"
+											returnKeyType="next"
+											blurOnSubmit={false}
+											onSubmitEditing={() => emailRef.current.focus()}
 											onBlur={onBlur}
 											onChangeText={value => onChange(value.trim())}
 										/>
@@ -154,10 +163,15 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 									name="email"
 									render={({ field: { onChange, onBlur } }) => (
 										<Input
+											ref={emailRef}
 											variant="outline"
 											type="text"
 											borderRadius="xl"
 											color="lightText"
+											returnKeyType="next"
+											autoCapitalize="none"
+											blurOnSubmit={false}
+											onSubmitEditing={() => passwordRef.current.focus()}
 											onBlur={onBlur}
 											onChangeText={value => onChange(value.trim())}
 										/>
@@ -170,13 +184,14 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 
 							<FormControl isInvalid={Boolean(errors.password)}>
 								<FormControl.Label>
-									<Text color="lightText">Password</Text>
+									<Text color="lightText">Senha</Text>
 								</FormControl.Label>
 								<Controller
 									control={control}
 									name="password"
 									render={({ field: { onChange, onBlur } }) => (
 										<Input
+											ref={passwordRef}
 											variant="outline"
 											type={showPassword ? 'text' : 'password'}
 											borderRadius="xl"
@@ -191,6 +206,10 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 													color="lightText"
 												/>
 											}
+											returnKeyType="next"
+											autoCapitalize="none"
+											blurOnSubmit={false}
+											onSubmitEditing={() => confirmPasswordRef.current.focus()}
 											onBlur={onBlur}
 											onChangeText={value => onChange(value)}
 										/>
@@ -210,6 +229,7 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 									name="passwordConfirmation"
 									render={({ field: { onChange, onBlur } }) => (
 										<Input
+											ref={confirmPasswordRef}
 											variant="outline"
 											type={showPasswordConfirmation ? 'text' : 'password'}
 											borderRadius="xl"
@@ -226,8 +246,11 @@ export default function SignUpScreen({ navigation }: TSignUpParamProps) {
 													color="lightText"
 												/>
 											}
+											returnKeyType="join"
+											autoCapitalize="none"
 											onBlur={onBlur}
 											onChangeText={value => onChange(value)}
+											onSubmitEditing={handleSubmit(onSubmit)}
 										/>
 									)}
 								/>

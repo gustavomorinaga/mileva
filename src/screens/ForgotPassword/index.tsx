@@ -103,8 +103,11 @@ export default function ForgotPasswordScreen({ navigation }: TForgotPasswordPara
 											borderRadius="xl"
 											color="lightText"
 											selectionColor="lightText"
+											autoCapitalize="none"
+											returnKeyType="join"
 											onBlur={onBlur}
 											onChangeText={value => onChange(value.trim())}
+											onSubmitEditing={handleSubmit(onSubmit)}
 										/>
 									)}
 								/>
@@ -128,7 +131,7 @@ export default function ForgotPasswordScreen({ navigation }: TForgotPasswordPara
 						<Flex direction="row" justify="flex-end">
 							<Link alignSelf="flex-end" onPress={() => navigation.navigate('Sign In')}>
 								<Flex direction="row" align="center" py="2" pl="2">
-									<Text color="lightText">Entrar na conta</Text>
+									<Text color="lightText">Entrar na minha conta</Text>
 
 									<Icon name="arrow-forward" size="sm" color="lightText" ml="2" />
 								</Flex>
