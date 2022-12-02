@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // --- Navigation ---
 import { THotelParamProps } from '@navigation/HomeStack';
@@ -27,49 +27,8 @@ import Gallery from '@components/Gallery';
 // --- Icons ---
 import { Ionicons } from '@expo/vector-icons';
 
-const data = {
-	_id: 'id123',
-	image: {
-		uri: 'https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/30/97/309756028.jpeg',
-		alt: 'Sofitel Athens Airport Hotel',
-	},
-	title: 'Sofitel Athens Airport Hotel',
-	description:
-		'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti vero dignissimos sunt quas voluptatibus voluptatum? Sequi earum quae voluptates nihil distinctio magni soluta laudantium doloremque tenetur, aspernatur quibusdam at architecto.',
-	location: 'Spata',
-	proximity: null,
-	rate: 4.8,
-	reviews: 3241,
-	price: 843,
-	services: ['wifi', 'transport', 'coffee', 'spa'],
-	gallery: [
-		{
-			_id: '1',
-			uri: 'https://photos.hotelbeds.com/giata/original/00/007053/007053a_hb_r_021.jpg',
-			alt: 'Grécia',
-		},
-		{
-			_id: '2',
-			uri: 'https://cdn.worldota.net/t/1024x768/content/ff/83/ff83ba69bfa233efb45c11d4b12db43aea09b6ea.jpeg',
-			alt: 'Grécia',
-		},
-		{
-			_id: '3',
-			uri: 'https://images.trvl-media.com/hotels/1000000/690000/688200/688125/8d9a53dd_z.jpg',
-			alt: 'Grécia',
-		},
-		{
-			_id: '4',
-			uri: 'https://photos.hotelbeds.com/giata/original/00/007053/007053a_hb_ro_038.jpg',
-			alt: 'Grécia',
-		},
-		{
-			_id: '5',
-			uri: 'https://photos.hotelbeds.com/giata/original/00/007053/007053a_hb_ro_012.jpg',
-			alt: 'Grécia',
-		},
-	],
-};
+// --- Interfaces ---
+import { IHotel } from '@interfaces/IHotel';
 
 const SERVICES_ICONS: {
 	[k: string]: { label: string; icon: keyof typeof Ionicons.glyphMap };
@@ -92,17 +51,18 @@ const SERVICES_ICONS: {
 	},
 };
 
-export default function HotelScreen({ navigation }: THotelParamProps) {
-	const hasRating = Boolean(data.rate) && Boolean(data.reviews);
+export default function HotelScreen({ navigation, route: { params } }: THotelParamProps) {
+	const [hotel] = useState<IHotel>(params.hotel);
+
+	const hasRating = Boolean(hotel.rate) && Boolean(hotel.reviews);
 
 	return (
 		<View position="relative" flex={1}>
 			<View zIndex={9}>
 				<ZStack position="absolute" zIndex={99} w="full">
 					<Header containerStyle={{ bgColor: 'transparent' }}>
-						<Stack direction="row" alignItems="center" justifyContent="space-between">
+						<Stack direction="row" alignItems="flex-start" justifyContent="space-between">
 							<IconButton
-								accessibilityHint="Voltar"
 								name="arrow-back"
 								bgColor="white"
 								shadow="5"
@@ -111,15 +71,25 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 
 							<View w="8" />
 
-							<IconButton name="share-social" bgColor="white" shadow="5" />
+							<Stack space="2">
+								<IconButton name="share-social" bgColor="white" shadow="5" />
+								<IconButton
+									name="map"
+									bgColor="white"
+									shadow="5"
+									onPress={() =>
+										navigation.navigate('Map', { geolocation: hotel.geolocation })
+									}
+								/>
+							</Stack>
 						</Stack>
 					</Header>
 				</ZStack>
 
 				<AspectRatio zIndex={10} ratio={{ base: 1 }} w="full">
 					<Image
-						source={{ uri: data.image.uri }}
-						alt={data.image.alt}
+						source={{ uri: hotel.image.uri }}
+						alt={hotel.image.alt}
 						height="full"
 						alignSelf="stretch"
 						resizeMode="cover"
@@ -154,7 +124,7 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 					/>
 					<ScrollView mt={-8} pt="4" showsVerticalScrollIndicator={false}>
 						<Stack space="6" pb="4">
-							<Heading>{data.title}</Heading>
+							<Heading>{hotel.title}</Heading>
 
 							<Stack space="2">
 								<Pressable onPress={() => navigation.navigate('Map')}>
@@ -162,9 +132,9 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 										<Icon name="location" color="red.500" />
 
 										<Stack direction="row" space="1">
-											<Text>{data.location}</Text>
-											{data.proximity && (
-												<Text color="gray.400">({data.proximity}Km do destino)</Text>
+											<Text>{hotel.location}</Text>
+											{hotel.proximity && (
+												<Text color="gray.400">({hotel.proximity}Km do destino)</Text>
 											)}
 										</Stack>
 									</Stack>
@@ -176,8 +146,8 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 											<Icon name="star" color="amber.400" />
 
 											<Stack direction="row" space="1">
-												<Text>{data.rate}</Text>
-												<Text color="gray.400">({data.reviews} reviews)</Text>
+												<Text>{hotel.rate}</Text>
+												<Text color="gray.400">({hotel.reviews} reviews)</Text>
 											</Stack>
 										</>
 									) : (
@@ -193,8 +163,8 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 							<Stack space="2">
 								<Heading fontSize="xl">Sobre</Heading>
 
-								{data.description ? (
-									<Text>{data.description}</Text>
+								{hotel.description ? (
+									<Text>{hotel.description}</Text>
 								) : (
 									<Box flex={1} p="2" rounded="xl" bgColor="warmGray.200">
 										<Text color="gray.400">Nenhuma informação disponível.</Text>
@@ -206,8 +176,8 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 								<Heading fontSize="xl">Serviços</Heading>
 
 								<Stack direction="row" space="2">
-									{data.services.length ? (
-										data.services.map((item, index) => (
+									{hotel?.services?.length ? (
+										hotel.services.map((item, index) => (
 											<Box key={index} p="2" rounded="xl" bgColor="darkBlue.200">
 												<Icon name={SERVICES_ICONS[item].icon} color="darkBlue.500" />
 											</Box>
@@ -223,8 +193,8 @@ export default function HotelScreen({ navigation }: THotelParamProps) {
 							<Stack space="2" pb="4">
 								<Heading fontSize="xl">Galeria</Heading>
 
-								{data.gallery.length ? (
-									<Gallery data={data.gallery} limit={3} />
+								{hotel?.gallery?.length ? (
+									<Gallery data={hotel.gallery} limit={3} />
 								) : (
 									<Box flex={1} p="2" rounded="xl" bgColor="warmGray.200">
 										<Text color="gray.400">Nenhuma imagem disponível.</Text>

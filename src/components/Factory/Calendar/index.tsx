@@ -4,56 +4,31 @@ import React from 'react';
 import { Box, Factory, IBoxProps } from 'native-base';
 
 // --- Calendars ---
-import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { Calendar, CalendarProps, LocaleConfig } from 'react-native-calendars';
+
+// --- Configs ---
+import { dateLocaleConfig } from '@configs/dateLocaleConfig';
 
 LocaleConfig.locales['pt-BR'] = {
-	monthNames: [
-		'Janeiro',
-		'Fevereiro',
-		'Março',
-		'Abril',
-		'Maio',
-		'Junho',
-		'Julho',
-		'Agosto',
-		'Setembro',
-		'Outubro',
-		'Novembro',
-		'Dezembro',
-	],
-	monthNamesShort: [
-		'Jan',
-		'Fev',
-		'Mar',
-		'Abr',
-		'Mai',
-		'Jun',
-		'Jul',
-		'Ago',
-		'Set',
-		'Out',
-		'Nov',
-		'Dez',
-	],
-	dayNames: [
-		'Domingo',
-		'Segunda-feira',
-		'Terça-feira',
-		'Quarta-feira',
-		'Quinta-feira',
-		'Sexta-feira',
-		'Sábado',
-	],
-	dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+	monthNames: dateLocaleConfig.config.months,
+	monthNamesShort: dateLocaleConfig.config.monthsShort,
+	dayNames: dateLocaleConfig.config.weekdays,
+	dayNamesShort: dateLocaleConfig.config.weekdaysShort,
 	today: 'Hoje',
 };
 LocaleConfig.defaultLocale = 'pt-BR';
 
-interface IFactoryCalendarProps {
+const primaryColor = '#0077e6';
+
+interface IFactoryCalendarProps extends CalendarProps {
+	children?: React.ReactElement;
 	containerProps?: IBoxProps;
 }
 
-export default function FactoryCalendar({ containerProps }: IFactoryCalendarProps) {
+export default function FactoryCalendar({
+	containerProps,
+	...calendarProps
+}: IFactoryCalendarProps) {
 	const FCalendar = Factory(Calendar);
 
 	return (
@@ -66,13 +41,20 @@ export default function FactoryCalendar({ containerProps }: IFactoryCalendarProp
 		>
 			<FCalendar
 				theme={{
-					arrowColor: '#0077e6',
-					selectedDayBackgroundColor: '#0077e6',
+					agendaTodayColor: primaryColor,
+					arrowColor: primaryColor,
+					dotColor: primaryColor,
+					indicatorColor: primaryColor,
+					todayButtonTextColor: primaryColor,
+					selectedDayBackgroundColor: primaryColor,
+					todayDotColor: primaryColor,
+					todayTextColor: primaryColor,
 					textMonthFontFamily: 'Poppins_600SemiBold',
 					textDayHeaderFontFamily: 'Poppins_300Light',
 					textDayFontFamily: 'Poppins_400Regular',
 				}}
 				enableSwipeMonths
+				{...calendarProps}
 			/>
 		</Box>
 	);

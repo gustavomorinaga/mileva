@@ -89,6 +89,7 @@
 		"react-dom": "18.1.0",
 		"react-hook-form": "7.39.1",
 		"react-native": "0.70.5",
+		"react-native-calendar-strip": "^2.2.6",
 		"react-native-calendars": "1.1291.1",
 		"react-native-device-info": "10.3.0",
 		"react-native-gesture-handler": "2.8.0",

@@ -22,11 +22,54 @@ import Icon from '@components/Icon';
 import Card from '@components/Card';
 import FactoryCalendar from '@components/Factory/Calendar';
 
+// --- Calendars ---
+import { MarkedDates } from 'react-native-calendars/src/types';
+
 // --- Date-FNS ---
 import { format, formatISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-const data = [
+// --- Utils ---
+import { getRealDate } from '@utils/realDate';
+
+const myAgendaData = [
+	{
+		date: '2022-11-11',
+		startingDay: true,
+		endingDay: false,
+	},
+	{
+		date: '2022-11-12',
+		startingDay: false,
+		endingDay: false,
+	},
+	{
+		date: '2022-11-13',
+		startingDay: false,
+		endingDay: true,
+	},
+	{
+		date: '2022-11-22',
+		startingDay: true,
+		endingDay: false,
+	},
+	{
+		date: '2022-11-23',
+		startingDay: false,
+		endingDay: false,
+	},
+	{
+		date: '2022-11-24',
+		startingDay: false,
+		endingDay: false,
+	},
+	{
+		date: '2022-11-25',
+		endingDay: true,
+	},
+];
+
+const myTravelsData = [
 	{
 		_id: '1',
 		accommodation: 'Nova Iorque',
@@ -60,6 +103,22 @@ const data = [
 ];
 
 export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
+	const markedDates: MarkedDates = Object.assign(
+		{ [format(new Date(), 'yyyy-MM-dd')]: { today: true, textColor: '#0077e6' } },
+		...myAgendaData.map(
+			({ date, ...item }) =>
+				({
+					[date]: {
+						...item,
+						textColor: '#ffffff',
+						...(item.startingDay || item.endingDay
+							? { color: '#0077e6' }
+							: { color: '#1a91ff' }),
+					},
+				} as MarkedDates)
+		)
+	);
+
 	const handleTravelPress = useCallback(() => {
 		navigation.navigate('Home', {
 			screen: 'Destination',
@@ -82,7 +141,18 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 
 			<BaseScreen mt={-12}>
 				<Stack mt={-3} flex={1} space="6">
-					<FactoryCalendar />
+					<FactoryCalendar
+						markingType="period"
+						markedDates={markedDates}
+						onDayPress={date =>
+							navigation.navigate('Travel Plan', {
+								selectedDate: date.dateString,
+								markedDates: Object.entries(markedDates)
+									.filter(([_, props]) => !props.today)
+									.map(([markedDate]) => getRealDate(new Date(markedDate)).toISOString()),
+							})
+						}
+					/>
 
 					<Stack flex={1} space="4">
 						<Heading fontSize="xl">Minhas viagens</Heading>
@@ -102,7 +172,7 @@ export default function ScheduleScreen({ navigation }: TScheduleParamProps) {
 								/>
 							</ZStack>
 							<FlatList
-								data={data}
+								data={myTravelsData}
 								keyExtractor={item => item._id}
 								showsVerticalScrollIndicator={false}
 								renderItem={({ item }) => (

@@ -26,75 +26,12 @@ import IconButton from '@components/IconButton';
 import SearchInput from '@components/SearchInput';
 import Card from '@components/Card';
 
-const data = [
-	{
-		_id: 'id123',
-		image: {
-			uri: 'https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1300,q_auto,w_2000/partnerimages/30/97/309756028.jpeg',
-			alt: 'Sofitel Athens Airport Hotel',
-		},
-		title: 'Sofitel Athens Airport Hotel',
-		location: 'Spata',
-		proximity: null,
-		rate: 4.8,
-		reviews: 3241,
-		price: 843,
-	},
-	{
-		_id: 'id124',
-		image: {
-			uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-			alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
-		},
-		title: 'Mirante da Colyna',
-		location: 'Monte Verde - MG',
-		proximity: 713,
-		rate: 4.8,
-		reviews: 3241,
-		price: 300,
-	},
-	{
-		_id: 'id125',
-		image: {
-			uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-			alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
-		},
-		title: 'Mirante da Colyna',
-		location: 'Monte Verde - MG',
-		proximity: 713,
-		rate: 4.8,
-		reviews: 3241,
-		price: 300,
-	},
-	{
-		_id: 'id126',
-		image: {
-			uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-			alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
-		},
-		title: 'Mirante da Colyna',
-		location: 'Monte Verde - MG',
-		proximity: 713,
-		rate: 4.8,
-		reviews: 3241,
-		price: 300,
-	},
-	{
-		_id: 'id127',
-		image: {
-			uri: 'https://ii1.pepperfry.com/media/catalog/product/m/o/568x625/modern-chaise-lounger-in-grey-colour-by-dreamzz-furniture-modern-chaise-lounger-in-grey-colour-by-dr-tmnirx.jpg',
-			alt: 'Pioneer LHS Chaise Lounger in Grey Colour',
-		},
-		title: 'Mirante da Colyna',
-		location: 'Monte Verde - MG',
-		proximity: 713,
-		rate: 4.8,
-		reviews: 3241,
-		price: 300,
-	},
-];
+// --- Stores ---
+import useHotelsStore from '@stores/hotels';
 
 export default function HotelsScreen({ navigation }: THotelsParamProps) {
+	const { hotels } = useHotelsStore(state => state);
+
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const handleSearchHotels = (value: string) => setSearchTerm(value);
@@ -127,10 +64,13 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 						<SearchInput.Autocomplete
 							searchTerm={searchTerm}
 							searchBy="title"
-							data={data}
+							data={hotels}
 							keyExtractor={item => item._id}
 							renderItem={({ item }) => (
-								<Pressable flex={1} onPress={() => navigation.navigate('Hotel')}>
+								<Pressable
+									flex={1}
+									onPress={() => navigation.navigate('Hotel', { hotel: item })}
+								>
 									<Box flex={1} mb="2">
 										<Stack space="2">
 											<Stack flex={1} direction="row" space="2" alignItems="center">
@@ -142,8 +82,8 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 													h="10"
 												>
 													<Image
-														source={{ uri: item.uri }}
-														alt={item.alt}
+														source={{ uri: item.image.uri }}
+														alt={item.image.alt}
 														resizeMode="cover"
 													/>
 												</AspectRatio>
@@ -188,14 +128,14 @@ export default function HotelsScreen({ navigation }: THotelsParamProps) {
 						/>
 					</ZStack>
 					<FlatList
-						data={data}
+						data={hotels}
 						keyExtractor={item => item._id}
 						showsVerticalScrollIndicator={false}
 						renderItem={({ item }) => (
 							<Card
 								image={item.image}
 								containerProps={{ mx: 5, mb: 5 }}
-								onPress={() => navigation.navigate('Hotel')}
+								onPress={() => navigation.navigate('Hotel', { hotel: item })}
 							>
 								<Card.Content>
 									<Card.Header title={item.title} />

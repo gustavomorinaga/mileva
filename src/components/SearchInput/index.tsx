@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 
 // --- Native-Base ---
-import { Box, FlatList, IBoxProps, IInputProps, Input, View } from 'native-base';
+import { Box, FlatList, IBoxProps, IInputProps, Input, Text, View } from 'native-base';
 
 // --- Components ---
 import Icon from '@components/Icon';
@@ -76,19 +76,23 @@ SearchInput.Autocomplete = function SearchInputAutocomplete({
 	const [filteredData, setFilteredData] = useState(data);
 	const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
-	const [isReady] = useDebounce(() => setDebouncedSearchTerm(searchTerm), 150, [
+	const [isReady] = useDebounce(() => setDebouncedSearchTerm(searchTerm), 300, [
 		searchTerm,
 	]);
 
 	const showAutocomplete = isReady && Boolean(debouncedSearchTerm);
 
-	useEffect(() => {
+	const handleFilterData = useCallback(() => {
 		setFilteredData(
 			data.filter(item =>
-				item[searchBy].includes(debouncedSearchTerm.trim().toLowerCase())
+				item[searchBy].toLowerCase().includes(debouncedSearchTerm.trim().toLowerCase())
 			)
 		);
 	}, [data, debouncedSearchTerm, searchBy]);
+
+	useEffect(() => {
+		handleFilterData();
+	}, [handleFilterData]);
 
 	if (!showAutocomplete) return null;
 
@@ -96,7 +100,6 @@ SearchInput.Autocomplete = function SearchInputAutocomplete({
 		<Box
 			flex={1}
 			overflow="hidden"
-			maxH="40"
 			pt="10"
 			bgColor="white"
 			rounded="2xl"
@@ -113,11 +116,16 @@ SearchInput.Autocomplete = function SearchInputAutocomplete({
 						paddingTop: 15,
 						paddingHorizontal: 10,
 					}}
+					maxH="56"
 				/>
 			) : (
-				<View flex={1} p="2">
-					{fallback}
-				</View>
+				<Box flex={1} py="3" px="5">
+					{fallback || (
+						<Text color="gray.400" fontSize="xs">
+							Não há resultados com esse termo
+						</Text>
+					)}
+				</Box>
 			)}
 		</Box>
 	);

@@ -1,14 +1,7 @@
 import React from 'react';
 
 // --- Native-Base ---
-import {
-	Box,
-	IBoxProps,
-	IImageProps,
-	IPressableProps,
-	Pressable,
-	ZStack,
-} from 'native-base';
+import { Box, IBoxProps, IImageProps, Pressable, ZStack } from 'native-base';
 
 // --- Reanimated ---
 import MasonryList from 'reanimated-masonry-list';
@@ -20,12 +13,13 @@ import MasonryItem from './MasonryItem';
 import { IImage } from '@interfaces/IImage';
 
 interface MasonryProps {
-	data: object & IImage[];
+	data: any & { image: IImage }[];
 	numColumns: number;
 	renderChild?: ({ item, i }: { item: object; i?: number }) => React.ReactElement;
 	containerProps?: IBoxProps;
 	imageProps?: IImageProps;
-	onPress?: IPressableProps['onPress'];
+	onPress?: ({ item }) => void;
+	onRefresh?: () => void;
 }
 
 export default function Masonry({
@@ -35,12 +29,13 @@ export default function Masonry({
 	containerProps,
 	imageProps,
 	onPress,
+	onRefresh,
 }: MasonryProps) {
 	const renderItem = ({ item }): React.ReactElement => {
 		return (
-			<Pressable onPress={onPress}>
+			<Pressable onPress={() => onPress({ item })}>
 				<MasonryItem
-					image={item}
+					image={item.image}
 					children={renderChild({ item })}
 					containerProps={containerProps}
 					imageProps={imageProps}
@@ -78,6 +73,7 @@ export default function Masonry({
 					paddingBottom: 8,
 					alignSelf: 'stretch',
 				}}
+				onRefresh={onRefresh}
 			/>
 		</Box>
 	);

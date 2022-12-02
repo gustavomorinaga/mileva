@@ -40,6 +40,7 @@ import useAuthStore from '@stores/auth';
 
 // --- Utils ---
 import { maskPhone } from '@utils/masks';
+import { getRealDate } from '@utils/realDate';
 
 // --- Date-FNS ---
 import { format } from 'date-fns';
@@ -84,7 +85,7 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 			avatar: auth.avatar,
 			name: auth.name,
 			email: auth.email,
-			birthday: auth.birthday,
+			birthday: getRealDate(new Date(auth.birthday)).toISOString(),
 			gender: auth.gender,
 			phone: auth.phone,
 		} as FormType,
@@ -290,7 +291,6 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 
 													{showDatePicker && (
 														<DateTimePicker
-															testID="birthday-picker"
 															mode="date"
 															negativeButtonLabel="Cancelar"
 															positiveButtonLabel="OK"
@@ -302,11 +302,15 @@ export default function AccountScreen({ navigation }: TAccountParamProps) {
 																}
 
 																const [date, selectedDateFormatted] = [
-																	format(new Date(value), 'yyyy-MM-dd'),
-																	format(new Date(selectedDate), 'yyyy-MM-dd'),
+																	getRealDate(new Date(value)),
+																	getRealDate(new Date(selectedDate)),
 																];
 
-																if (selectedDateFormatted !== date) onChange(date);
+																if (
+																	selectedDateFormatted.toDateString() !==
+																	date.toDateString()
+																)
+																	onChange(selectedDateFormatted.toISOString());
 
 																handleShowDatePicker(false);
 															}}

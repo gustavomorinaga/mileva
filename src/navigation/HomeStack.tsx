@@ -20,6 +20,10 @@ import PackagesScreen from '@screens/Packages';
 import stackNavigatorConfig from '@configs/stackNavigatorConfig';
 import MapScreen from '@screens/Map';
 
+// --- Interfaces ---
+import { IDestination } from '@interfaces/IDestination';
+import { IHotel } from '@interfaces/IHotel';
+
 type THomeBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
 	BottomTabScreenProps<TRootTabParamList, T>,
 	TRootTabScreenProps<keyof TRootTabParamList>
@@ -28,14 +32,16 @@ type THomeBottomTab<T extends keyof TRootTabParamList> = CompositeScreenProps<
 export type THomeStackParamList = {
 	'Home Root': undefined;
 	Destination: {
+		destination: IDestination;
+
 		returnScreen?: keyof TRootTabParamList;
 		returnScreenKey?: string;
 	};
 	Hotels: undefined;
-	Hotel: undefined;
+	Hotel: { hotel: IHotel };
 	Tickets: undefined;
 	Packages: undefined;
-	Map: undefined;
+	Map: { geolocation?: { latitude: number; longitude: number }; zoomLevel?: number };
 };
 
 export type THomeParamProps = CompositeScreenProps<

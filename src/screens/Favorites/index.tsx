@@ -12,67 +12,26 @@ import Header from '@components/Header';
 import IconButton from '@components/IconButton';
 import ImageCard from '@components/ImageCard';
 
-const data = [
-	{
-		_id: '1',
-		name: 'Grécia',
-		image: {
-			uri: 'https://cdn.kimkim.com/files/a/content_articles/featured_photos/0e3794a0b646d638627afb626bf9ee46f472feb1/big-0bb2a2bea537c680f141d40cb484d888.jpg',
-			alt: 'Grécia',
-		},
-	},
-	{
-		_id: '2',
-		name: 'Canadá',
-		image: {
-			uri: 'http://www.yazigi.com.br/galeria/repositorio/images/noticias/pontos-turisticos-canada/banff-national-park.jpg',
-			alt: 'Canadá',
-		},
-	},
-	{
-		_id: '3',
-		name: 'Chile',
-		image: {
-			uri: 'https://a.cdn-hotels.com/gdcs/production48/d1338/3cb6a4d4-c771-483c-b66b-3557af9f5e19.jpg',
-			alt: 'Chile',
-		},
-	},
-	{
-		_id: '4',
-		name: 'Grécia',
-		image: {
-			uri: 'https://cdn.kimkim.com/files/a/content_articles/featured_photos/0e3794a0b646d638627afb626bf9ee46f472feb1/big-0bb2a2bea537c680f141d40cb484d888.jpg',
-			alt: 'Grécia',
-		},
-	},
-	{
-		_id: '5',
-		name: 'Canadá',
-		image: {
-			uri: 'http://www.yazigi.com.br/galeria/repositorio/images/noticias/pontos-turisticos-canada/banff-national-park.jpg',
-			alt: 'Canadá',
-		},
-	},
-	{
-		_id: '6',
-		name: 'Chile',
-		image: {
-			uri: 'https://a.cdn-hotels.com/gdcs/production48/d1338/3cb6a4d4-c771-483c-b66b-3557af9f5e19.jpg',
-			alt: 'Chile',
-		},
-	},
-];
+// --- Stores ---
+import useFavoritesStore from '@stores/favorites';
 
-export default function FavoritesScreen({ navigation, route }: TFavoritesParamProps) {
-	const handleFavoritePress = useCallback(() => {
-		navigation.navigate('Home', {
-			screen: 'Destination',
-			params: {
-				returnScreen: 'Favorites',
-			},
-			initial: false,
-		});
-	}, [navigation]);
+export default function FavoritesScreen({ navigation }: TFavoritesParamProps) {
+	const { favorites, setFavorite } = useFavoritesStore(state => state);
+
+	const handleFavoritePress = useCallback(
+		({ item }) => {
+			navigation.navigate('Home', {
+				screen: 'Destination',
+				params: {
+					destination: item,
+
+					returnScreen: 'Favorites',
+				},
+				initial: false,
+			});
+		},
+		[navigation]
+	);
 
 	return (
 		<>
@@ -100,14 +59,14 @@ export default function FavoritesScreen({ navigation, route }: TFavoritesParamPr
 						/>
 					</ZStack>
 					<FlatList
-						pt="4"
+						pt="5"
 						contentContainerStyle={{
 							marginTop: -4,
 							paddingTop: 4,
 							paddingBottom: 10,
 							paddingHorizontal: 20,
 						}}
-						data={data}
+						data={favorites}
 						keyExtractor={item => item._id}
 						showsVerticalScrollIndicator={false}
 						renderItem={({ item }) => (
@@ -115,10 +74,16 @@ export default function FavoritesScreen({ navigation, route }: TFavoritesParamPr
 								title={item.name}
 								image={item.image}
 								sideContent={
-									<IconButton name="heart" color="rose.500" bgColor="white" shadow="3" />
+									<IconButton
+										name={item.favorited ? 'heart' : 'heart-outline'}
+										color={item.favorited ? 'rose.500' : 'black'}
+										bgColor="white"
+										shadow="3"
+										onPress={() => setFavorite(item)}
+									/>
 								}
 								containerProps={{ mb: 4, h: 40 }}
-								onPress={handleFavoritePress}
+								onPress={() => handleFavoritePress({ item })}
 							/>
 						)}
 					/>

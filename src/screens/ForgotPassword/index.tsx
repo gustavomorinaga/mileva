@@ -85,10 +85,15 @@ export default function ForgotPasswordScreen({ navigation }: TForgotPasswordPara
 				<Flex w="full" h="full" justify="flex-end" pb="4">
 					<VStack w="full" space="16">
 						<AspectRatio ratio={{ base: 16 / 9 }}>
-							<Logo width="100%" height={400} />
+							<Logo width="100%" height={300} />
 						</AspectRatio>
 
 						<VStack w="full" space="4">
+							<Text color="lightText">
+								Informe o seu e-mail para enviarmos os próximos passos para redefinir a
+								senha
+							</Text>
+
 							<FormControl isInvalid={Boolean(errors.email)}>
 								<FormControl.Label>
 									<Text color="lightText">E-mail</Text>
