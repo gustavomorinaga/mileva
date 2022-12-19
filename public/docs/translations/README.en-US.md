@@ -153,7 +153,7 @@ Done!
      <sub><b>Bruno Godinho</b></sub>
     </a>
     <br />
-    <a href="https://github.com/gmbrunoo/mileva/commits?author=gmbrunoo" title="Documentation">📖</a>
+    <a href="https://github.com/gmatthewsfeuer/mileva/commits?author=gmbrunoo" title="Documentation">📖</a>
     <a href="#design-gmbrunoo" title="Design">🎨</a>
    </td>
    <td align="center">
@@ -163,7 +163,7 @@ Done!
      <sub><b>Gustavo Silva Gomes de Souza</b></sub>
     </a>
     <br />
-    <a href="https://github.com/gssouza10/mileva/commits?author=gssouza10" title="Documentation">📖</a>
+    <a href="https://github.com/gmatthewsfeuer/mileva/commits?author=gssouza10" title="Documentation">📖</a>
    </td>
   </tr>
  </tbody>
