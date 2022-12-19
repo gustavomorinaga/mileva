@@ -9,7 +9,7 @@
 
 <!-- Banner Section -->
 <p align="center">
-  <img src="./public/assets/logo.png" alt="Mileva Banner" width="512px" />
+  <img src="../../assets/logo.png" alt="Mileva Banner" width="512px" />
 </p>
 <h3 align="center">
   A travel app that helps you on your journey
@@ -173,7 +173,7 @@ Done!
 
 ## 📜 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) page for details.
+This project is licensed under the **MIT License** - see the [LICENSE](../../../LICENSE) page for details.
 
 <!-- Acknowledgment Section -->
 
