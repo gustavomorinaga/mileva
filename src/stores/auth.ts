@@ -35,13 +35,14 @@ const useAuthStore = create(
 			login: async ({ email }) => {
 				const auth: IAuth = {
 					isAuthenticated: true,
-					avatar: 'https://github.com/gmatthewsfeuer.png',
-					name: 'Gustavo Matheus',
-					firstName: 'Gustavo Matheus'.split(' ')[0],
+					avatar:
+						'https://avatars.dicebear.com/api/big-ears-neutral/Isabelly%20Rocha.png',
+					name: 'Isabelly Rocha',
+					firstName: 'Isabelly Rocha'.split(' ')[0],
 					email,
-					birthday: '2000-10-27',
+					birthday: '1998-07-13',
 					gender: 'male',
-					phone: '(11) 99769-2927',
+					phone: '(11) 93456-2123',
 				};
 
 				set(() => auth);
